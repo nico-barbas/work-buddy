@@ -1,0 +1,29 @@
+.banner {
+  background-color: #858AE3;
+}
+
+.navbar {
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: "Gaegu", "cursive";
+  font-size: 5rem;
+  color: #FFEEDD;
+  margin-right: 6rem;
+}
+
+.slogan {
+  font-size: 5rem;
+  text-align: center;
+  color: #FFEEDD;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+}
+
+.banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
