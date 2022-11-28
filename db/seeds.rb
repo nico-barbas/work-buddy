@@ -8,5 +8,5 @@
 
 User.destroy_all
 
-new_user = User.new(email: "user@example.com", password: "password")
+new_user = User.new(email: "user@example.com", password: "password", username: "username")
 new_user.save
