@@ -25,7 +25,7 @@ margin: 10px;
 
 
 .input-field-short-blue {
-  padding: 8px 24px;
+  padding: 0.5rem 1.5rem;
   border-radius: 50px;
   font-weight: lighter;
   background-color: $blue;
@@ -33,11 +33,11 @@ margin: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   text-align: center;
   width: 75%;
-  margin: 10px;
+  margin: 0.625rem;
   }
 
 .input-field-long-blue {
-    padding: 8px 24px;
+    padding: 0.5rem 1.5rem;
     border-radius: 30px;
     font-weight: lighter;
     background-color: $blue;
@@ -45,8 +45,8 @@ margin: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     text-align: center;
     width: 75%;
-    height: 150px;
-    margin: 10px;
+    height: 9.375rem;
+    margin: 0.625rem;
   }
 
   // HTML to add input field, example :

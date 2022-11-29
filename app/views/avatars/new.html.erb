@@ -1,16 +1,22 @@
 <div class="devise-box">
-<h2>Create your buddy</h2>
+<% if current_user.avatar %>
+  <h2>Your already created your buddy!</h2>
+  <%= link_to "Go see your buddy", user_path(current_user), class:"btn small-btn-blue" %>
+  <%= link_to "Homepage", root_path, class: "btn small-btn-outline-blue" %>
+<% else %>
+  <h2>Create your buddy</h2>
 
-<%= simple_form_for(@avatar) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "your buddy name" }%>
-  </div>
+  <%= simple_form_for(@avatar) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "your buddy name" }%>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Create", class: "btn small-btn-blue" %>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Create", class: "btn small-btn-blue" %>
+    </div>
+  <% end %>
 <% end %>
 </div>
