@@ -1,0 +1,37 @@
+.timer {
+  border-radius: 50px;
+  background-color: $purple;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+  width: 12.5rem;
+  margin: 0.625rem;
+  opacity: 0.7;
+  padding: 0.625rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  h2 {
+    align-items: center;
+    margin: 0px;
+    font-size: 32px;
+  }
+}
+
+// HTML to add a timer
+// <div class="timer"><h2>01:37</h2><p>&ensp;55</p></div>
+
+
+.clock {
+  font-size: 32px;
+  border-radius: 50px;
+  background-color: $blue;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+  width: 12.5rem;
+  margin: 0.625rem;
+  opacity: 0.7;
+  padding: 0.625rem;
+}
+
+// HTML to add a clock
+// <div class="clock">04:30 pm</div>
