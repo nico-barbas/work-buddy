@@ -35,3 +35,45 @@
 
 // HTML to add a clock
 // <div class="clock">04:30 pm</div>
+
+
+.timer-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-tag-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-buttons-panel {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+}
+
+.timer-button {
+  border: 1px solid $blue;
+  padding: 1em;
+  border-radius: 40%;
+  background-color: $blue;
+  margin-bottom: 0.7em;
+  width:5em;
+  text-align: center;
+  margin-left:0.8em;
+  .fa-solid {
+    &:hover {
+      color: $beige;
+      opacity: 1;
+    }
+  }
+}
+
+.purple-timer-title {
+  color: $purple;
+}

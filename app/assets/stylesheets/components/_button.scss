@@ -55,3 +55,21 @@
 a {
   text-decoration: none;
 }
+
+.small-btn-plus {
+  text-decoration: none;
+  text-justify: center;
+  font-size: 1.8rem;
+  color: #0F0326;
+  opacity: 0.7;
+  background-color: $purple;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+    &:hover {
+    color: $beige;
+  }
+}
