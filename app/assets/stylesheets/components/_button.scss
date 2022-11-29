@@ -12,6 +12,7 @@
   padding-right: 1.2rem;
   background-color: $blue;
   color: white;
+  border: $blue;
 }
 
 .small-btn-outline-blue {
@@ -86,4 +87,8 @@ a {
     &:hover {
     color: $beige;
   }
+}
+
+.create-btn {
+  z-index: 5;
 }

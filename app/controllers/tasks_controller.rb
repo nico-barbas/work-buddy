@@ -6,6 +6,10 @@ class TasksController < ApplicationController
     if @task.save
       flash[:notice] = "Task created successfully"
     end
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user) }
+      format.text { render partial: "users/task_list", locals: {tasks: Task.where(user:current_user)}, formats: [:html] }
+    end
   end
 
   def update
