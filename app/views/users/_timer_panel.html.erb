@@ -8,7 +8,7 @@
         <% if @timer.id %>
           <%= link_to "", start_timer_path(@timer), class:"fa-solid fa-play" %>
         <% else %>
-          <%= link_to "", user_timers_path(current_user), class:"fa-solid fa-play" %>
+         <%= button_to "", create_timer_path, class:"skip-button-to-style fa-solid fa-play"%>
         <% end %>
       </div>
       <div class="timer-button">

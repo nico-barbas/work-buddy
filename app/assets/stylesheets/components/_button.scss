@@ -87,3 +87,13 @@ a {
     color: $beige;
   }
 }
+
+.skip-button-to-style {
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  &:hover {
+    background-color: none;
+    border: none;
+  }
+}

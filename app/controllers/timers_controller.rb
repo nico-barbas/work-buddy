@@ -7,8 +7,10 @@ class TimersController < ApplicationController
     @timer.started_at = Time.now
     @timer.user = current_user
     @timer.label = Label.first # Here we will need to obtain the label selected by the user ...To do as a second step
+    @timer.save!
     if @timer.save
       # here we ned to start the timer on the show page (the total_time start increasing each second, and is displayed in the timer with JS)
+      redirect_to root_path
     end
   end
 
@@ -30,5 +32,10 @@ class TimersController < ApplicationController
     # push the total time to daily_lable_time / total_label_time
     # display a message telling "Your time has been loged! You can start a new timer"
   end
+private
+
+# def timer_params
+#   params.require(:timer).
+# end
 
 end
