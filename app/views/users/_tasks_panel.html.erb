@@ -9,8 +9,12 @@
     </div>
   </div>
 
+  <%= simple_form_for [current_user, @task], html: {class: "d-none"} do |f| %>
+    <%= f.input :title %>
+    <%= f.input :descriptionn %>
+  <% end %>
+
   <div class="footer-task" >
     <a href="" class="btn-plus">+</a>
   </div>
-
 </div>

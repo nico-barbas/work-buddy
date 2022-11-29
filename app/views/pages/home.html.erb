@@ -4,7 +4,14 @@
     <div class="banner-navbar">
       <div class="navbar">
         <div class="logo">Virtual Work Buddy</div>
-        <a class="btn btn-blue" href="">Login</a>
+        <div class="homepage-buttons">
+        <%= link_to "Sign up", new_avatar_path, class: "btn btn-pink" %>
+        <% if current_user %>
+          <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blue" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path(show: "log-in"), class: "btn btn-blue" %>
+        <% end %>
+        </div>
       </div>
     </div>
     <div class="banner-container">

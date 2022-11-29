@@ -24,3 +24,16 @@
 .card-task .card-task-infos {
   padding: 16px;
 }
+
+
+.panel {
+  position: relative;
+  .footer-task {
+    position: absolute;
+    bottom: 20px;
+    left:15%;
+    right:15%;
+    display: flex;
+    justify-content: center;
+  }
+}
