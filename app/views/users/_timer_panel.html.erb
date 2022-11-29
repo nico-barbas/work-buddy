@@ -5,7 +5,11 @@
 
     <div class="timer-buttons-panel">
       <div class="timer-button">
-        <a href="" class="fa-solid fa-play"></a>
+        <% if @timer.id %>
+          <%= link_to "", start_timer_path(@timer), class:"fa-solid fa-play" %>
+        <% else %>
+          <%= link_to "", user_timers_path(current_user), class:"fa-solid fa-play" %>
+        <% end %>
       </div>
       <div class="timer-button">
         <a href="" class="fa-sharp fa-solid fa-pause"></a>

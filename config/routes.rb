@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get "/users/:id/game", to: "users#game", as: "game"
   resources :tasks, only: [:update, :destroy]
   resources :playlists, only: [:update]
-  resources :timers, only: [:update]
   resources :avatars, only: [:new, :create]
+  post "/timers/:id/start_timer", to: "timers#start_timer", as: "start_timer"
+  post "/timers/:id/pause_timer", to: "timers#pause_timer", as: "pause_timer"
+  post "/timers/:id/close_timer", to: "timers#close_timer", as: "close_timer"
 
 end
