@@ -3,12 +3,39 @@
   padding-left: 2rem;
   padding-right: 2rem;
   background-color: #75C9C8;
+  color: white;
+}
+
+.small-btn-blue {
+  font-size: 1.2rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  background-color: $blue;
+  color: white;
+}
+
+.small-btn-outline-blue {
+  font-size: 1.2rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  background-color: white;
+  color: $blue;
+  border: solid 2px $blue;
+}
+
+.btn-pink {
+  font-size: 1.8rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-right: 1rem;
+  color: $pink;
+  border: solid 2px $pink;
 }
 
 .btn-banner {
   text-decoration: none;
   font-size: 2rem;
-  color: #0F0326;
+  color: white;
   background-color: #FFA62B;
   border-radius: 3rem;
   padding: 1.5rem;
@@ -18,4 +45,9 @@
     &:hover {
     color:#FFA62B;
   }
+}
+
+.homepage-buttons {
+  display: flex;
+  justify-content: space-between;
 }
