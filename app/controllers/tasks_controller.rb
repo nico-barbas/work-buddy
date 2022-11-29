@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
   def create
     #  create a task with a title / description / status
-    task = Task.new(title:, description:)
-    if task.save
+    @task = Task.new(task_params)
+    @task.user = current_user
+    if @task.save
       flash[:notice] = "Task created successfully"
-      redirect_to tasks_path
     end
   end
 
@@ -19,6 +19,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require("task").permit(:title, :descriptionn)
+    params.require("task").permit(:title, :description)
   end
 end
