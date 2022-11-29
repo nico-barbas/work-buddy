@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CreateTaskController from "./create_task_controller"
+application.register("create-task", CreateTaskController)
+
 import GameController from "./game_controller"
 application.register("game", GameController)
 

@@ -1,2 +1,31 @@
-<div class="panel">
+<div class="panel task-panel">
+
+  <div class="container-task">
+    <% if @tasks.empty?  %>
+      <div class="no-tasks"><h4>No task to do yet !</h4></div>
+    <% else %>
+      <% @tasks.each do |task| %>
+        <div class="card-task m-3">
+          <div class="card-task-infos">
+            <h2><%= task.title %></h2>
+            <p> <%= task.description %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+
+
+  <div class="task-card" data-controller="create-task">
+    <%= simple_form_for [current_user, @task], html: {class: "d-none", data: {create_task_target: "form"}} do |f| %>
+      <%= f.input :title %>
+      <%= f.input :description %>
+      <%= f.submit %>
+    <% end %>
+
+    <div class="footer-task" >
+      <div class="btn-plus" data-action="click->create-task#displayForm">+</div>
+    </div>
+  </div>
 </div>

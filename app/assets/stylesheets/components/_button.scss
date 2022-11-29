@@ -73,3 +73,17 @@ a {
     color: $beige;
   }
 }
+
+.btn-plus {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #0F0326;
+  background-color: $purple;
+  border-radius: 3rem;
+  padding: 0.3em 1em 0.4em 1em;
+  margin-bottom: center;
+  cursor: pointer;
+    &:hover {
+    color: $beige;
+  }
+}
