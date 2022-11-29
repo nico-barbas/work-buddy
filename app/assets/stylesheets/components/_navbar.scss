@@ -1,0 +1,61 @@
+.fa-solid {
+ font-size: 2.8em;
+ color: $darkpurple;
+ opacity: 0.7;
+}
+
+.icon-list {
+  border: 1px solid $orange;
+  padding: 1.3em;
+  border-radius: 40%;
+  background-color: $orange;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  .fa-solid {
+    &:hover {
+      color: $beige;
+      opacity: 1;
+      }
+   }
+}
+
+.icon-clock {
+  border: 1px solid $pink;
+  padding: 1.3em;
+  border-radius: 40%;
+  background-color: $pink;
+  margin-bottom: 1em;
+  .fa-solid {
+    &:hover {
+      color: $beige;
+      opacity: 1;
+    }
+  }
+}
+
+.icon-music {
+  border: 1px solid $blue;
+  padding: 1.3em;
+  border-radius: 40%;
+  background-color: $blue;
+  margin-bottom: 1em;
+  .fa-solid {
+    &:hover {
+      color: $beige;
+      opacity: 1;
+    }
+  }
+}
+
+.icon-stat {
+  border: 1px solid $purple;
+  padding: 1.3em;
+  border-radius: 40%;
+  background-color: $purple;
+  .fa-solid {
+    &:hover {
+      color: $beige;
+      opacity: 1;
+    }
+  }
+}
