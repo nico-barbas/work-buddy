@@ -8,10 +8,6 @@ export default class extends Controller {
     id: Number
   }
 
-  connect() {
-    console.log('connected')
-  }
-
   toggleElement(event) {
     if (this.previousTarget){
       this.previousTarget.classList.toggle('hidden')
