@@ -12,3 +12,6 @@ application.register("game", GameController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import UpdateTimerController from "./update_timer_controller"
+application.register("update-timer", UpdateTimerController)
