@@ -3,12 +3,7 @@
       <div class="no-tasks"><h4>No task to do yet !</h4></div>
     <% else %>
       <% tasks.each do |task| %>
-        <div class="card-task m-3">
-          <div class="card-task-infos">
-            <h2><%= task.title %></h2>
-            <p> <%= task.description %></p>
-          </div>
-        </div>
+        <%= render "card_task", task: task %>
       <% end %>
     <% end %>
   </div>

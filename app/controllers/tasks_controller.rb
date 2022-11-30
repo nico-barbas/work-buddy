@@ -8,12 +8,18 @@ class TasksController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to user_path(current_user) }
-      format.text { render partial: "users/task_list", locals: {tasks: Task.where(user:current_user)}, formats: [:html] }
+      format.text { render partial: "users/task_list", locals: { tasks: Task.where(user:current_user) }, formats: [:html] }
     end
   end
 
   def update
     #  update title / description / status of a given task
+    @task = Task.find(params[:id])
+    @task.update(task_params)
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user) }
+        format.text { render partial: "users/card_task", locals: { task: @task }, formats: [:html] }
+      end
   end
 
   def destroy
