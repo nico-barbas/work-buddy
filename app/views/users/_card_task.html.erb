@@ -2,7 +2,9 @@
   <div class="wrapper">
     <div class="task-box" >
       <label for="mark-as-done">
-        <input type="checkbox" id="done" name="done" value="yes">
+        <input type="checkbox" id=<%= task.id %> name="done" value="yes" data-action='change->edit-task#markAsDone' <% if task.status == "done" %>
+        <%= "checked" %>
+        <% end %>>
       </label>
       <div class="card-task-infos">
         <h2><%= task.title %></h2>

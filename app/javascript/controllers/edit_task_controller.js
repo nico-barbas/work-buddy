@@ -1,4 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
+import { csrfToken } from "@rails/ujs";
+
 
 // Connects to data-controller="edit-task"
 export default class extends Controller {
@@ -23,12 +25,31 @@ export default class extends Controller {
       headers: { "Accept": "text/plain" },
       body: new FormData(this.formTarget)
     })
-  .then(response => response.text())
-  .then((data) => {
-    this.cardTarget.outerHTML = data
-    this.formTarget.classList.add("d-none")
-  })
-}
+    .then(response => response.text())
+    .then((data) => {
+      this.cardTarget.outerHTML = data
+      this.formTarget.classList.add("d-none")
+    })
+  }
 
-
+  markAsDone(event) {
+    event.preventDefault()
+    const url = this.formTarget.action
+    const postData = {
+      id: event.currentTarget.id,
+      task: {
+        status: event.currentTarget.checked ? "done" : "to do"
+      }
+    }
+    fetch(url, {
+      method: "PATCH",
+      headers: { "Accept": "text/plain",  'X-CSRF-Token': csrfToken() },
+      body: JSON.stringify( postData )
+    })
+    .then(response => response.text())
+    .then((data) => {
+      this.cardTarget.outerHTML = data
+      this.formTarget.classList.add("d-none")
+    })
+  }
 }

@@ -15,11 +15,24 @@ class TasksController < ApplicationController
   def update
     #  update title / description / status of a given task
     @task = Task.find(params[:id])
-    @task.update(task_params)
+    p params[:task]
+    if params[:task].nil?
+      case @task.status
+      when "done" then @task.status = "to do"
+      when "to do" then @task.status = "done"
+      end
+      @task.save
       respond_to do |format|
         format.html { redirect_to user_path(current_user) }
         format.text { render partial: "users/card_task", locals: { task: @task }, formats: [:html] }
       end
+    else
+      @task.update(task_params)
+        respond_to do |format|
+          format.html { redirect_to user_path(current_user) }
+          format.text { render partial: "users/card_task", locals: { task: @task }, formats: [:html] }
+        end
+    end
   end
 
   def destroy
@@ -35,6 +48,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
+
     params.require(:task).permit(:title, :description)
   end
 end
