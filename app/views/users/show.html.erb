@@ -1,5 +1,5 @@
 <div class="d-flex flex-row justify-content-around align-items-start p-2">
   <%= render "navbar" %>
   <%= render "tasks_panel" %>
-  <%= render "timer_panel" %>
+  <%= render "timer_panel", timer: @timers.last %>
 </div>
