@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   post "/timers/:id/start_timer", to: "timers#start_timer", as: "start_timer"
   post "/timers/:id/pause_timer", to: "timers#pause_timer", as: "pause_timer"
   post "/timers/:id/close_timer", to: "timers#close_timer", as: "close_timer"
+  get "/users/:id/frontend", to: "users#front_end_test", as:"frontend"
 
 end

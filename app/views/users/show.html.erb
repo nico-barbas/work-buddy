@@ -1,5 +1,15 @@
-<div class="d-flex flex-row justify-content-around align-items-start p-2">
+<div class="d-flex flex-row justify-content-left align-items-start p-2" data-controller="navbar">
   <%= render "navbar" %>
-  <%= render "tasks_panel" %>
-  <%= render "timer_panel", timer: @timers.last %>
+  <div data-navbar-target="tasks" class="d-none">
+    <%= render "tasks_panel" %>
+  </div>
+  <div data-navbar-target="timers" class="d-none">
+    <%= render "timer_panel" %>
+  </div>
+  <div data-navbar-target="music" class="d-none">
+    <%= render "music_panel" %>
+  </div>
+  <div data-navbar-target="data" class="d-none">
+    <%= render "data_panel" %>
+  </div>
 </div>
