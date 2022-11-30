@@ -4,7 +4,12 @@ class UsersController < ApplicationController
     @task = Task.new
     @tasks = Task.all
     @timers = Timer.all
-    # how to find the timer when it is already existing? 
+  end
+
+  def front_end_test
+    @task = Task.new
+    @tasks = Task.all
+    @timers = Timer.all
   end
 
   def game
