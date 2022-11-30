@@ -35,10 +35,15 @@
     right:15%;
     display: flex;
     justify-content: center;
+    position: sticky;
   }
 }
 
 .no-tasks {
   text-align: center;
   margin-top: 2em;
+}
+
+.task-panel {
+  overflow-y: scroll;
 }
