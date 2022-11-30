@@ -4,10 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["trigger", "target", "form", "card"]
 
-  static values = {
-    id: Number
-  }
-
   toggleElement(event) {
     if (this.previousTarget){
       this.previousTarget.classList.toggle('hidden')
@@ -19,7 +15,6 @@ export default class extends Controller {
   }
 
   update(event) {
-    console.log(this.formTarget)
     event.preventDefault()
     this.toggleElement(event)
     const url = this.formTarget.action
@@ -30,10 +25,10 @@ export default class extends Controller {
     })
   .then(response => response.text())
   .then((data) => {
-    console.log('hello')
     this.cardTarget.outerHTML = data
     this.formTarget.classList.add("d-none")
   })
 }
+
 
 }
