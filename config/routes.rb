@@ -6,13 +6,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :users, only: [:show] do
-    resources :tasks, only: [:create]
+    resources :tasks, only: [:update, :create]
     resources :playlists, only: [:create]
   end
   get "/users/:id/game", to: "users#game", as: "game"
-  resources :tasks, only: [:update, :destroy]
+  resources :tasks, only: [:destroy]
   resources :playlists, only: [:update]
   resources :avatars, only: [:new, :create]
+
   post "/timers/create", to: "timers#create", as: "create_timer"
   post "/timers/:id/start_timer", to: "timers#start_timer", as: "start_timer"
   post "/timers/:id/pause_timer", to: "timers#pause_timer", as: "pause_timer"
