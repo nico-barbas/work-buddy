@@ -1,23 +1,38 @@
 class TimersController < ApplicationController
+
   def create
-    # create a new timer with a specific label
+    # When you start the timer and a timer does not exist (check to be done in html page --- I did it but issue with the create route he cannot find)
+    # --> create a new timer with a specific label
+    @timer = Timer.new
+    @timer.started_at = Time.now
+    @timer.user = current_user
+    @timer.label = Label.first # Here we will need to obtain the label selected by the user ...
+    @timer.save!
   end
 
-  def update
-    # when starting for the first time or re-starting the timer --> update the start_at (timestamp) (cf private method update_start)
-    # when you "pause" the timer --> update the total_time (cf private method update_total_time)
-    # when you "finish" the timer --> update the total_time + push the total time to daily_lable_time / total_lable_time (cf private push_time)
+  def start_timer
+    # When you start the timer and a timer already exist (check to be done in html page)
+    # update the start_at (timestamp) + restart the timer on the show page (total_time start increasing again)
   end
 
-  private
-
-  def update_start
+  def pause_timer
+    # when you "pause" the timer:
+    # pause the timer on the show page
+    # save the total_time to the db (before the total_time is incread each second but not saved before you pause)
   end
 
-  def update_total_time
+  def close_timer
+    # when you "finish" the timer:
+    # put the timer on the show page back to 00:00
+    # update the total_time
+    # push the total time to daily_lable_time / total_label_time
+    # display a message telling "Your time has been loged! You can start a new timer"
   end
 
-  def push_time
-    # push the total_time to the update_time method of label
-  end
+private
+
+# def timer_params
+#   params.require(:timer).
+# end
+
 end
