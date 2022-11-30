@@ -15,7 +15,7 @@ class TimersController < ApplicationController
     # pause the timer on the show page
     # save the total_time to the db (before the total_time is incread each second but not saved before you pause)
     @timer = Timer.find(params[:id])
-    @timer.total_time =
+    @timer.total_time 
     # il faut que je récupère les heures / minutes / secondes et que je créé le total_time avec cela
     # a priori il faut que je fasse des values avec heures / minutes / secondes pour pouvoir les utiliser en params ici
   end
@@ -34,12 +34,4 @@ class TimersController < ApplicationController
     # mark the timer as logged true
     # display a message telling "Your time has been loged! You can start a new timer"
   end
-
-
-# private
-
-# def timer_params
-#   params.require(:timer).
-# end
-
 end
