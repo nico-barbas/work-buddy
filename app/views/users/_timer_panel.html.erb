@@ -1,16 +1,20 @@
 <div class="panel">
-  <div class="timer-panel" data-controller="update-timer">
+  <div class="timer-panel" data-controller="update-timer" data-update-timer-id-value= <%= @timer.id%>>
     <h2 class="purple-timer-title">Timer 1</h2>
     <div class="timer"><h2 data-update-timer-target="hours">00</h2>:<h2 data-update-timer-target="minutes">00</h2>&ensp;<p data-update-timer-target="seconds">00</p></div>
     <div class="timer-buttons-panel">
         <div class="timer-button">
+        <% if @timer.logged %>
+          <a href="" class="fa-sharp fa-solid fa-play" data-update-timer-target="play"></a>
+        <% else %>
           <a href="" class="fa-sharp fa-solid fa-play" data-update-timer-target="play" data-action="click->update-timer#start"></a>
+        <% end %>
         </div>
         <div class="timer-button">
-          <a href="" class="fa-sharp fa-solid fa-pause"></a>
+          <a href="" class="fa-sharp fa-solid fa-pause" data-update-timer-target="pause" data-action="click->update-timer#pause"></a>
         </div>
         <div class="timer-button">
-          <a href="" class="fa-solid fa-circle-check"></a>
+          <a href="" class="fa-solid fa-circle-check" data-update-timer-target="log"></a>
         </div>
       </div>
     <div class="input-field-short-blue">Select an existing tag</div>
@@ -22,5 +26,4 @@
 </div>
 
 
-
-<%# data-update-timer-id-value=<%= timer.id %>
+<%= console %>
