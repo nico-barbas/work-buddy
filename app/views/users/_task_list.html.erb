@@ -3,7 +3,7 @@
       <div class="no-tasks"><h4>No task to do yet !</h4></div>
     <% else %>
       <% tasks.each do |task| %>
-        <%= render "card_task", task: task %>
+        <%= render "users/card_task", task: task %>
       <% end %>
     <% end %>
   </div>
