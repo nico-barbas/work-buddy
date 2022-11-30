@@ -46,4 +46,5 @@
 
 .task-panel {
   overflow-y: scroll;
+  overscroll-behavior-block: contain;
 }
