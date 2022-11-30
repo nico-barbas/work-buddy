@@ -92,7 +92,7 @@ export class PlayerController {
       canvas.addEventListener("click", handleMouseLeftInput);
 
       const handleMouseRightInput = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 
         switch (this.mode.kind) {
           case "idle":
@@ -243,7 +243,7 @@ class DecorateMode {
 
   placeItem(at) {
     if (this.grid.validItemPosition(this.item, at)) {
-      this.grid.insertItem(this.item, at);
+      this.grid.setTileItem(this.item, at);
       return true;
     }
 
