@@ -23,6 +23,10 @@ export class Vector2 {
   isZero() {
     return this.x == 0 && this.y == 0;
   }
+
+  lerp(b, t) {
+    return new Vector2(this.x * (1 - t) + b.x * t, this.y * (1 - t) + b.y * t);
+  }
 }
 
 export class Matrix2x2 {

@@ -12,11 +12,15 @@ export class Grid extends Container {
     this.items = new Array();
     this.gridWidth = w;
     this.gridHeight = h;
-    this.tileWidth = 64;
-    this.tileHeight = 64;
-    this.widthRatio = 64 / 256;
-    this.heightRatio = 64 / 256;
+    this.tileWidth = 128;
+    this.tileHeight = 128;
+    this.widthRatio = 128 / 256;
+    this.heightRatio = 128 / 256;
     this.yValue = this.tileHeight * (2 / 4);
+    this.tileCenterOffset = new Vector2(
+      this.tileWidth / 2,
+      this.tileHeight / 4
+    );
 
     this.projection = Matrix2x2.from(
       0.5 * this.tileWidth,
@@ -35,8 +39,8 @@ export class Grid extends Container {
         this.tiles[index] = new Tile(this, index, false);
         this.tileContainer.addChild(this.tiles[index].sprite);
 
-        const wallInfo = findAssetInfo("wall");
         // // Setup the initial walls
+        const wallInfo = findAssetInfo("wall");
         if (x === 0 || y === 0) {
           if (x != 0 || y != 0) {
             const screenPosition = this.coordToWorld(coord);
@@ -51,13 +55,17 @@ export class Grid extends Container {
             item.x = screenPosition.x - item.currentOffset.x;
             item.y = screenPosition.y - item.currentOffset.y;
             item.y -= this.yValue / 2;
-
-            console.log(item.x, item.y, item.width, item.height);
-            this.insertItem(item, coord);
+            this.setTileItem(item, coord);
           }
         }
       }
     }
+    const pixelWidth = w * this.tileWidth;
+    const pixelHeight = h * (this.tileHeight / 2);
+
+    this.x = window.innerWidth - pixelWidth;
+    this.y = (window.innerHeight - pixelHeight) / 2;
+
     this.addChild(this.tileContainer);
     this.addChild(this.itemContainer);
   }
@@ -88,8 +96,18 @@ export class Grid extends Container {
     // this.addChild(this.itemContainer);
   }
 
+  sortItems() {
+    this.items.sort((item1, item2) => {
+      return item1.y - item2.y;
+    });
+    this.itemContainer.removeChildren();
+    this.items.forEach((item) => {
+      this.itemContainer.addChild(item);
+    });
+  }
+
   setTileSprite(tile) {
-    const animation = getSpritesheetAnimation("floor");
+    const animation = getSpritesheetAnimation("tile", "floor");
     tile.sprite = new AnimatedSprite(animation);
     tile.sprite.width = this.tileWidth;
     tile.sprite.height = this.tileHeight;
@@ -187,7 +205,7 @@ export class Grid extends Container {
   //   return true;
   // }
 
-  insertItem(item, at) {
+  setTileItem(item, at) {
     this.items.push(item);
     item.x -= this.x;
     item.y -= this.y;
@@ -202,7 +220,7 @@ export class Grid extends Container {
 
         if (item.pattern[x][z]) {
           if (this.coordInBounds(current)) {
-            const tile = this.tiles[this.coordToIndex(current)];
+            const tile = this.tiles[index];
             if (!tile.walkable) {
               return;
             }
@@ -218,6 +236,81 @@ export class Grid extends Container {
     this.items.sort((item1, item2) => {
       return item1.y - item2.y;
     });
+  }
+
+  addBuddy(buddy, at) {
+    if (!this.coordInBounds(at)) {
+      console.error("Buddy out of grid bounds");
+      return;
+    }
+
+    const index = this.coordToIndex(at);
+    if (!this.tiles[index].walkable) {
+      console.error("Trying to place buddy at non-walkable tile coordinate");
+      return;
+    }
+
+    const screenPosition = this.coordToWorld(at);
+    this.items.push(buddy);
+    buddy.setPosition(
+      new Vector2(screenPosition.x - this.x, screenPosition.y - this.y)
+    );
+    this.tiles[index].setContent(buddy);
+    this.itemContainer.addChild(buddy);
+    this.sortItems();
+  }
+
+  moveBuddy(buddy, to) {
+    if (!this.coordInBounds(to)) {
+      console.error("Buddy out of grid bounds");
+      return;
+    }
+
+    const index = this.coordToIndex(to);
+    if (!this.tiles[index].walkable) {
+      console.error("Trying to place buddy at non-walkable tile coordinate");
+      return;
+    }
+
+    this.tiles[this.coordToIndex(buddy.currentCoord)].clearContent();
+
+    const screenPosition = this.coordToWorld(to);
+    buddy.setPosition(
+      new Vector2(screenPosition.x - this.x, screenPosition.y - this.y)
+    );
+    this.tiles[index].setContent(buddy);
+    this.sortItems();
+  }
+
+  adjacentTiles(coord) {
+    const result = new Array();
+    if (this.coordInBounds(coord)) {
+      const current = new Vector3();
+      current.x = coord.x;
+      current.z = coord.z - 1;
+      if (this.coordInBounds(current)) {
+        result.push(this.tiles[this.coordToIndex(current)]);
+      }
+
+      current.x = coord.x + 1;
+      current.z = coord.z;
+      if (this.coordInBounds(current)) {
+        result.push(this.tiles[this.coordToIndex(current)]);
+      }
+
+      current.x = coord.x;
+      current.z = coord.z + 1;
+      if (this.coordInBounds(current)) {
+        result.push(this.tiles[this.coordToIndex(current)]);
+      }
+
+      current.x = coord.x - 1;
+      current.z = coord.z;
+      if (this.coordInBounds(current)) {
+        result.push(this.tiles[this.coordToIndex(current)]);
+      }
+    }
+    return result;
   }
 }
 
@@ -245,6 +338,11 @@ export class Tile {
     this.width = width;
     this.height = height;
     return this;
+  }
+
+  clearContent() {
+    this.content = null;
+    this.walkable = true;
   }
 
   setContent(content) {

@@ -45,7 +45,9 @@ export class Item extends Container {
 
     this.origins = info["origins"];
 
-    this.sprite = new AnimatedSprite(getSpritesheetAnimation(info["name"]));
+    this.sprite = new AnimatedSprite(
+      getSpritesheetAnimation("item", info["name"])
+    );
     this.textureWidth = this.sprite.width;
     this.textureHeight = this.sprite.height;
     this.addChild(this.sprite);
