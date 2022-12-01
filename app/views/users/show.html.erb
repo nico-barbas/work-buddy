@@ -4,7 +4,7 @@
     <%= render "tasks_panel" %>
   </div>
   <div data-navbar-target="timers" class="d-none">
-    <%= render "timer_panel" %>
+    <%= render "timer_panel", timer: @timer %>
   </div>
   <div data-navbar-target="music" class="d-none">
     <%= render "music_panel" %>
