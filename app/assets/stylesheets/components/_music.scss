@@ -8,7 +8,6 @@
 .input-field-music {
     margin-bottom: 3rem;
     margin-top: 2rem;
-
 }
 
 .btn-music {
@@ -23,6 +22,15 @@
   align-items: center;
 }
 
-.input-field-short-blue {
+
+.input-field-url-music {
   background-color: $white;
-}
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-weight: lighter;
+  opacity: 0.6;
+  border-color: $orange;
+  text-align: center;
+  width: 75%;
+  margin: 0.625rem;
+  }
