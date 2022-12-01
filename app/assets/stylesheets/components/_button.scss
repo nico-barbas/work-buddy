@@ -78,15 +78,18 @@ a {
 .btn-plus {
   text-decoration: none;
   font-size: 1.5rem;
-  color: #0F0326;
-  background-color: $purple;
-  border-radius: 3rem;
+  color: #ffffff;
+  background-color: #858AE3;
+  border-radius: 50%;
   padding: 0.3em 1em 0.4em 1em;
   margin-bottom: center;
+  height: 65px;
+  line-height: 2.7rem;
   cursor: pointer;
     &:hover {
     color: $beige;
   }
+
 }
 
 .skip-button-to-style {
@@ -101,4 +104,17 @@ a {
 
 .create-btn {
   z-index: 5;
+}
+
+.btn-submit {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #FFA62B;
+  border-radius: 1.5rem;
+  padding: 0.6rem;
+
+    &:hover {
+    color:#FFA62B;
+  }
 }
