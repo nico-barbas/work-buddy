@@ -63,7 +63,7 @@ export class Grid extends Container {
     const pixelWidth = w * this.tileWidth;
     const pixelHeight = h * (this.tileHeight / 2);
 
-    this.x = window.innerWidth - pixelWidth;
+    this.x = window.innerWidth / 2;
     this.y = (window.innerHeight - pixelHeight) / 2;
 
     this.addChild(this.tileContainer);
