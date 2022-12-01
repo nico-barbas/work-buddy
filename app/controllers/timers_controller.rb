@@ -30,6 +30,8 @@ class TimersController < ApplicationController
   def start_timer
     # When you start the timer and a timer already exist (check to be done in html page)
     # update the start_at (timestamp) to now + restart the timer on the show page (total_time start increasing again)
+    @timer = Timer.find(params[:id])
+    @timer.started_at = Time.now 
   end
 
 

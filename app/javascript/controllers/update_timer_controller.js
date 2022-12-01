@@ -31,7 +31,29 @@ export default class extends Controller {
   start(event) {
     event.preventDefault()
     this.paused = false
-    if (this.timeValue != 0) {
+    if (this.loggedValue == false && this.timeValue != 0) {
+      // on restart le timer
+      console.log("timer restarted")
+      setInterval(() => {
+        if (this.paused) {return}
+        let hours = parseInt(this.hoursTarget.innerHTML, 10)
+        let minutes = parseInt(this.minutesTarget.innerHTML, 10)
+        let seconds = parseInt(this.secondsTarget.innerHTML, 10)
+        if ((seconds + 1) >= 60) {
+          seconds = 0
+          if ((minutes + 1) >= 60) {
+            minutes = 0
+            hours +=1
+          } else {
+            minutes += 1
+          }
+        } else {
+          seconds += 1
+        }
+        this.display(hours, minutes, seconds)
+        this.timeValue = (hours*3600000) + (minutes*60000) + (seconds*1000)
+      }, 1000);
+    } else {
       const url = "/timers/create"
       fetch(url, {
       method: "POST",
@@ -61,10 +83,8 @@ export default class extends Controller {
           this.timeValue = (hours*3600000) + (minutes*60000) + (seconds*1000)
         }, 1000);
       })
-    } else {
-      
+      this.idValue = this.idValue + 1
     }
-    this.idValue = this.idValue + 1
   }
 
   pause() {
@@ -72,7 +92,6 @@ export default class extends Controller {
     this.paused = true
     this.totalTarget.value = this.timeValue
     const url = this.timerUrl(this.formTarget.action)
-    console.log(url)
     fetch(url, {
       method: "PATCH",
       headers: { "Accept": "text/plain", 'X-CSRF-Token': csrfToken() },
@@ -88,26 +107,19 @@ export default class extends Controller {
   })
 }
 
-  disconect() {
-    this.paused = true
-    let hours = parseInt(this.hoursTarget.innerHTML, 10) * 3600000
-    let minutes = parseInt(this.minutesTarget.innerHTML, 10) * 60000
-    let seconds = parseInt(this.secondsTarget.innerHTML, 10) * 1000
-    this.totalTarget.value = hours + minutes + seconds
-    const url = this.formTarget.action
-    fetch(url, {
-      method: "PATCH",
-      headers: { "Accept": "text/plain" },
-      body: new FormData(this.formTarget)
-    })
-    .then(response => response.text())
-    .then((data) => {
-      console.log(data)
-    })
-  }
-
-  // restart() {
-  //   event.preventDefault()
+  // disconect() {
+  //   this.paused = true
+  //   this.totalTarget.value = this.timeValue
+  //   const url = this.timerUrl(this.formTarget.action)
+  //   fetch(url, {
+  //     method: "PATCH",
+  //     headers: { "Accept": "text/plain", 'X-CSRF-Token': csrfToken() },
+  //     body: new FormData(this.formTarget)
+  //   })
+  //   .then(response => response.text())
+  //   .then((data) => {
+  //     console.log(data)
+  //   })
   // }
 
   // log() {
