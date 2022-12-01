@@ -1,0 +1,28 @@
+.music-panel-input {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.input-field-music {
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+
+}
+
+.btn-music {
+  height: fit-content;
+}
+
+.music-panel-title {
+  margin-bottom: 2rem;
+}
+
+.card-spotify {
+  align-items: center;
+}
+
+.input-field-short-blue {
+  background-color: $white;
+}
