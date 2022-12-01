@@ -4,6 +4,12 @@
   padding-right: 2rem;
   background-color: #75C9C8;
   color: white;
+  border: 4px solid $blue;
+  &:hover {
+    color: #75C9C8;
+    border: 4px solid $blue;
+
+  }
 }
 
 .small-btn-blue {
@@ -30,7 +36,10 @@
   padding-right: 2rem;
   margin-right: 1rem;
   color: $pink;
-  border: solid 2px $pink;
+  border: solid 4px $pink;
+  &:hover {
+    color: #FFEEDD;
+  }
 }
 
 .btn-banner {
@@ -104,17 +113,24 @@ a {
 
 .create-btn {
   z-index: 5;
+  &:hover {
+    background-color: none;
+    border: 4px solid $blue;
+  }
 }
 
 .btn-submit {
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: white;
   background-color: #FFA62B;
   border-radius: 1.5rem;
   padding: 0.6rem;
-
+  border: 4px solid $orange;
     &:hover {
     color:#FFA62B;
+    border: 4px solid $orange;
+    border-radius: 1.5rem;
+
   }
 }
