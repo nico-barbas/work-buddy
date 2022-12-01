@@ -1,19 +1,47 @@
 
 items.png
-size: 512, 512
+size: 2048, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-wall01
+desk01
   rotate: false
   xy: 2, 4
+  size: 220, 200
+  orig: 256, 256
+  offset: 19, 56
+  index: -1
+desk02
+  rotate: false
+  xy: 224, 4
+  size: 220, 200
+  orig: 256, 256
+  offset: 19, 55
+  index: -1
+desk03
+  rotate: false
+  xy: 446, 4
+  size: 220, 200
+  orig: 256, 256
+  offset: 17, 55
+  index: -1
+desk04
+  rotate: false
+  xy: 668, 4
+  size: 220, 200
+  orig: 256, 256
+  offset: 17, 56
+  index: -1
+wall01
+  rotate: false
+  xy: 890, 4
   size: 138, 272
   orig: 512, 512
   offset: 189, 117
   index: -1
 wall02
   rotate: false
-  xy: 142, 4
+  xy: 1112, 4
   size: 137, 272
   orig: 512, 512
   offset: 185, 117

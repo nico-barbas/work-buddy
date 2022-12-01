@@ -2,8 +2,10 @@ import * as PIXI from "pixi.js";
 import { Controller } from "@hotwired/stimulus";
 import { Grid } from "./game/grid";
 import { PlayerController } from "./game/player";
-import { loadAssets } from "./game/assets";
+import { findAssetInfo, loadAssets } from "./game/assets";
 import { Buddy } from "./game/buddy";
+import { Vector3 } from "./game/math";
+import { Item } from "./game/item";
 
 // Connects to data-controller="game"
 export default class extends Controller {
@@ -48,7 +50,20 @@ export default class extends Controller {
       charactersSpritesheetPath,
       charactersConfigPath
     );
-    const grid = new Grid(app, 10, 10);
+    const grid = new Grid(app, 10, 10, (g) => {
+      const deskCoord = new Vector3(4, 0, 1);
+      const deskPosition = g.coordToWorld(deskCoord);
+      const desk = new Item(app, findAssetInfo("desk"));
+      desk.setScaledSize(
+        desk.sprite.width * g.widthRatio,
+        desk.sprite.height * g.heightRatio
+      );
+      desk.rotateCW();
+      desk.x = deskPosition.x - desk.currentOffset.x;
+      desk.y = deskPosition.y - desk.currentOffset.y;
+      desk.y -= g.yValue / 2;
+      g.setTileItem(desk, deskCoord);
+    });
     app.stage.addChild(grid);
 
     const playerController = new PlayerController(app);

@@ -4,6 +4,7 @@ import { Grid, Tile } from "./grid";
 // import { findAsset } from "./data/assets";
 import { Item } from "./item";
 import { Input } from "./input";
+import { SignalDispatcher } from "./signal";
 
 // PlayerController groups all the procedures related to handling
 // the player's interactions with the game world or its UI
@@ -106,6 +107,13 @@ export class PlayerController {
         }
       };
       canvas.addEventListener("contextmenu", handleMouseRightInput);
+
+      const workTest = (event) => {
+        if (event.key === " ") {
+          SignalDispatcher.dispatchSignal("interrupt.work");
+        }
+      };
+      document.addEventListener("keyup", workTest);
     }
 
     this.initUpdateLoop(app, grid);

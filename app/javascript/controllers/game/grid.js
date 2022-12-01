@@ -4,7 +4,7 @@ import { Item } from "./item";
 import { Vector2, Vector3, Matrix2x2 } from "./math";
 
 export class Grid extends Container {
-  constructor(app, w, h) {
+  constructor(app, w, h, defaultRoomCallback) {
     super();
     this.app = app;
     this.name = "grid";
@@ -68,6 +68,8 @@ export class Grid extends Container {
 
     this.addChild(this.tileContainer);
     this.addChild(this.itemContainer);
+
+    defaultRoomCallback(this);
   }
 
   offsetOrigin(v) {
@@ -238,6 +240,16 @@ export class Grid extends Container {
     });
   }
 
+  findItem(name) {
+    const item = this.tiles.find((tile) => {
+      if (tile.content && tile.content.name === name) {
+        return true;
+      }
+    });
+
+    return item;
+  }
+
   addBuddy(buddy, at) {
     if (!this.coordInBounds(at)) {
       console.error("Buddy out of grid bounds");
@@ -311,6 +323,142 @@ export class Grid extends Container {
       }
     }
     return result;
+  }
+
+  /** Basic A* algorithm implementation:
+   * ~ For better perfomances, swap raw array for a heap
+   */
+  pathTo(start, end, opt) {
+    // Scoped helper functions
+    const searchMin = (set) => {
+      let currentMin = Infinity;
+      let index = -1;
+
+      for (let i = 0; i < set.length; i += 1) {
+        const node = set[i];
+        if (node.fCost < currentMin) {
+          index = i;
+          currentMin = node.fCost;
+        }
+      }
+
+      return index;
+    };
+
+    const calculateHeuristic = (current, end) => {
+      return Math.abs(current.x - end.x) + Math.abs(current.z - end.z);
+    };
+
+    const setContains = (set, node) => {
+      for (let i = 0; i < set.length; i += 1) {
+        const n = set[i];
+        if (node.tile.index == n.tile.index) {
+          return [i, true];
+        }
+      }
+
+      return [-1, false];
+    };
+
+    const startIndex = this.coordToIndex(start);
+    const endIndex = this.coordToIndex(end);
+
+    const startOk = !(opt.includeStart && !this.tiles[startIndex].walkable);
+    const endOk = !(opt.includeEnd && !this.tiles[endIndex].walkable);
+
+    if (!startOk && !endOk) {
+      return [[], false];
+    }
+
+    const openSet = new Array();
+    const closedSet = new Array();
+
+    let endNode;
+    let endFound = false;
+    openSet.push(new NavigationNode(this.tiles[startIndex], null));
+    while (openSet.length > 0 && !endFound) {
+      const minIndex = searchMin(openSet);
+      if (minIndex >= 0) {
+        const current = openSet[minIndex];
+        const currentCoord = this.indexToCoord(current.tile.index);
+        openSet.splice(minIndex, 1);
+        closedSet.push(current);
+
+        const adjacents = this.adjacentTiles(currentCoord);
+        for (let i = 0; i < adjacents.length; i += 1) {
+          const result = adjacents[i];
+          const next = new NavigationNode(result, current);
+          next.gCost = current.gCost + 1;
+          next.hCost = calculateHeuristic(currentCoord, end);
+          next.fCost = next.gCost + next.hCost;
+
+          // Are we done yet?
+          if (result.index == endIndex) {
+            closedSet.push(next);
+            endNode = next;
+            endFound = true;
+            break;
+          }
+
+          const [opendIndex, inOpenSet] = setContains(openSet, next);
+          let skipClosedSet = false;
+          if (inOpenSet) {
+            const other = openSet[opendIndex];
+            if (next.fCost < other.fCost) {
+              other.parent = next.parent;
+              other.fCost = next.fCost;
+            }
+            skipClosedSet = true;
+          }
+
+          if (!skipClosedSet) {
+            const [_, inClosedSet] = setContains(closedSet, next);
+            if (!inClosedSet) {
+              openSet.push(next);
+            }
+          }
+        }
+      }
+    }
+
+    if (endNode) {
+      const path = new Array();
+      let current = endNode;
+      while (true) {
+        if (!current.parent) {
+          if (opt.includeStart) {
+            path.push(current.tile);
+          }
+          break;
+        }
+        path.push(current.tile);
+        current = current.parent;
+      }
+
+      if (!opt.includeEnd) {
+        path.splice(0, 1);
+      }
+      return [path, true];
+    }
+
+    return [[], false];
+  }
+}
+
+class NavigationNode {
+  tile;
+  parent;
+  gCost = 0;
+  hCost = 0;
+  fCost = 0;
+
+  constructor(tile, parent) {
+    this.tile = tile;
+    if (parent) {
+      this.parent = parent;
+    } else {
+      this.parent = null;
+    }
   }
 }
 
