@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @task = Task.new
     @tasks = Task.where(user: current_user)
     @timers = Timer.where(user: current_user)
-    @timer = Timer.where(user: current_user, logged: false).last
+    @timer = Timer.where(user: current_user).last
    else
     redirect_to root_path
    end
