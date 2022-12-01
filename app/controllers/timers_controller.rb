@@ -27,26 +27,22 @@ class TimersController < ApplicationController
     # end
   end
 
-  def start_timer
-    # When you start the timer and a timer already exist (check to be done in html page)
-    # update the start_at (timestamp) to now + restart the timer on the show page (total_time start increasing again)
-    @timer = Timer.find(params[:id])
-    @timer.started_at = Time.now 
-  end
-
-
   def close_timer
     # when you "finish" the timer:
-    # put the timer on the show page back to 00:00
+    # put the timer on the show page back to 00:00 (--> stimulus controller does it)
     # update the total_time
-    # push the total time to daily_lable_time / total_label_time
+    @timer = Timer.find(params[:id])
+    @timer.update(timer_params)
     # mark the timer as logged true
+    @timer.logged = true
+    @timer.save
+    # push the total time to daily_lable_time / total_label_time
     # display a message telling "Your time has been loged! You can start a new timer"
   end
 
   private
 
 def timer_params
-  params.require(:timer).permit(:total_time, :started_at)
+  params.require(:timer).permit(:total_time, :started_at, :logged)
 end
 end
