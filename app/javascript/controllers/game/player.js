@@ -116,7 +116,7 @@ export class PlayerController {
       document.addEventListener("keyup", workTest);
     }
 
-    this.initUpdateLoop(app, grid);
+    // this.initUpdateLoop(app, grid);
   }
 
   initUpdateLoop(app, grid) {

@@ -29,7 +29,9 @@ export default class extends Controller {
     let app = new PIXI.Application({
       width: window.innerWidth,
       height: window.innerHeight,
+      background: 0xffffff,
     });
+    // background: 0xf2ecfd,
 
     document.body.style.margin = "0";
     app.renderer.view.style.position = "absolute";
