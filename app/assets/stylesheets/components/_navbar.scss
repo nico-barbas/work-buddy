@@ -60,6 +60,21 @@
   }
 }
 
+
+.icon-param {
+  border: 1px solid $beige;
+  padding: 1.3em;
+  border-radius: 40%;
+  background-color: $beige;
+  margin-top: 17em;
+  .fa-solid {
+    &:hover {
+      color: $darkpurple;
+      background-color: $beige;
+      opacity: 1;
+    }
+  }
+
 .circle {
   box-shadow: inset 0px 0px 0px 4px #0f0326b5;
 }
