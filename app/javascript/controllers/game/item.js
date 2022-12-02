@@ -19,7 +19,7 @@ export class Item extends Container {
   offsets;
   currentOffset = new Vector2();
   sprite;
-  placed = false;
+  tiled = false;
   blocking = true;
 
   // Info coming from a DB as a JSON/Record
@@ -28,6 +28,7 @@ export class Item extends Container {
     this.app = app;
     this.name = info["name"];
     this.id = info["id"];
+    this.blocking = info["blocking"];
     this.spriteScale = info["scale"];
     this.gridScale = new Vector2(info["width"], info["height"]);
     this.pattern = new Array(this.gridScale.x);

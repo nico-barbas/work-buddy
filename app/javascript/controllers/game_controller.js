@@ -53,18 +53,24 @@ export default class extends Controller {
       charactersConfigPath
     );
     const grid = new Grid(app, 10, 10, (g) => {
-      const deskCoord = new Vector3(4, 0, 1);
-      const deskPosition = g.coordToWorld(deskCoord);
-      const desk = new Item(app, findAssetInfo("desk"));
-      desk.setScaledSize(
-        desk.sprite.width * g.widthRatio,
-        desk.sprite.height * g.heightRatio
-      );
-      desk.rotateCW();
-      desk.x = deskPosition.x - desk.currentOffset.x;
-      desk.y = deskPosition.y - desk.currentOffset.y;
-      desk.y -= g.yValue / 2;
-      g.setTileItem(desk, deskCoord);
+      const insertItem = (name, coord, rotationsCount) => {
+        const position = g.coordToWorld(coord);
+        const item = new Item(app, findAssetInfo(name));
+        item.setScaledSize(
+          item.sprite.width * g.widthRatio,
+          item.sprite.height * g.heightRatio
+        );
+        for (let i = 0; i < rotationsCount; i += 1) {
+          item.rotateCW();
+        }
+        item.x = position.x - item.currentOffset.x;
+        item.y = position.y - item.currentOffset.y;
+        item.y -= g.yValue / 2;
+        g.setTileItem(item, coord);
+      };
+      insertItem("desk", new Vector3(4, 0, 1), 1);
+      insertItem("rug", new Vector3(9, 0, 5), 0);
+      insertItem("couch", new Vector3(1, 0, 5));
     });
     app.stage.addChild(grid);
 
