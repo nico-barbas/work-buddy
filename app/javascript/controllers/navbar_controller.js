@@ -33,6 +33,7 @@ export default class extends Controller {
     this.databtnTarget.classList.remove("circle");
     this.paramTarget.classList.add("d-none");
     this.parambtnTarget.classList.remove("circle");
+    this.welcomeTarget.classList.add("d-none");
   }
 
   displayTimers() {
@@ -47,6 +48,8 @@ export default class extends Controller {
     this.databtnTarget.classList.remove("circle");
     this.paramTarget.classList.add("d-none");
     this.parambtnTarget.classList.remove("circle");
+    this.welcomeTarget.classList.add("d-none");
+
   }
 
   displayMusic() {
@@ -61,6 +64,7 @@ export default class extends Controller {
     this.databtnTarget.classList.remove("circle");
     this.paramTarget.classList.add("d-none");
     this.parambtnTarget.classList.remove("circle");
+    this.welcomeTarget.classList.add("d-none");
   }
 
   displayData() {
@@ -75,6 +79,7 @@ export default class extends Controller {
     this.timerbtnTarget.classList.remove("circle");
     this.paramTarget.classList.add("d-none");
     this.parambtnTarget.classList.remove("circle");
+    this.welcomeTarget.classList.add("d-none");
   }
 
   displayParam() {
@@ -89,7 +94,9 @@ export default class extends Controller {
     this.musicbtnTarget.classList.remove("circle");
     this.timersTarget.classList.add("d-none");
     this.timerbtnTarget.classList.remove("circle");
+    this.welcomeTarget.classList.add("d-none");
   }
+  
   displayTaskAfterWelcome(event) {
     console.log(this.welcomeTarget);
     event.preventDefault();
