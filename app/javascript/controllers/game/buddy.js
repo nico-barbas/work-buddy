@@ -33,6 +33,7 @@ export class Buddy extends Container {
       const blackboard = {
         lock: "none",
         agentData: this,
+        runningNode: null,
         previousCoord: new Vector3(),
         nextCoord: new Vector3(),
         pathFound: false,
@@ -131,10 +132,17 @@ export class Buddy extends Container {
           new BehaviorCondition(blackboard, (b) => {
             return b.work.atDesk;
           }),
-          new BehaviorAction(blackboard, (b) => {
-            b.lock = "none";
-            return false;
-          }),
+          new BehaviorAction(
+            blackboard,
+            (b) => {
+              b.lock = "none";
+              return false;
+            },
+            (b) => {
+              b.lock = "none";
+              b.work.atDesk = false;
+            }
+          ),
           moveToDeskBehavior
         )
       );
@@ -219,10 +227,12 @@ export class Buddy extends Container {
   setSignalListeners() {
     SignalDispatcher.addListener("interrupt.work", () => {
       this.agent.blackboard.work.hasWork = true;
+      this.agent.interrupt();
     });
-    // SignalDispatcher.addListener("interrupt.break", () => {
-    //   this.agent.blackboard.interrupt = "break";
-    // });
+    SignalDispatcher.addListener("interrupt.break", () => {
+      this.agent.blackboard.work.hasWork = false;
+      this.agent.interrupt();
+    });
   }
 
   setPosition(pos) {
@@ -247,6 +257,12 @@ class BehaviorTree {
       result = this.root.execute();
     }
     return result;
+  }
+
+  interrupt() {
+    if (this.blackboard.runningNode && this.blackboard.runningNode.cleanup) {
+      this.blackboard.runningNode.interrupt();
+    }
   }
 }
 
@@ -329,13 +345,23 @@ class BehaviorCondition {
 class BehaviorAction {
   kind = "action";
 
-  constructor(blackboard, callback) {
+  constructor(blackboard, callback, cleanup) {
     this.blackboard = blackboard;
     this.callback = callback;
+    this.cleanup = cleanup;
   }
 
   execute() {
     const done = this.callback(this.blackboard);
-    return done ? BehaviorResult.Success : BehaviorResult.Processing;
+    if (done) {
+      return BehaviorResult.Success;
+    } else {
+      this.blackboard.runningNode = this;
+      return BehaviorResult.Processing;
+    }
+  }
+
+  interrupt() {
+    this.cleanup(this.blackboard);
   }
 }
