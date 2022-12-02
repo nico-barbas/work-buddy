@@ -13,6 +13,8 @@ export default class extends Controller {
     "databtn",
     "param",
     "parambtn",
+    "welcome",
+    "welcomebtn",
   ];
 
   // connect() {
@@ -87,5 +89,12 @@ export default class extends Controller {
     this.musicbtnTarget.classList.remove("circle");
     this.timersTarget.classList.add("d-none");
     this.timerbtnTarget.classList.remove("circle");
+  }
+  displayTaskAfterWelcome(event) {
+    console.log(this.welcomeTarget);
+    event.preventDefault();
+    this.welcomeTarget.classList.add("d-none");
+    this.taskbtnTarget.classList.add("circle");
+    this.tasksTarget.classList.remove("d-none");
   }
 }

@@ -98,7 +98,6 @@ a {
     &:hover {
     color: $beige;
   }
-
 }
 
 .skip-button-to-style {
@@ -132,5 +131,28 @@ a {
     border: 4px solid $pink;
     border-radius: 1.5rem;
 
+  }
+}
+
+.welcome-panel-btn {
+  display: flex;
+  justify-content: center;
+  .welcome-btn {
+    text-decoration: none;
+    font-size: 1rem;
+    color: $beige;
+    background-color: #858AE3;
+    border-radius: 20px;
+    padding: 0.3em 1em 0.4em 1em;
+    margin-bottom: center;
+    height: 65px;
+    line-height: 2.7rem;
+    cursor: pointer;
+    border: solid 4px $purple;
+      &:hover {
+      color: $purple;
+      background-color: #858ae36f;
+      border: solid 4px $purple;
+    }
   }
 }
