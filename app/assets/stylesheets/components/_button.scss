@@ -123,13 +123,13 @@ a {
   text-decoration: none;
   font-size: 1rem;
   color: white;
-  background-color: #FFA62B;
+  background-color: $pink;
   border-radius: 1.5rem;
   padding: 0.6rem;
-  border: 4px solid $orange;
+  border: 4px solid $pink;
     &:hover {
-    color:#FFA62B;
-    border: 4px solid $orange;
+    color: $pink;
+    border: 4px solid $pink;
     border-radius: 1.5rem;
 
   }
