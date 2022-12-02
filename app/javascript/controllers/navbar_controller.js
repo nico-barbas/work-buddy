@@ -29,6 +29,8 @@ export default class extends Controller {
     this.musicbtnTarget.classList.remove("circle");
     this.dataTarget.classList.add("d-none");
     this.databtnTarget.classList.remove("circle");
+    this.paramTarget.classList.add("d-none");
+    this.parambtnTarget.classList.remove("circle");
   }
 
   displayTimers() {
@@ -41,6 +43,8 @@ export default class extends Controller {
     this.musicbtnTarget.classList.remove("circle");
     this.dataTarget.classList.add("d-none");
     this.databtnTarget.classList.remove("circle");
+    this.paramTarget.classList.add("d-none");
+    this.parambtnTarget.classList.remove("circle");
   }
 
   displayMusic() {
@@ -53,6 +57,8 @@ export default class extends Controller {
     this.timerbtnTarget.classList.remove("circle");
     this.dataTarget.classList.add("d-none");
     this.databtnTarget.classList.remove("circle");
+    this.paramTarget.classList.add("d-none");
+    this.parambtnTarget.classList.remove("circle");
   }
 
   displayData() {
@@ -65,12 +71,16 @@ export default class extends Controller {
     this.musicbtnTarget.classList.remove("circle");
     this.timersTarget.classList.add("d-none");
     this.timerbtnTarget.classList.remove("circle");
+    this.paramTarget.classList.add("d-none");
+    this.parambtnTarget.classList.remove("circle");
   }
 
   displayParam() {
     event.preventDefault();
     this.paramTarget.classList.toggle("d-none");
     this.parambtnTarget.classList.toggle("circle");
+    this.dataTarget.classList.add("d-none");
+    this.databtnTarget.classList.remove("circle");
     this.tasksTarget.classList.add("d-none");
     this.taskbtnTarget.classList.remove("circle");
     this.musicTarget.classList.add("d-none");
