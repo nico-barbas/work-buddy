@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     resources :tasks, only: [:update, :create]
     resources :playlists, only: [:create]
+    resources :labels, only: [:create, :update]
   end
   get "/users/:id/game", to: "users#game", as: "game"
   resources :tasks, only: [:destroy]
   resources :playlists, only: [:update]
+  resources :labels, only: [:destroy]
   resources :avatars, only: [:new, :create]
 
   post "/timers/create", to: "timers#create", as: "create_timer"

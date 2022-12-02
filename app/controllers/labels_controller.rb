@@ -3,9 +3,8 @@ class LabelsController < ApplicationController
   def create
     # to be able to create a new lable with a label name
     @label = Label.new(label_params)
-    if @label.save
-      flash[:notice] = "Label created successfully"
-    end
+    @label.user = current_user
+    @label.save
     # respond_to do |format|
     #   format.html { redirect_to user_path(current_user) }
     #   # format.text { render partial: "users/task_list", locals: { tasks: Task.where(user:current_user) }, formats: [:html] }
@@ -29,6 +28,6 @@ class LabelsController < ApplicationController
   private
 
   def label_params
-    params.require(:label).permit(:name, :description)
+    params.require(:label).permit(:name)
   end
 end
