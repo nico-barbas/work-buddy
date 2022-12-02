@@ -1,3 +1,4 @@
+import { OutlineFilter } from "pixi-filters";
 import { Container, AnimatedSprite } from "pixi.js";
 import { getSpritesheetAnimation, findAssetInfo } from "./assets";
 import { Item } from "./item";
@@ -29,8 +30,10 @@ export class Grid extends Container {
       0.25 * this.tileHeight
     );
     this.inverseProjection = this.projection.inverse();
+
     this.tileContainer = new Container();
     this.itemContainer = new Container();
+    this.tiledItemContainer = new Container();
 
     for (let y = 0; y < h; y += 1) {
       for (let x = 0; x < w; x += 1) {
@@ -41,10 +44,12 @@ export class Grid extends Container {
 
         // // Setup the initial walls
         const wallInfo = findAssetInfo("wall");
+        const wallWindowInfo = findAssetInfo("wallwindow");
         if (x === 0 || y === 0) {
           if (x != 0 || y != 0) {
             const screenPosition = this.coordToWorld(coord);
-            const item = new Item(app, wallInfo);
+            const isWindow = x === 4 || y === 7;
+            const item = new Item(app, isWindow ? wallWindowInfo : wallInfo);
             item.setScaledSize(
               item.sprite.width * this.widthRatio,
               item.sprite.height * this.heightRatio
@@ -55,6 +60,7 @@ export class Grid extends Container {
             item.x = screenPosition.x - item.currentOffset.x;
             item.y = screenPosition.y - item.currentOffset.y;
             item.y -= this.yValue / 2;
+            item.tiled = true;
             this.setTileItem(item, coord);
           }
         }
@@ -67,7 +73,12 @@ export class Grid extends Container {
     this.y = (window.innerHeight - pixelHeight) / 2;
 
     this.addChild(this.tileContainer);
+    this.addChild(this.tiledItemContainer);
     this.addChild(this.itemContainer);
+
+    const outlineClr = 0x4c1f20;
+    this.tileContainer.filters = [new OutlineFilter(2, outlineClr, 0.25)];
+    this.tiledItemContainer.filters = [new OutlineFilter(2, outlineClr, 0.25)];
 
     defaultRoomCallback(this);
   }
@@ -95,7 +106,6 @@ export class Grid extends Container {
         this.tileContainer.addChild(this.tiles[index].sprite);
       }
     }
-    // this.addChild(this.itemContainer);
   }
 
   sortItems() {
@@ -103,8 +113,13 @@ export class Grid extends Container {
       return item1.y - item2.y;
     });
     this.itemContainer.removeChildren();
+    this.tiledItemContainer.removeChildren();
     this.items.forEach((item) => {
-      this.itemContainer.addChild(item);
+      if (item.tiled) {
+        this.tiledItemContainer.addChild(item);
+      } else {
+        this.itemContainer.addChild(item);
+      }
     });
   }
 
@@ -234,7 +249,11 @@ export class Grid extends Container {
       }
     }
 
-    this.itemContainer.addChild(item);
+    if (item.tiled) {
+      this.tiledItemContainer.addChild(item);
+    } else {
+      this.itemContainer.addChild(item);
+    }
     this.items.sort((item1, item2) => {
       return item1.y - item2.y;
     });

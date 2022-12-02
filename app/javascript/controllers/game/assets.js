@@ -138,6 +138,39 @@ const itemAssets = [
     width: 1,
     height: 1,
     pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "wallwindow",
+    origins: [new Vector2(135 - 256, 78), new Vector2(0, 78)],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "rug",
+    origins: [new Vector2(-8, -68)],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: false,
+  },
+  {
+    name: "couch",
+    origins: [
+      new Vector2(-8, 128),
+      new Vector2(),
+      new Vector2(),
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1010",
+    blocking: true,
   },
   {
     name: "desk",
@@ -146,6 +179,7 @@ const itemAssets = [
     width: 1,
     height: 1,
     pattern: "1",
+    blocking: true,
   },
 ];
 

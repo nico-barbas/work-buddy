@@ -26,7 +26,7 @@ export class Buddy extends Container {
     this.offset = this.offset.sub(this.grid.tileCenterOffset);
     this.addChild(this.sprite);
 
-    this.currentCoord = new Vector3(9, 0, 9);
+    this.currentCoord = new Vector3(3, 0, 3);
     this.grid.addBuddy(this, this.currentCoord);
 
     {
@@ -212,7 +212,6 @@ export class Buddy extends Container {
 
     const update = () => {
       this.agent.run();
-      console.log(this.agent.blackboard.work.hasWork);
     };
     app.ticker.add(update);
   }
