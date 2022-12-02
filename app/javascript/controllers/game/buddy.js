@@ -1,6 +1,7 @@
 import { AnimatedSprite, Container } from "pixi.js";
 import { getSpritesheetAnimation } from "./assets";
 import { Vector2, Vector3 } from "./math";
+import { SignalDispatcher } from "./signal";
 import { secondToTick } from "./utils";
 
 export class Buddy extends Container {
@@ -30,6 +31,7 @@ export class Buddy extends Container {
 
     {
       const blackboard = {
+        lock: "none",
         agentData: this,
         previousCoord: new Vector3(),
         nextCoord: new Vector3(),
@@ -44,7 +46,99 @@ export class Buddy extends Container {
           timer: 0,
           rate: secondToTick(0.3),
         },
+        work: {
+          hasWork: false,
+          atDesk: false,
+        },
       };
+      const moveToDeskBehavior = new BehaviorSequence(blackboard);
+      moveToDeskBehavior.addChild(
+        new BehaviorCondition(blackboard, (b) => {
+          if (!b.pathFound) {
+            const grid = b.agentData.grid;
+            const deskTile = grid.findItem("desk");
+            const deskCoord = grid.indexToCoord(deskTile.index);
+            if (deskTile) {
+              const sitCoord = deskCoord.add(
+                deskTile.content.rotationIndexToDirectionVector()
+              );
+              [b.path, b.pathFound] = grid.pathTo(
+                b.agentData.currentCoord,
+                sitCoord,
+                {
+                  includeStart: false,
+                  includeEnd: true,
+                }
+              );
+              b.nextCoord = grid.indexToCoord(b.path.pop().index);
+            }
+          }
+          return b.pathFound;
+        })
+      );
+      moveToDeskBehavior.addChild(
+        new BehaviorAction(blackboard, (b) => {
+          const grid = b.agentData.grid;
+
+          b.move.timer += 1;
+          if (b.move.timer === b.move.rate) {
+            b.move.timer = 0;
+            grid.moveBuddy(b.agentData, b.nextCoord);
+            b.previousCoord = b.agentData.currentCoord;
+            b.agentData.currentCoord = b.nextCoord;
+            b.lock = "none";
+            if (b.path.length > 0) {
+              b.nextCoord = grid.indexToCoord(b.path.pop().index);
+              return false;
+            }
+            return true;
+          }
+
+          const t = b.move.timer / b.move.rate;
+          // FIXME: Could optimize this since they are constant across the movement
+          const start = grid.coordToWorld(b.agentData.currentCoord);
+          const end = grid.coordToWorld(b.nextCoord);
+          const v = start.lerp(end, t);
+          b.agentData.setPosition(new Vector2(v.x - grid.x, v.y - grid.y));
+          b.lock = "work";
+          return false;
+        })
+      );
+      moveToDeskBehavior.addChild(
+        new BehaviorAction(blackboard, (b) => {
+          b.pathFound = false;
+          b.work.atDesk = true;
+          return true;
+        })
+      );
+
+      const workBehavior = new BehaviorSequence(blackboard);
+      workBehavior.addChild(
+        new BehaviorCondition(blackboard, (b) => {
+          const filters = ["work", "none"];
+          const isLocked = !filters.find((filter) => {
+            return filter == b.lock;
+          });
+          if (!isLocked) {
+            return b.work.hasWork;
+          }
+          return false;
+        })
+      );
+      workBehavior.addChild(
+        new BehaviorBranch(
+          blackboard,
+          new BehaviorCondition(blackboard, (b) => {
+            return b.work.atDesk;
+          }),
+          new BehaviorAction(blackboard, (b) => {
+            b.lock = "none";
+            return false;
+          }),
+          moveToDeskBehavior
+        )
+      );
+
       const idleBehavior = new BehaviorSequence(blackboard);
       idleBehavior.addChild(
         new BehaviorCondition(blackboard, (b) => {
@@ -85,6 +179,7 @@ export class Buddy extends Container {
             grid.moveBuddy(b.agentData, b.nextCoord);
             b.previousCoord = b.agentData.currentCoord;
             b.agentData.currentCoord = b.nextCoord;
+            b.lock = "none";
             return true;
           }
           const t = b.move.timer / b.move.rate;
@@ -94,7 +189,7 @@ export class Buddy extends Container {
 
           const v = start.lerp(end, t);
           b.agentData.setPosition(new Vector2(v.x - grid.x, v.y - grid.y));
-          console.log(b.agentData.x, b.agentData.y);
+          b.lock = "idle";
           return false;
         })
       );
@@ -105,15 +200,30 @@ export class Buddy extends Container {
           return true;
         })
       );
-      this.blackboard = blackboard;
-      this.agent.setRoot(idleBehavior);
-      console.log(this.agent);
+      this.agent.blackboard = blackboard;
+
+      const root = new BehaviorSequence(blackboard, BehaviorResult.Success);
+      root.addChild(workBehavior);
+      root.addChild(idleBehavior);
+      this.agent.setRoot(root);
     }
+
+    this.setSignalListeners();
 
     const update = () => {
       this.agent.run();
+      console.log(this.agent.blackboard.work.hasWork);
     };
     app.ticker.add(update);
+  }
+
+  setSignalListeners() {
+    SignalDispatcher.addListener("interrupt.work", () => {
+      this.agent.blackboard.work.hasWork = true;
+    });
+    // SignalDispatcher.addListener("interrupt.break", () => {
+    //   this.agent.blackboard.interrupt = "break";
+    // });
   }
 
   setPosition(pos) {
@@ -152,9 +262,14 @@ class BehaviorSequence {
   kind = "sequence";
   blackboard = null;
   children = [];
+  exitCode = BehaviorResult.Failure;
 
-  constructor(blackboard) {
+  constructor(blackboard, exitCode = BehaviorResult.Failure) {
     this.blackboard = blackboard;
+    this.exitCode = exitCode;
+    if (this.exitCode == BehaviorResult.Success) {
+      this.kind = "selector";
+    }
   }
 
   addChild(node) {
@@ -167,10 +282,7 @@ class BehaviorSequence {
       const child = this.children[i];
       result = child.execute();
 
-      if (
-        result === BehaviorResult.Failure ||
-        result === BehaviorResult.Processing
-      ) {
+      if (result === this.exitCode || result === BehaviorResult.Processing) {
         break;
       }
     }

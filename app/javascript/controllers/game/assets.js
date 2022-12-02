@@ -139,6 +139,14 @@ const itemAssets = [
     height: 1,
     pattern: "1",
   },
+  {
+    name: "desk",
+    origins: [new Vector2(), new Vector2(), new Vector2(), new Vector2()],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+  },
 ];
 
 export const findAssetInfo = (name) => {
