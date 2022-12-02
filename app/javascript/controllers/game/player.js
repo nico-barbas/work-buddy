@@ -108,12 +108,12 @@ export class PlayerController {
       };
       canvas.addEventListener("contextmenu", handleMouseRightInput);
 
-      const workTest = (event) => {
-        if (event.key === " ") {
-          SignalDispatcher.dispatchSignal("interrupt.work");
-        }
-      };
-      document.addEventListener("keyup", workTest);
+      // const workTest = (event) => {
+      //   if (event.key === " ") {
+      //     SignalDispatcher.dispatchSignal("interrupt.work");
+      //   }
+      // };
+      // document.addEventListener("keyup", workTest);
     }
 
     // this.initUpdateLoop(app, grid);
