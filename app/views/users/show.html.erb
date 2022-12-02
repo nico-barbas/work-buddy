@@ -12,10 +12,13 @@
   <div data-navbar-target="data" class="d-none">
     <%= render "data_panel" %>
   </div>
+   <div data-navbar-target="param" class="d-none">
+    <%= render "param_panel" %>
+  </div>
 </div>
 
-<div 
-    data-controller="game" 
+<div
+    data-controller="game"
     data-game-tiles-value=<%= asset_path("tiles.png") %>
     data-game-tiles-config-value=<%= asset_path("tiles.atlas") %>
     data-game-items-value=<%= asset_path("items.png") %>
