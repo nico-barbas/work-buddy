@@ -1,0 +1,26 @@
+<div class="card-task m-3" data-controller="edit-task" data-edit-task-target="card">
+  <div class="wrapper">
+    <div class="task-box" >
+      <label for="mark-as-done">
+        <input class="form-check-input" type="checkbox" id=<%= task.id %> name="done" value="yes" data-action='change->edit-task#markAsDone' <% if task.status == "done" %>
+        <%= "checked" %>
+        <% end %>>
+      </label>
+      <div class="card-task-infos">
+        <h2><%= task.title %></h2>
+        <p> <%= task.description %></p>
+      </div>
+    </div>
+    <div class="buttons" >
+      <button class="btn btn-outline-warning edit-btn" data-action='click->edit-task#toggleElement'>Edit</button>
+      <button class="btn btn-outline-warning delete-btn" data-action='click->create-task#destroy' id=<%= task.id %> >Delete</button>
+    </div>
+  </div>
+  <div class="inline-form hidden" data-edit-task-target="target">
+    <%= simple_form_for [current_user, task], html: { data: {edit_task_target: "form", action: 'submit->edit-task#update'}} do |f| %>
+      <%= f.input :title %>
+      <%= f.input :description %>
+      <%= f.submit class:"btn btn-outline-warning edit-btn" %>
+      <% end %>
+  </div>
+</div>

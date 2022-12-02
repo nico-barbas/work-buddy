@@ -1,0 +1,44 @@
+<div >
+  <div class="timer-buttons-panel">
+          <div class="timer-button">
+            <a href="" class="fa-sharp fa-solid fa-play" data-update-timer-target="play" data-action="click->update-timer#start"></a>
+          </div>
+          <div class="timer-button">
+            <a href="" class="fa-sharp fa-solid fa-pause" data-update-timer-target="pause" data-action="click->update-timer#pause"></a>
+          </div>
+          <div class="timer-button">
+            <a href="" class="fa-solid fa-circle-check" data-update-timer-target="log" data-action="click->update-timer#log"></a>
+          </div>
+  </div>
+  <div class="input-field-short-blue">Select existing tag</div>
+      <div class="new-tag-field">
+        <div class="input-field-short-blue">Create a new tag</div>
+        <div class="small-btn-plus">+</div>
+      </div>
+  <br><div class="text-center text-danger" data-update-timer-target="logconfirmation"></div>
+</div>
+  <%= simple_form_for timer,
+    url: pause_timer_path(timer),
+    method: "patch",
+    html: {
+    class: "d-none",
+    data: {
+      update_timer_target: "form",
+    }
+  } do |f|%>
+      <%= f.input :total_time,  input_html: {data: {update_timer_target: "total" }}%>
+      <%= f.submit %>
+  <% end %>
+
+  <%= simple_form_for timer,
+    url: close_timer_path(timer),
+    method: "patch",
+    html: {
+    class: "d-none",
+    data: {
+      update_timer_target: "logform",
+    }
+  } do |f|%>
+      <%= f.input :total_time,  input_html: {data: {update_timer_target: "logtotal" }}%>
+      <%= f.submit %>
+  <% end %>

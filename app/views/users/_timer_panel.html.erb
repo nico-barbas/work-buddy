@@ -1,26 +1,7 @@
-<div class="panel">
-  <div class="timer-panel" data-controller="update-timer">
-    <h2 class="purple-timer-title">Timer 1</h2>
+<div class="panel" data-controller="update-timer" data-update-timer-logged-value=<%= @timer.logged %> data-update-timer-time-value=<%= @timer.total_time %> data-update-timer-id-value= <%= timer.id %> >
+  <div class="timer-panel">
+    <h2 class="purple-timer-title">Timer</h2>
     <div class="timer"><h2 data-update-timer-target="hours">00</h2>:<h2 data-update-timer-target="minutes">00</h2>&ensp;<p data-update-timer-target="seconds">00</p></div>
-    <div class="timer-buttons-panel">
-        <div class="timer-button">
-          <a href="" class="fa-sharp fa-solid fa-play" data-update-timer-target="play" data-action="click->update-timer#start"></a>
-        </div>
-        <div class="timer-button">
-          <a href="" class="fa-sharp fa-solid fa-pause"></a>
-        </div>
-        <div class="timer-button">
-          <a href="" class="fa-solid fa-circle-check"></a>
-        </div>
-      </div>
-    <div class="input-field-short-blue">Select an existing tag</div>
-    <div class="new-tag-field">
-        <div class="input-field-short-blue">Create a new tag</div>
-        <div class="small-btn-plus">+</div>
-      </div>
+    <%= render "timer_panel_buttons", timer: timer %>
   </div>
 </div>
-
-
-
-<%# data-update-timer-id-value=<%= timer.id %>

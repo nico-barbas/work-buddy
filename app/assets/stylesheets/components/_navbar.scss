@@ -60,6 +60,7 @@
   }
 }
 
+
 .icon-param {
   border: 1px solid $beige;
   padding: 1.3em;
@@ -73,4 +74,7 @@
       opacity: 1;
     }
   }
+
+.circle {
+  box-shadow: inset 0px 0px 0px 4px #0f0326b5;
 }

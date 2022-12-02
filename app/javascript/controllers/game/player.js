@@ -4,6 +4,7 @@ import { Grid, Tile } from "./grid";
 // import { findAsset } from "./data/assets";
 import { Item } from "./item";
 import { Input } from "./input";
+import { SignalDispatcher } from "./signal";
 
 // PlayerController groups all the procedures related to handling
 // the player's interactions with the game world or its UI
@@ -92,7 +93,7 @@ export class PlayerController {
       canvas.addEventListener("click", handleMouseLeftInput);
 
       const handleMouseRightInput = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 
         switch (this.mode.kind) {
           case "idle":
@@ -106,9 +107,16 @@ export class PlayerController {
         }
       };
       canvas.addEventListener("contextmenu", handleMouseRightInput);
+
+      const workTest = (event) => {
+        if (event.key === " ") {
+          SignalDispatcher.dispatchSignal("interrupt.work");
+        }
+      };
+      document.addEventListener("keyup", workTest);
     }
 
-    this.initUpdateLoop(app, grid);
+    // this.initUpdateLoop(app, grid);
   }
 
   initUpdateLoop(app, grid) {
@@ -243,7 +251,7 @@ class DecorateMode {
 
   placeItem(at) {
     if (this.grid.validItemPosition(this.item, at)) {
-      this.grid.insertItem(this.item, at);
+      this.grid.setTileItem(this.item, at);
       return true;
     }
 

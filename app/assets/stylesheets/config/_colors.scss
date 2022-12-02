@@ -8,3 +8,12 @@ $orange: #FFA62B;
 $green: #1EDD88;
 $darkpurple: #0F0326;
 $beige: #FFEEDD;
+// #fff5ea;
+
+// general rules
+
+.hidden {
+  opacity: 0;
+  position: absolute;
+  visibility: hidden;
+}

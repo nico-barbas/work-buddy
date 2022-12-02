@@ -1,6 +1,6 @@
 import { Container, Sprite, Application, AnimatedSprite } from "pixi.js";
 import { getSpritesheetAnimation } from "./assets";
-import { Vector2 } from "./math";
+import { Vector2, Vector3 } from "./math";
 import { Direction } from "./utils";
 
 export class Item extends Container {
@@ -45,7 +45,9 @@ export class Item extends Container {
 
     this.origins = info["origins"];
 
-    this.sprite = new AnimatedSprite(getSpritesheetAnimation(info["name"]));
+    this.sprite = new AnimatedSprite(
+      getSpritesheetAnimation("item", info["name"])
+    );
     this.textureWidth = this.sprite.width;
     this.textureHeight = this.sprite.height;
     this.addChild(this.sprite);
@@ -106,5 +108,18 @@ export class Item extends Container {
       );
     });
     this.currentOffset = this.offsets[Direction.Up];
+  }
+
+  rotationIndexToDirectionVector() {
+    switch (this.rotationIndex) {
+      case 0:
+        return new Vector3(1, 0, 0);
+      case 1:
+        return new Vector3(0, 0, 1);
+      case 2:
+        return new Vector3(-1, 0, 0);
+      case 3:
+        return new Vector3(0, 0, -1);
+    }
   }
 }

@@ -7,11 +7,17 @@ import { application } from "./application"
 import CreateTaskController from "./create_task_controller"
 application.register("create-task", CreateTaskController)
 
+import EditTaskController from "./edit_task_controller"
+application.register("edit-task", EditTaskController)
+
 import GameController from "./game_controller"
 application.register("game", GameController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import MusicPanelController from "./music_panel_controller"
+application.register("music-panel", MusicPanelController)
 
 import NavbarController from "./navbar_controller"
 application.register("navbar", NavbarController)
