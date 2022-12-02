@@ -5,7 +5,6 @@
 }
 
 .icon-list {
-  border: 1px solid $orange;
   padding: 1.3em;
   border-radius: 40%;
   background-color: $orange;
@@ -20,7 +19,6 @@
 }
 
 .icon-clock {
-  border: 1px solid $pink;
   padding: 1.3em;
   border-radius: 40%;
   background-color: $pink;
@@ -34,7 +32,6 @@
 }
 
 .icon-music {
-  border: 1px solid $blue;
   padding: 1.3em;
   border-radius: 40%;
   background-color: $blue;
@@ -48,7 +45,6 @@
 }
 
 .icon-stat {
-  border: 1px solid $purple;
   padding: 1.3em;
   border-radius: 40%;
   background-color: $purple;
@@ -61,8 +57,7 @@
 }
 
 
-.icon-param {
-  border: 1px solid $beige;
+  .icon-param {
   padding: 1.3em;
   border-radius: 40%;
   background-color: $beige;
@@ -74,7 +69,8 @@
       opacity: 1;
     }
   }
+  }
 
-.circle {
-  box-shadow: inset 0px 0px 0px 4px #0f0326b5;
-}
+  .circle {
+    box-shadow: inset 0px 0px 0px 4px #0f0326b5;
+  }
