@@ -11,10 +11,7 @@
           </div>
   </div>
   <div class="input-field-short-blue">Select existing tag</div>
-      <div class="new-tag-field">
-        <div class="input-field-short-blue">Create a new tag</div>
-        <div class="small-btn-plus">+</div>
-      </div>
+  <div><%= render "new_label", timer: timer %></div>
   <br><div class="text-center text-danger" data-update-timer-target="logconfirmation"></div>
 </div>
   <%= simple_form_for timer,

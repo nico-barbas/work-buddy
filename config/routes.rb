@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   resources :avatars, only: [:new, :create]
 
   post "/timers/create", to: "timers#create", as: "create_timer"
-  patch "/timers/:id/start_timer", to: "timers#start_timer", as: "start_timer"
   patch "/timers/:id/pause_timer", to: "timers#pause_timer", as: "pause_timer"
   patch "/timers/:id/close_timer", to: "timers#close_timer", as: "close_timer"
   get "/users/:id/frontend", to: "users#front_end_test", as:"frontend"

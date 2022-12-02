@@ -1,0 +1,11 @@
+
+<div class="new-tag-field">
+  <div class="input-field-short-blue">Create a new tag</div>
+  <div class="small-btn-plus">+</div>
+</div>
+
+<%# A FINIR %>
+   <%= simple_form_for [current_user, @label], html: {class: "d-none", data: {manage_labels_target: "labelform", action: "submit->manage-labels#create"}} do |f| %>
+      <%= f.input :name %>
+      <%= f.submit class:"btn small-btn-blue create-btn" %>
+    <% end %>

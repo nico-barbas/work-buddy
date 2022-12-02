@@ -12,6 +12,8 @@ class UsersController < ApplicationController
       else
         @timer = Timer.where(user: current_user).last
       end
+      @label = Label.new
+      @labels = Label.where(user: current_user)
    else
       redirect_to root_path
    end
