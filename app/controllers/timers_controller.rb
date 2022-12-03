@@ -6,12 +6,13 @@ class TimersController < ApplicationController
     @timer = Timer.new
     @timer.started_at = Time.now
     @timer.user = current_user
-    @timer.label = Label.first # Here we will need to obtain the label selected by the user ...
-    @timer.save!
-    # respond_to do |format|
-    #   format.html { redirect_to user_path(current_user) }
-    #   format.text { render partial: "users/timer_panel_buttons", locals: { timer: @timer }, formats: [:html] }
-    # end
+    if Label.find_by name: "no label assigned"
+      label = Label.find_by name: "no label assigned"
+      @timer.label = label
+    else
+      @timer.label = Label.create(name: "no label assigned", user: current_user) # Here we will need to obtain the label selected by the user ...
+    end
+    @timer.save
   end
 
   def pause_timer
@@ -20,11 +21,7 @@ class TimersController < ApplicationController
     # save the total_time to the db (before the total_time is incread each second but not saved before you pause)
     @timer = Timer.find(params[:id])
     @timer.update(timer_params)
-    # COMMENT POUSSER LE TOTAL_TIME MIS À JOUR POUR POUVOIR L'UTILISER DANS LE HTML?
-    # respond_to do |format|
-    #   format.html { redirect_to user_path(current_user) }
-    #   format.text { render partial: "users/timer_panel_buttons", locals: { timer: @timer }, formats: [:html] }
-    # end
+    @timer.save
   end
 
   def close_timer
@@ -36,13 +33,19 @@ class TimersController < ApplicationController
     # mark the timer as logged true
     @timer.logged = true
     @timer.save
-    # push the total time to daily_lable_time / total_label_time
-    # display a message telling "Your time has been loged! You can start a new timer"
+    # push the total time to daily_lable_time / total_label_time -- TO DO
+    # display a message telling "Your time has been loged! You can start a new timer" -- TO DO
+  end
+
+  def set_label
+    @timer = Timer.find(params[:id])
+    @timer.update(timer_params)
+    @timer.save
   end
 
   private
 
 def timer_params
-  params.require(:timer).permit(:total_time, :started_at, :logged)
+  params.require(:timer).permit(:total_time, :started_at, :logged, :label_id)
 end
 end

@@ -3,8 +3,8 @@ import { csrfToken } from "@rails/ujs";
 
 // Connects to data-controller="update-timer"
 export default class extends Controller {
-  static targets = ["hours", "minutes", "seconds", "play", "pause", "log", "form", "total", "logform", "logtotal", "logconfirmation"]
-  static values = {id: Number, logged: Boolean, time: Number}
+  static targets = ["hours", "minutes", "seconds", "play", "pause", "log", "form", "total", "logform", "logtotal", "logconfirmation", "assignlabelform"]
+  static values = {id: Number, logged: Boolean, time: Number, label: String}
   paused = false
 
   connect() {
@@ -26,9 +26,6 @@ export default class extends Controller {
     console.log("timer controller connected")
     this.paused = true;
     if (this.loggedValue == false && this.timeValue != 0) {
-      console.log(this.timeValue)
-      console.log(this.idValue)
-      console.log(this.loggedValue)
       // need to transform timeValue (milliseconds) into hours / minutes / seconds and put them into the target.innerHTML
       let milliseconds = this.timeValue
       let seconds = Math.floor(milliseconds / 1000);
@@ -37,9 +34,6 @@ export default class extends Controller {
       seconds = seconds % 60;
       minutes = seconds >= 30 ? minutes + 1 : minutes;
       minutes = minutes % 60;
-      console.log(seconds)
-      console.log(minutes)
-      console.log(hours)
       this.display(hours, minutes, seconds)
     }
     setInterval(() => {
@@ -67,8 +61,6 @@ export default class extends Controller {
     event.preventDefault()
     this.logconfirmationTarget.innerHTML = ""
     this.paused = false
-    console.log(this.timeValue)
-    console.log(this.loggedValue)
     if (this.loggedValue == false && this.timeValue != 0) {
       // on restart le timer
       console.log("timer restarted")
@@ -85,8 +77,8 @@ export default class extends Controller {
         console.log("timer created")
       })
       this.idValue = this.idValue + 1
+      this.assignlabelformTarget.reset()
     }
-      // NEED TO DISABLE THE PLAY BUTTON UNTIL THE PAUSE BUTTON IS CLICKED
   }
 
   pause() {
@@ -107,7 +99,6 @@ export default class extends Controller {
         let seconds = parseInt(this.secondsTarget.innerHTML, 10)
         this.display(hours, minutes, seconds)
   })
-  // NEED TO DISABLE THE PAUSE BUTTON UNTIL THE START BUTTON IS CLICKED AGAIN, OTHERWISE IT CREATE ISSUES
 }
 
   log() {
@@ -128,6 +119,7 @@ export default class extends Controller {
         this.minutesTarget.innerHTML = "00"
         this.secondsTarget.innerHTML = "00"
         this.logconfirmationTarget.innerHTML = "Your last timer has been logged!<br>You can create a new one."
+        this.assignlabelformTarget.reset()
   })
 
   }
@@ -154,19 +146,23 @@ export default class extends Controller {
     }
   }
 
-    disconnect() {
-    this.paused = true
-    this.totalTarget.value = this.timeValue
-    const url = this.timerUrl(this.formTarget.action)
+  setlabel() {
+    event.preventDefault()
+    const url = this.timerUrl(this.assignlabelformTarget.action)
     fetch(url, {
       method: "PATCH",
       headers: { "Accept": "text/plain", 'X-CSRF-Token': csrfToken() },
-      body: new FormData(this.formTarget)
+      body: new FormData(this.assignlabelformTarget)
     })
-    .then(response => response.text())
-    .then((data) => {
-      console.log(data)
-    })
+      .then(response => response.text())
+      .then((data) => {
+        console.log("label assigned")
+  })
   }
 
 }
+
+
+// TO DO
+// SET THE LABEL SELECT FORM RESET AT GOOD PLACE (STILL ONE CORNER CASE: WHEN YOU LOG A TIMER AND THEN RELOAD PAGE: the label of the old timer is the one displayed which can be confusing)
+// WHEN A NEW LABEL IS CREATED --> PUSH IT TO THE LIST OF LABELS

@@ -1,6 +1,5 @@
-
 <div>
-   <%= simple_form_for [current_user, @label], html: { data: {manage_labels_target: "labelform", action: "submit->manage-labels#create"}} do |f| %>
+   <%= simple_form_for [current_user, @label], html: { data: {manage_labels_target: "newlabelform", action: "submit->manage-labels#create" }} do |f| %>
       <div class="d-flex justify-content-around align-items-center mt-0">
       <%= f.input :name, label: false, placeholder: 'type label name' %>
       <%= f.submit "+", class:"btn small-btn-blue create-btn" %>
@@ -8,4 +7,6 @@
     <% end %>
 </div>
 <%# ADD CONFIRMATION WHEN LABEL IS CREATED %>
-<div data-manage-labels-target="creationconfirmation" class="d-none"><%= "Your label'#{@labels.last.name}' has been created!" %></div>
+<div data-manage-labels-target="creationconfirmation" class="d-none mt-2 text-primary"><%= "Your label has been created!" %></div>
+
+<%= console %>

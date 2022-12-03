@@ -1,4 +1,4 @@
-<div >
+<div>
   <div class="timer-buttons-panel">
           <div class="timer-button">
             <a href="" class="fa-sharp fa-solid fa-play" data-update-timer-target="play" data-action="click->update-timer#start"></a>
@@ -10,10 +10,31 @@
             <a href="" class="fa-solid fa-circle-check" data-update-timer-target="log" data-action="click->update-timer#log"></a>
           </div>
   </div>
-  <div class="input-field-short-blue">Select existing tag</div>
+  <div>
+    <p class="mt-2 text-danger">Assign your timer to a specific tag</p>
+    <%# LIST OF TAG HERE RELATED TO A FORM WITH PATCH METHOD TO UPDATE THE TAG OF THE TIMER %>
+      <%= simple_form_for timer,
+    url: timer_label_path(timer),
+    method: "patch",
+    html: {
+    data: {
+      update_timer_target: "assignlabelform",
+      action: "submit->update-timer#setlabel"
+    }
+  } do |f|%>
+      <%= f.collection_select :label_id, Label.where(user: current_user), :id, :name, prompt: true, class: "select-label-form" %>
+      <%= f.submit "Select", class:"btn small-btn-blue create-btn"%>
+  <% end %>
+  </div>
+
+  <p class="mt-2 text-danger">Create a new label</p>
   <div><%= render "new_label", timer: timer %></div>
-  <br><div class="text-center text-danger" data-update-timer-target="logconfirmation"></div>
+
+  <br><div class="text-center text-info" data-update-timer-target="logconfirmation"></div>
+
 </div>
+
+
   <%= simple_form_for timer,
     url: pause_timer_path(timer),
     method: "patch",
