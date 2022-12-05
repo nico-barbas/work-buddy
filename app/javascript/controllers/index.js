@@ -16,6 +16,9 @@ application.register("game", GameController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ManageLabelsController from "./manage_labels_controller"
+application.register("manage-labels", ManageLabelsController)
+
 import MusicPanelController from "./music_panel_controller"
 application.register("music-panel", MusicPanelController)
 
