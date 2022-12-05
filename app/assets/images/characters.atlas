@@ -1,13 +1,34 @@
 
-character.png
-size: 128, 256
+characters.png
+size: 512, 256
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 idle01
   rotate: false
-  xy: 2, 2
-  size: 123, 200
+  xy: 2, 4
+  size: 122, 198
   orig: 256, 256
-  offset: 66, 50
+  offset: 67, 39
+  index: -1
+idle02
+  rotate: false
+  xy: 127, 4
+  size: 123, 198
+  orig: 256, 256
+  offset: 66, 39
+  index: -1
+idle03
+  rotate: false
+  xy: 252, 4
+  size: 122, 192
+  orig: 256, 256
+  offset: 67, 40
+  index: -1
+idle04
+  rotate: false
+  xy: 377, 4
+  size: 122, 192
+  orig: 256, 256
+  offset: 67, 40
   index: -1

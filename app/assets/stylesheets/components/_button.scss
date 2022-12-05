@@ -156,3 +156,46 @@ a {
     }
   }
 }
+
+.buttons {
+  display: flex;
+  justify-content: right;
+}
+
+.data-btn {
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: white;
+  background-color: #858AE3;
+  border-radius: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  cursor: pointer;
+  border: solid 4px $purple;
+    &:hover {
+    color: #858AE3;
+    background-color: #FFEEDD;
+    border: solid 4px $purple;
+  }
+  h3 {
+    margin: 2rem;
+  }
+}
+
+.happy-btn {
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: $beige;
+  background-color: #FFA62B;
+  border-radius: 20px;
+  padding: 0.4em 1em 0.5em 1em;
+  margin: 1rem;
+  width: fit-content;
+  cursor: pointer;
+  border: solid 4px $orange;
+    &:hover {
+    color: $orange;
+    background-color: #FFEEDD;
+    border: solid 4px $orange;
+  }
+}
