@@ -67,6 +67,8 @@ export class NeedController {
         .withDecrease(secondToTick(85))
         .withMoodWeight(1),
     };
+
+    this.needs.hunger.set(20);
   }
 
   update() {

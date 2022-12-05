@@ -17,6 +17,7 @@ import {
   BehaviorCondition,
 } from "./behaviors";
 import { MoodDisplay, NeedController } from "./needs";
+import { OutlineFilter } from "pixi-filters";
 
 export class Buddy extends Container {
   grid;
@@ -42,6 +43,7 @@ export class Buddy extends Container {
     this.offset = this.offset.sub(this.grid.tileCenterOffset);
     this.addChild(this.sprite);
     this.addChild(this.moodDisplay);
+    this.filters = [new OutlineFilter(1, 0x4c1f20, 25)];
 
     this.currentCoord = new Vector3(3, 0, 3);
     this.grid.addBuddy(this, this.currentCoord);
@@ -120,6 +122,18 @@ export class Buddy extends Container {
   setPosition(pos) {
     this.x = pos.x - this.offset.x;
     this.y = pos.y - this.offset.y;
+  }
+
+  lookAt(dir) {
+    if (dir.x === 1 && dir.z === 0) {
+      this.sprite.gotoAndStop(0);
+    } else if (dir.x === 0 && dir.z === 1) {
+      this.sprite.gotoAndStop(1);
+    } else if (dir.x === -1 && dir.z === 0) {
+      this.sprite.gotoAndStop(2);
+    } else if (dir.x === 0 && dir.z === -1) {
+      this.sprite.gotoAndStop(3);
+    }
   }
 }
 
