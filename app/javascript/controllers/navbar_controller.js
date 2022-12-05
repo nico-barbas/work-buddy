@@ -81,6 +81,8 @@ export default class extends Controller {
     this.paramTarget.classList.add("d-none");
     this.parambtnTarget.classList.remove("circle");
     this.welcomeTarget.classList.add("d-none");
+    this.data1Target.classList.remove("d-none");
+    this.data2Target.classList.add("d-none");
   }
 
   displayParam() {
