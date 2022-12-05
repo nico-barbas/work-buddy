@@ -21,7 +21,7 @@ new_avatar = Avatar.new(name: "Sherb", user: new_user)
 new_avatar.save!
 p "avatar created"
 
-label_test = Label.new(name: "test")
+label_test = Label.new(name: "test", user: new_user)
 label_test.save!
 p "lavel 'test' created"
 

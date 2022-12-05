@@ -6,15 +6,16 @@ class UsersController < ApplicationController
       @tasks = Task.where(user: current_user)
       @timers = Timer.where(user: current_user)
       if @timers.empty?
-        @timer = Timer.new({user: current_user, label: Label.last})
-        # FIXME: Change before push on production
-        @timer.save!
+        @timer = Timer.new({ user: current_user, label: Label.last })
+        @timer.save
       else
         @timer = Timer.where(user: current_user).last
       end
-   else
+      @label = Label.new
+      @labels = Label.where(user: current_user)
+    else
       redirect_to root_path
-   end
+    end
   end
 
   def front_end_test

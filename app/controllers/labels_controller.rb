@@ -2,25 +2,35 @@ class LabelsController < ApplicationController
 
   def create
     # to be able to create a new lable with a label name
+    @label = Label.new(label_params)
+    @label.user = current_user
+    @label.save
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user) }
+      format.text { render partial: "users/assign_label", locals: { labels: Label.where(user: current_user), timer: Timer.where(user: current_user).last}, formats: [:html] }
+    end
+  end
+
+  def index
+    @labels = Label.where(user: current_user)
   end
 
   def update
-    # to be able to change the label name manually (--> private method update_name)
+    # to be able to change the label name manually
+    @label = Label.find(params[:id])
+    @label.update(label_params)
+    @label.save
   end
 
-  def update_time
-    # route to create
-    # to be automatically update both the daily_lable_time and the total_lable_time each time we finish a timer (--> private method update_time)
-  end
-
-  def clean_daily_label_time
-    # route to create
-    # each day at midnight, put the daily_label_time back to 0
+  def destroy
+    # to be able to destroy a label
+    @label = Label.find(params[:id])
+    @label.destroy
   end
 
   private
 
   def label_params
+    params.require(:label).permit(:name)
   end
-
 end

@@ -14,6 +14,12 @@ class AvatarsController < ApplicationController
     end
   end
 
+  def update
+    @avatar = Avatar.find(params[:id])
+    @avatar.update(avatar_params)
+    @avatar.save
+  end
+
   private
 
   def avatar_params

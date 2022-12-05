@@ -1,0 +1,15 @@
+<div  data-manage-labels-target= "assignlabelpartial">
+    <p class="mt-2 text-danger text-center">Assign your timer to a specific label</p>
+      <%= simple_form_for timer,
+    url: timer_label_path(timer),
+    method: "patch",
+    html: {
+    data: {
+      update_timer_target: "assignlabelform",
+      action: "submit->update-timer#setlabel"
+    }
+  } do |f|%>
+      <%= f.collection_select :label_id, labels, :id, :name, prompt: true %>
+      <%= f.submit "Select", class:"btn small-btn-blue create-btn"%>
+  <% end %>
+  </div>
