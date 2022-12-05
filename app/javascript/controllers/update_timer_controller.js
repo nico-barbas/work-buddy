@@ -166,19 +166,3 @@ export default class extends Controller {
   })
   }
 }
-
-// METHOD WITH JSON RESPONSE (INSTEAD OF TEXT)
-// log() {
-//   event.preventDefault()
-//   this.paused = true
-//   this.logtotalTarget.value = this.timeValue
-//   const url = this.timerUrl(this.logformTarget.action)
-//   fetch(url, {
-//     method: "PATCH",
-//     headers: { "Accept": "application/json", 'X-CSRF-Token': csrfToken() },
-//     body: new FormData(this.logformTarget)
-//   })
-//     .then(response => response.json())
-//     .then((data) => {
-//    ...
-// })

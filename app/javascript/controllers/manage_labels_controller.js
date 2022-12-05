@@ -20,11 +20,13 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
         console.log("label created")
-        console.log(data)
         // // PUSH DATA TO ASSIGN LABEL
         this.assignlabelpartialTarget.outerHTML = data
-        this.creationconfirmationTarget.classList.remove("d-none")
         event.target.reset()
       })
+      this.creationconfirmationTarget.classList.remove("d-none")
+      setTimeout(() => {
+        this.creationconfirmationTarget.classList.add("d-none")
+      }, 5000);
   }
 }
