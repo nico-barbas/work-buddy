@@ -4,7 +4,7 @@ import { Grid } from "./game/grid";
 import { PlayerController } from "./game/player";
 import { findAssetInfo, loadAssets } from "./game/assets";
 import { Buddy } from "./game/buddy";
-import { Vector3 } from "./game/math";
+import { Vector2, Vector3 } from "./game/math";
 import { Item } from "./game/item";
 
 // Connects to data-controller="game"
@@ -75,9 +75,12 @@ export default class extends Controller {
         g.setTileItem(item, coord);
       };
       insertItem("desk", new Vector3(4, 0, 1), 1);
+      insertItem("coffeeTable", new Vector3(3, 0, 5));
       insertItem("rug", new Vector3(9, 0, 5), 0);
       insertItem("couch", new Vector3(1, 0, 5));
       insertItem("fridge", new Vector3(9, 0, 1), 1);
+      insertItem("plant", new Vector3(5, 0, 1));
+      insertItem("plant", new Vector3(1, 0, 4), 1);
     });
     app.stage.addChild(grid);
 
