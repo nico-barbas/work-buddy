@@ -6,6 +6,7 @@ import {
   idleBehavior,
   feedBehavior,
   celebrateBehavior,
+  drinkBehavior,
 } from "./behaviors";
 import { Vector2, Vector3 } from "./math";
 import { SignalDispatcher } from "./signal";
@@ -107,6 +108,7 @@ export class Buddy extends Container {
         BehaviorResult.Success
       );
       breakSubTree.addChild(feedBehavior(blackboard));
+      breakSubTree.addChild(drinkBehavior(blackboard));
       breakSubTree.addChild(idleBehavior(blackboard));
 
       const root = new BehaviorSequence(blackboard, BehaviorResult.Success);

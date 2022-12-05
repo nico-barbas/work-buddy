@@ -53,296 +53,310 @@ emote_cross01
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_dots01
+emote_divertissementTv01
   rotate: false
   xy: 240, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_dots02
+emote_dots01
   rotate: false
   xy: 274, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_dots03
+emote_dots02
   rotate: false
   xy: 308, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_drop01
+emote_dots03
   rotate: false
   xy: 342, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_drops01
+emote_drop01
   rotate: false
   xy: 376, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_exclamation01
+emote_drops01
   rotate: false
   xy: 410, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_exclamations01
+emote_exclamation01
   rotate: false
   xy: 444, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceAngel01
+emote_exclamations01
   rotate: false
   xy: 478, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceAngry01
+emote_faceAngel01
   rotate: false
   xy: 512, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceAvocado01
+emote_faceAngry01
   rotate: false
   xy: 546, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceBigmouth01
+emote_faceAvocado01
   rotate: false
   xy: 580, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceBlue01
+emote_faceBigmouth01
   rotate: false
   xy: 614, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceDemon01
+emote_faceBlue01
   rotate: false
   xy: 648, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceGlasses01
+emote_faceDemon01
   rotate: false
   xy: 682, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceHappy01
+emote_faceGlasses01
   rotate: false
   xy: 716, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceHeart01
+emote_faceHappy01
   rotate: false
   xy: 750, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceJoke01
+emote_faceHeart01
   rotate: false
   xy: 784, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceMdr01
+emote_faceJoke01
   rotate: false
   xy: 818, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceRelieved01
+emote_faceMdr01
   rotate: false
   xy: 852, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceSad01
+emote_faceRelieved01
   rotate: false
   xy: 886, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_faceVomit01
+emote_faceSad01
   rotate: false
   xy: 920, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_foodApple01
+emote_faceVomit01
   rotate: false
   xy: 954, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_foodBeer01
+emote_foodApple01
   rotate: false
   xy: 988, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_foodBurger01
+emote_foodBeer01
   rotate: false
   xy: 1022, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_foodCarott01
+emote_foodBurger01
   rotate: false
   xy: 1056, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_foodPizza01
+emote_foodCarott01
   rotate: false
   xy: 1090, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_foodWater01
+emote_foodPizza01
   rotate: false
   xy: 1124, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_heart01
+emote_foodWater01
   rotate: false
   xy: 1158, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_heartBroken01
+emote_heart01
   rotate: false
   xy: 1192, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_hearts01
+emote_heartBroken01
   rotate: false
   xy: 1226, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_idea01
+emote_hearts01
   rotate: false
   xy: 1260, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_laugh01
+emote_idea01
   rotate: false
   xy: 1294, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_music01
+emote_laugh01
   rotate: false
   xy: 1328, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_nofaceHeart01
+emote_music01
   rotate: false
   xy: 1362, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_partyFiesta01
+emote_musicBlue
   rotate: false
   xy: 1396, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_question01
+emote_nofaceHeart01
   rotate: false
   xy: 1430, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_sleep01
+emote_partyFiesta01
   rotate: false
   xy: 1464, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_sleeps01
+emote_question01
   rotate: false
   xy: 1498, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_star01
+emote_sleep01
   rotate: false
   xy: 1532, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_stars01
+emote_sleeps01
   rotate: false
   xy: 1566, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_swirl01
+emote_star01
   rotate: false
   xy: 1600, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0
   index: -1
-emote_xmasTree01
+emote_stars01
   rotate: false
   xy: 1634, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_swirl01
+  rotate: false
+  xy: 1668, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_xmasTree01
+  rotate: false
+  xy: 1702, 4
   size: 32, 38
   orig: 32, 38
   offset: 0, 0

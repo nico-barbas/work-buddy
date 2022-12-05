@@ -73,14 +73,32 @@ export default class extends Controller {
         item.y = position.y - item.currentOffset.y;
         item.y -= g.yValue / 2;
         g.setTileItem(item, coord);
+        return item;
       };
+      const insertNestedItem = (name, parent, rotationsCount, offset) => {
+        const item = new Item(app, findAssetInfo(name));
+        item.setScaledSize(
+          item.sprite.width * g.widthRatio,
+          item.sprite.height * g.heightRatio
+        );
+        for (let i = 0; i < rotationsCount; i += 1) {
+          item.rotateCW();
+        }
+        item.x = -item.currentOffset.x;
+        item.y = -item.currentOffset.y;
+        parent.nestItem(item, offset);
+      };
+
       insertItem("desk", new Vector3(4, 0, 1), 1);
-      insertItem("coffeeTable", new Vector3(3, 0, 5));
       insertItem("rug", new Vector3(9, 0, 5), 0);
       insertItem("couch", new Vector3(1, 0, 5));
       insertItem("fridge", new Vector3(9, 0, 1), 1);
+      insertItem("kitchenSink", new Vector3(8, 0, 1), 1);
       insertItem("plant", new Vector3(5, 0, 1));
       insertItem("plant", new Vector3(1, 0, 4), 1);
+
+      const table = insertItem("coffeeTable", new Vector3(3, 0, 5));
+      insertNestedItem("tv", table, 2, new Vector2(0, 10));
     });
     app.stage.addChild(grid);
 

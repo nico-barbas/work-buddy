@@ -398,6 +398,60 @@ export const feedBehavior = (blackboard) => {
   return behavior;
 };
 
+export const drinkBehavior = (blackboard) => {
+  const moveToSource = new BehaviorSequence(blackboard);
+  moveToSource.addChild(findPathBehavior(blackboard));
+  moveToSource.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      if (b.move.timer + 1 === b.move.rate) {
+        b.lock = "none";
+      } else {
+        b.lock = "drink";
+      }
+      return true;
+    })
+  );
+  moveToSource.addChild(moveAlongPathBehavior(blackboard));
+  moveToSource.addChild(lookAtItemBehavior(blackboard));
+  moveToSource.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      b.food.atFoodSource = true;
+      b.pathFound = false;
+      b.agentData.moodDisplay.play("drink");
+      return true;
+    })
+  );
+
+  const behavior = new BehaviorSequence(blackboard);
+  behavior.addChild(
+    new BehaviorCondition(blackboard, (b) => {
+      const ok = b.agentData.needs.isLow("thirst");
+      if (ok) {
+        b.itemLookup = "kitchenSink";
+      }
+      return ok;
+    })
+  );
+  behavior.addChild(
+    new BehaviorBranch(
+      blackboard,
+      new BehaviorCondition(blackboard, (b) => {
+        return b.food.atFoodSource;
+      }),
+      new BehaviorAction(blackboard, (b) => {
+        const done = !b.agentData.moodDisplay.playing;
+        if (done) {
+          b.agentData.needs.increaseValue("thirst", 65);
+        }
+        return done;
+      }),
+      moveToSource
+    )
+  );
+
+  return behavior;
+};
+
 export const idleBehavior = (blackboard) => {
   const behavior = new BehaviorSequence(blackboard);
   behavior.addChild(

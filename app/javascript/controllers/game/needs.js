@@ -47,8 +47,11 @@ export class Need {
       if (this.decreaseTimer >= this.decreaseRate) {
         this.decreaseTimer = 0;
         this.decrease(1);
+        return true;
       }
     }
+
+    return false;
   }
 }
 
@@ -68,14 +71,14 @@ export class NeedController {
         .withMoodWeight(1),
     };
 
-    // this.needs.hunger.set(20);
+    this.needs.thirst.set(20);
   }
 
   update() {
     let moodTotal = 0;
     let moodDenom = 0;
     Object.values(this.needs).forEach((need) => {
-      need.update();
+      const changed = need.update();
       if (need.affectMood) {
         moodTotal += need.current * need.moodWeight;
         moodDenom += need.moodWeight;
@@ -128,15 +131,16 @@ export class MoodDisplay extends Container {
       "foodPizza",
       "faceAvocado",
     ],
-    thirst: ["foodBeer", "foddWater", "faceBigmouth"],
+    thirst: ["foodBeer", "foodWater", "faceBigmouth"],
     bathroom: ["drop", "drops"],
     rest: ["swirl", "faceBigmouth", "faceBlue", "sleeps", "heartBroken"],
     recreation: ["cloud", "divertissementTv", "faceBigmouth", "faceGlasses"],
     happy: ["faceMdr", "faceJoke", "faceHeart"],
-    celebrate: ["party"],
+    celebrate: ["partyFiesta"],
     sing: ["musicBlue"],
     daydream: ["faceAngel", "xmasTree", "faceDemon"],
     eat: ["faceRelieved", "heart"],
+    drink: ["foodBeer", "foodWater"],
   };
 
   constructor(offset) {
@@ -145,6 +149,8 @@ export class MoodDisplay extends Container {
       const [name, animation] = entry;
       const moodName = name.replace(/emote_/, "");
       this.sprites[moodName] = new AnimatedSprite(animation);
+      this.sprites[moodName].width = this.sprites[moodName].width * 1.2;
+      this.sprites[moodName].height = this.sprites[moodName].height * 1.2;
     });
 
     this.x += offset.x;
