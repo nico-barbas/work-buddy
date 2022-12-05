@@ -1,4 +1,4 @@
-<div class="d-flex flex-row justify-content-left align-items-start p-2 ui-overlay" data-controller="navbar">
+<div class="d-flex flex-row justify-content-left align-items-start p-2 ui-overlay" data-controller="navbar manage-data">
 
   <%= render "navbar" %>
 
@@ -20,7 +20,7 @@
 
   <div data-navbar-target="data" class="d-none">
     <div data-navbar-target="data1" class=""><%= render "data_panel" %></div>
-    <div data-navbar-target="data2" class="d-none"><%= render "data_panel_2" %></div>
+    <div data-navbar-target="data2" class="d-none"><%= render "data_panel_2", labels: @labels %></div>
   </div>
 
    <div data-navbar-target="param" class="d-none">
@@ -29,8 +29,8 @@
 
 </div>
 
-<div 
-    data-controller="game" 
+<div
+    data-controller="game"
     data-game-tiles-value=<%= asset_path("tiles.png") %>
     data-game-tiles-config-value=<%= asset_path("tiles.atlas") %>
     data-game-items-value=<%= asset_path("items.png") %>
