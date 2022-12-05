@@ -119,16 +119,24 @@ export class MoodDisplay extends Container {
   sprites = {};
   current = null;
   moodMap = {
-    hunger: ["cloud", "bars", "faceAngry"],
-    thirst: ["cloud", "bars", "faceAngry"],
-    bathroom: ["cloud", "bars", "faceAngry"],
-    rest: ["cloud", "bars", "faceAngry", "sleep", "sleeps"],
-    recreation: ["cloud", "bars", "faceSad"],
-    happy: ["faceHappy", "laugh", "star"],
+    hunger: [
+      "faceVomit",
+      "faceAngry",
+      "foodCarott",
+      "foodApple",
+      "foodBurger",
+      "foodPizza",
+      "faceAvocado",
+    ],
+    thirst: ["foodBeer", "foddWater", "faceBigmouth"],
+    bathroom: ["drop", "drops"],
+    rest: ["swirl", "faceBigmouth", "faceBlue", "sleeps", "heartBroken"],
+    recreation: ["cloud", "divertissementTv", "faceBigmouth", "faceGlasses"],
+    happy: ["faceMdr", "faceJoke", "faceHeart"],
     celebrate: ["party"],
-    sing: ["music"],
-    daydream: ["faceHappy", "laugh", "star"],
-    eat: ["faceRelieved"],
+    sing: ["musicBlue"],
+    daydream: ["faceAngel", "xmasTree", "faceDemon"],
+    eat: ["faceRelieved", "heart"],
   };
 
   constructor(offset) {
