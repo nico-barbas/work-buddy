@@ -12,7 +12,7 @@
   justify-content: space-between;
   margin-bottom: 1em;
   align-items: center;
-  .myBar {
+  #hunger {
     width: 10%;
     height: 100%;
     background-color: $blue;
@@ -34,7 +34,7 @@
   justify-content: space-between;
   margin-bottom: 1em;
   align-items: center;
-  .myBar {
+  #thirst {
     width: 10%;
     height: 100%;
     background-color: $blue;
@@ -54,7 +54,7 @@
   justify-content: space-between;
   margin-bottom: 1em;
   align-items: center;
-  .myBar {
+  #bathroom {
     width: 10%;
     height: 100%;
     background-color: $blue;
@@ -74,7 +74,7 @@
   justify-content: space-between;
   margin-bottom: 1em;
   align-items: center;
-  .myBar {
+  #rest {
     width: 10%;
     height: 100%;
     background-color: $blue;
@@ -92,7 +92,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .myBar {
+  #recreation {
     width: 10%;
     height: 100%;
     background-color: $blue;
