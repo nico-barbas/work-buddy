@@ -127,6 +127,31 @@ export class BehaviorAction {
 
 // All the premade Behaviors
 
+export const celebrateBehavior = (blackboard) => {
+  const behavior = new BehaviorSequence(blackboard);
+  behavior.addChild(
+    new BehaviorCondition(blackboard, (b) => {
+      return b.celebrate.shouldCelebrate;
+    })
+  );
+  behavior.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      if (!b.agentData.moodDisplay.playing) {
+        b.agentData.moodDisplay.play("celebrate");
+      }
+      return !b.agentData.animation.playing;
+    })
+  );
+  behavior.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      b.celebrate.shouldCelebrate = false;
+      return true;
+    })
+  );
+
+  return behavior;
+};
+
 export const expressMoodBehavior = (blackboard) => {
   const happyMoods = ["happy", "sing", "daydream"];
   const behavior = new BehaviorSequence(blackboard);

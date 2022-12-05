@@ -148,6 +148,7 @@ export default class extends Controller {
           "Your last timer has been logged!<br>You can create a new one.";
       });
     SignalDispatcher.dispatchSignal("interrupt.break");
+    SignalDispatcher.dispatchSignal("interrupt.celebrate");
   }
 
   timerUrl(url) {
