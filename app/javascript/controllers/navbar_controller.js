@@ -15,6 +15,8 @@ export default class extends Controller {
     "parambtn",
     "welcome",
     "welcomebtn",
+    "data2",
+    "data1",
   ];
 
   // connect() {
@@ -49,7 +51,6 @@ export default class extends Controller {
     this.paramTarget.classList.add("d-none");
     this.parambtnTarget.classList.remove("circle");
     this.welcomeTarget.classList.add("d-none");
-
   }
 
   displayMusic() {
@@ -80,6 +81,8 @@ export default class extends Controller {
     this.paramTarget.classList.add("d-none");
     this.parambtnTarget.classList.remove("circle");
     this.welcomeTarget.classList.add("d-none");
+    this.data1Target.classList.remove("d-none");
+    this.data2Target.classList.add("d-none");
   }
 
   displayParam() {
@@ -96,12 +99,17 @@ export default class extends Controller {
     this.timerbtnTarget.classList.remove("circle");
     this.welcomeTarget.classList.add("d-none");
   }
-  
+
   displayTaskAfterWelcome(event) {
-    console.log(this.welcomeTarget);
     event.preventDefault();
     this.welcomeTarget.classList.add("d-none");
     this.taskbtnTarget.classList.add("circle");
     this.tasksTarget.classList.remove("d-none");
+  }
+
+  displayDataTwo(event) {
+    console.log(this.data2btnTarget);
+    this.data1Target.classList.toggle("d-none");
+    this.data2Target.classList.remove("d-none");
   }
 }
