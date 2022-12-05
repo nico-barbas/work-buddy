@@ -1,0 +1,108 @@
+.needs-title {
+
+}
+
+.needs-variables {
+  height: 100%;
+}
+
+
+.need-hunger {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  align-items: center;
+  .myBar {
+    width: 10%;
+    height: 100%;
+    background-color: $blue;
+    border-radius: 2rem;
+  }
+  .myProgress {
+    height: 3rem;
+    width: 17rem;
+    background-color: rgb(227, 130, 130);
+    border-radius: 1rem;
+  }
+  .fa-solid {
+    color: $darkpurple;
+  }
+}
+
+.need-thirst {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  align-items: center;
+  .myBar {
+    width: 10%;
+    height: 100%;
+    background-color: $blue;
+    border-radius: 2rem;
+  }
+  .myProgress {
+    height: 3rem;
+    width: 17rem;
+    background-color: rgb(227, 130, 130);
+    border-radius: 1rem;
+
+  }
+}
+
+.need-bathroom {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  align-items: center;
+  .myBar {
+    width: 10%;
+    height: 100%;
+    background-color: $blue;
+    border-radius: 2rem;
+  }
+  .myProgress {
+    height: 3rem;
+    width: 17rem;
+    background-color: rgb(227, 130, 130);
+    border-radius: 1rem;
+
+  }
+}
+
+.need-rest {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  align-items: center;
+  .myBar {
+    width: 10%;
+    height: 100%;
+    background-color: $blue;
+    border-radius: 2rem;
+  }
+  .myProgress {
+    height: 3rem;
+    width: 17rem;
+    background-color: rgb(227, 130, 130);
+    border-radius: 1rem;
+  }
+}
+
+.need-recreation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .myBar {
+    width: 10%;
+    height: 100%;
+    background-color: $blue;
+    border-radius: 2rem;
+  }
+  .myProgress {
+    height: 3rem;
+    width: 17rem;
+    background-color: rgb(227, 130, 130);
+    border-radius: 1rem;
+
+  }
+}

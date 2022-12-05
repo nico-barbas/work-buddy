@@ -15,3 +15,15 @@
   z-index: 2;
 }
 
+.needs-panel {
+  background-color: $beige;
+  color: $darkpurple;
+  border-radius: 30px;
+  height: fit-content;
+  width: 400px;
+  margin: 20px;
+  padding: 20px;
+  position: absolute;
+  bottom: 0rem;
+  right: 0rem;
+}
