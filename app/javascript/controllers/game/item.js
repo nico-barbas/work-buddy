@@ -22,6 +22,8 @@ export class Item extends Container {
   tiled = false;
   blocking = true;
 
+  nestedItems = [];
+
   // Info coming from a DB as a JSON/Record
   constructor(app, info) {
     super();
@@ -86,6 +88,13 @@ export class Item extends Container {
     this.currentOffset = this.offsets[this.rotationIndex];
   }
 
+  nestItem(item, offset) {
+    this.nestedItems.push({ item: item, offset: offset });
+    item.x -= offset.x;
+    item.y -= offset.y;
+    this.addChild(item);
+  }
+
   debugLog() {
     let str = "";
     for (let y = 0; y < this.gridScale.y; y += 1) {
@@ -99,8 +108,8 @@ export class Item extends Container {
   }
 
   setScaledSize(scaledWidth, scaledHeight) {
-    this.width = scaledWidth;
-    this.height = scaledHeight;
+    this.sprite.width = scaledWidth;
+    this.sprite.height = scaledHeight;
 
     this.offsets = this.origins.map((origin) => {
       return new Vector2(
