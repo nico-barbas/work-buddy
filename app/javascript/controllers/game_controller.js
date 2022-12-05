@@ -16,6 +16,8 @@ export default class extends Controller {
     items: String,
     charactersConfig: String,
     characters: String,
+    iconsConfig: String,
+    icons: String,
   };
 
   async connect() {
@@ -25,6 +27,8 @@ export default class extends Controller {
     const itemsConfigPath = this.itemsConfigValue;
     const charactersSpritesheetPath = this.charactersValue;
     const charactersConfigPath = this.charactersConfigValue;
+    const iconsSpritesheetPath = this.iconsValue;
+    const iconsConfigPath = this.iconsConfigValue;
 
     let app = new PIXI.Application({
       width: window.innerWidth,
@@ -50,7 +54,9 @@ export default class extends Controller {
       itemsSpritesheetPath,
       itemsConfigPath,
       charactersSpritesheetPath,
-      charactersConfigPath
+      charactersConfigPath,
+      iconsSpritesheetPath,
+      iconsConfigPath
     );
     const grid = new Grid(app, 10, 10, (g) => {
       const insertItem = (name, coord, rotationsCount) => {
@@ -71,6 +77,7 @@ export default class extends Controller {
       insertItem("desk", new Vector3(4, 0, 1), 1);
       insertItem("rug", new Vector3(9, 0, 5), 0);
       insertItem("couch", new Vector3(1, 0, 5));
+      insertItem("fridge", new Vector3(9, 0, 1), 1);
     });
     app.stage.addChild(grid);
 
