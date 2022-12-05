@@ -8,10 +8,10 @@ export class SignalDispatcher {
     this.listeners[signal].push(callback);
   }
 
-  static dispatchSignal(signal) {
+  static dispatchSignal(signal, args) {
     if (signal in this.listeners) {
       this.listeners[signal].forEach((callback) => {
-        callback();
+        callback(args);
       });
     }
   }

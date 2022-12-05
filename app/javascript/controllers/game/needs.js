@@ -1,5 +1,6 @@
 import { AnimatedSprite, Container } from "pixi.js";
 import { getSpritesheetAnimations } from "./assets";
+import { SignalDispatcher } from "./signal";
 import { secondToTick, Tween } from "./utils";
 
 export class Need {
@@ -62,7 +63,7 @@ export class NeedController {
 
   constructor() {
     this.needs = {
-      hunger: new Need(100).withDecrease(secondToTick(120)).withMoodWeight(3),
+      hunger: new Need(100).withDecrease(secondToTick(1)).withMoodWeight(3),
       thirst: new Need(100).withDecrease(secondToTick(60)).withMoodWeight(4),
       bathroom: new Need(100).withDecrease(secondToTick(60)).withMoodWeight(6),
       rest: new Need(100).withDecrease(secondToTick(180)).withMoodWeight(2),
@@ -77,11 +78,17 @@ export class NeedController {
   update() {
     let moodTotal = 0;
     let moodDenom = 0;
-    Object.values(this.needs).forEach((need) => {
+    Object.entries(this.needs).forEach((entry) => {
+      const [key, need] = entry;
       const changed = need.update();
       if (need.affectMood) {
         moodTotal += need.current * need.moodWeight;
         moodDenom += need.moodWeight;
+      }
+      if (changed) {
+        const info = {};
+        info[key] = need.current;
+        SignalDispatcher.dispatchSignal("needsUpdated", info);
       }
     });
 

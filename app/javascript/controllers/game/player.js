@@ -107,6 +107,14 @@ export class PlayerController {
         }
       };
       canvas.addEventListener("contextmenu", handleMouseRightInput);
+
+      SignalDispatcher.addListener("needsUpdated", (info) => {
+        Object.entries(info).forEach((entry) => {
+          const [key, value] = entry;
+          const bar = document.querySelector(`#${key}`);
+          bar.style.width = `${value}%`;
+        });
+      });
     }
   }
 
