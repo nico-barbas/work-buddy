@@ -1,166 +1,180 @@
 
 items.png
-size: 2048, 2048
+size: 4096, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-couch01
+coffeeTable01
   rotate: false
   xy: 2, 4
+  size: 447, 343
+  orig: 512, 512
+  offset: 32, 120
+  index: -1
+coffeeTable02
+  rotate: false
+  xy: 451, 4
+  size: 447, 343
+  orig: 512, 512
+  offset: 32, 120
+  index: -1
+couch01
+  rotate: false
+  xy: 900, 4
   size: 360, 315
   orig: 512, 512
   offset: 82, 114
   index: -1
 couch02
   rotate: false
-  xy: 364, 4
+  xy: 1349, 4
   size: 360, 315
   orig: 512, 512
   offset: 70, 114
   index: -1
 couch03
   rotate: false
-  xy: 726, 4
+  xy: 1798, 4
   size: 360, 294
   orig: 512, 512
   offset: 70, 120
   index: -1
 couch04
   rotate: false
-  xy: 1088, 4
+  xy: 2247, 4
   size: 360, 294
   orig: 512, 512
   offset: 82, 120
   index: -1
 desk01
   rotate: false
-  xy: 1450, 4
+  xy: 2696, 4
   size: 222, 201
   orig: 256, 256
   offset: 18, 55
   index: -1
 desk02
   rotate: false
-  xy: 2, 321
+  xy: 3145, 4
   size: 220, 202
   orig: 256, 256
   offset: 19, 54
   index: -1
 desk03
   rotate: false
-  xy: 364, 321
+  xy: 3594, 4
   size: 222, 202
   orig: 256, 256
   offset: 16, 54
   index: -1
 desk04
   rotate: false
-  xy: 726, 321
+  xy: 2, 349
   size: 222, 201
   orig: 256, 256
   offset: 16, 55
   index: -1
 fridge01
   rotate: false
-  xy: 1088, 321
+  xy: 451, 349
   size: 135, 282
   orig: 512, 512
   offset: 190, 133
   index: -1
 fridge02
   rotate: false
-  xy: 1450, 321
+  xy: 900, 349
   size: 134, 282
   orig: 512, 512
   offset: 187, 133
   index: -1
 fridge03
   rotate: false
-  xy: 2, 638
+  xy: 1349, 349
   size: 134, 284
   orig: 512, 512
   offset: 187, 133
   index: -1
 fridge04
   rotate: false
-  xy: 364, 638
+  xy: 1798, 349
   size: 134, 284
   orig: 512, 512
   offset: 191, 133
   index: -1
 plant01
   rotate: false
-  xy: 726, 638
+  xy: 2247, 349
   size: 90, 147
   orig: 256, 256
   offset: 83, 77
   index: -1
 plant02
   rotate: false
-  xy: 1088, 638
+  xy: 2696, 349
   size: 54, 176
   orig: 256, 256
   offset: 101, 75
   index: -1
 rug01
   rotate: false
-  xy: 1450, 638
+  xy: 3145, 349
   size: 244, 130
   orig: 512, 512
   offset: 134, 204
   index: -1
 tv01
   rotate: false
-  xy: 2, 955
+  xy: 3594, 349
   size: 79, 90
   orig: 256, 256
   offset: 91, 98
   index: -1
 tv02
   rotate: false
-  xy: 364, 955
+  xy: 2, 694
   size: 80, 89
   orig: 256, 256
   offset: 85, 99
   index: -1
 tv03
   rotate: false
-  xy: 726, 955
+  xy: 451, 694
   size: 80, 87
   orig: 256, 256
   offset: 85, 101
   index: -1
 tv04
   rotate: false
-  xy: 1088, 955
+  xy: 900, 694
   size: 80, 87
   orig: 256, 256
   offset: 91, 101
   index: -1
 wall01
   rotate: false
-  xy: 1450, 955
+  xy: 1349, 694
   size: 136, 271
   orig: 512, 512
   offset: 188, 133
   index: -1
 wall02
   rotate: false
-  xy: 2, 1272
+  xy: 1798, 694
   size: 136, 270
   orig: 512, 512
   offset: 188, 134
   index: -1
 wallwindow01
   rotate: false
-  xy: 364, 1272
+  xy: 2247, 694
   size: 136, 271
   orig: 512, 512
   offset: 188, 135
   index: -1
 wallwindow02
   rotate: false
-  xy: 726, 1272
+  xy: 2696, 694
   size: 136, 271
   orig: 512, 512
   offset: 188, 135
