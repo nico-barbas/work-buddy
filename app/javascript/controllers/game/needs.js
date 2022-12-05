@@ -129,7 +129,7 @@ export class MoodDisplay extends Container {
       "faceAvocado",
     ],
     thirst: ["foodBeer", "foddWater", "faceBigmouth"],
-    bathroom: ["drop", "cloud", "drops"],
+    bathroom: ["drop", "drops"],
     rest: ["swirl", "faceBigmouth", "faceBlue", "sleeps", "heartBroken"],
     recreation: ["cloud", "divertissementTv", "faceBigmouth", "faceGlasses"],
     happy: ["faceMdr", "faceJoke", "faceHeart"],
