@@ -64,11 +64,11 @@ export class NeedController {
   constructor() {
     this.needs = {
       hunger: new Need(100).withDecrease(secondToTick(1)).withMoodWeight(3),
-      thirst: new Need(100).withDecrease(secondToTick(60)).withMoodWeight(4),
-      bathroom: new Need(100).withDecrease(secondToTick(60)).withMoodWeight(6),
-      rest: new Need(100).withDecrease(secondToTick(180)).withMoodWeight(2),
+      thirst: new Need(100).withDecrease(secondToTick(5)).withMoodWeight(4),
+      bathroom: new Need(100).withDecrease(secondToTick(15)).withMoodWeight(6),
+      rest: new Need(100).withDecrease(secondToTick(15)).withMoodWeight(2),
       recreation: new Need(100)
-        .withDecrease(secondToTick(85))
+        .withDecrease(secondToTick(10))
         .withMoodWeight(1),
     };
 
