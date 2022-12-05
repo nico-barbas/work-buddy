@@ -121,7 +121,6 @@ export default class extends Controller {
         this.logconfirmationTarget.innerHTML = "Your last timer has been logged!<br>You can create a new one."
         this.assignlabelformTarget.reset()
   })
-
   }
 
   timerUrl(url) {
@@ -159,10 +158,20 @@ export default class extends Controller {
         console.log("label assigned")
   })
   }
-
 }
 
-
-// TO DO
-// SET THE LABEL SELECT FORM RESET AT GOOD PLACE (STILL ONE CORNER CASE: WHEN YOU LOG A TIMER AND THEN RELOAD PAGE: the label of the old timer is the one displayed which can be confusing)
-// WHEN A NEW LABEL IS CREATED --> PUSH IT TO THE LIST OF LABELS
+// METHOD WITH JSON RESPONSE (INSTEAD OF TEXT)
+// log() {
+//   event.preventDefault()
+//   this.paused = true
+//   this.logtotalTarget.value = this.timeValue
+//   const url = this.timerUrl(this.logformTarget.action)
+//   fetch(url, {
+//     method: "PATCH",
+//     headers: { "Accept": "application/json", 'X-CSRF-Token': csrfToken() },
+//     body: new FormData(this.logformTarget)
+//   })
+//     .then(response => response.json())
+//     .then((data) => {
+//    ...
+// })

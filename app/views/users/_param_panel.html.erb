@@ -3,5 +3,9 @@
    <div class="param-panel-title">
     <h2 style='color: #FFA62B'>Settings</h2>
   </div>
+<div class="d-flex flex-column justify-content-center">
+  <%= link_to "Manage your labels", user_labels_path(current_user), class: "btn small-btn-blue create-btn mb-3" %>
+  <%= link_to "Update your avatar", edit_avatar_path(current_user.avatar), class: "btn small-btn-blue create-btn" %>
+</div>
 
 </div>

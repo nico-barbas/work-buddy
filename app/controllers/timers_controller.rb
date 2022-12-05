@@ -30,17 +30,39 @@ class TimersController < ApplicationController
     # update the total_time
     @timer = Timer.find(params[:id])
     @timer.update(timer_params)
-    # mark the timer as logged true
+    # mark the timer as logged true and set the logged_date
     @timer.logged = true
+    @timer.logged_date = Date.today
     @timer.save
-    # push the total time to daily_lable_time / total_label_time -- TO DO
-    # display a message telling "Your time has been loged! You can start a new timer" -- TO DO
+    # push the total time to daily_label_time / total_label_time
+    label = @timer.label
+    label.total_label_time = @timer.total_time
+    label.daily_label_time = @timer.total_time
+    label.save
   end
 
   def set_label
     @timer = Timer.find(params[:id])
     @timer.update(timer_params)
     @timer.save
+  end
+
+  def get_daily_times
+    # A CONNECTER AU STIMULUS CONTROLLER DE MARINE AVEC UNE METHODE DEDIE (Request GET sur la route get_daily_times_path)
+    # RENVOYER DE LA DONNEE EN JSON
+    # get the total time worked on the given day (based on logged timers) + convert in h / min
+    @daily_work_time = 0
+    @logged_timers = Timer.where(user: current_user, logged: true, logged_date: Date.today)
+    @logged_timers.each do |timer|
+        @daily_work_time += timer.total_time
+    end
+    @hours = @daily_work_time / (1000 * 60 * 60)
+    @minutes = @daily_work_time / (1000 * 60) % 60
+    @labels = Label.where(user: current_user)
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user) }
+      format.json { render json: {daily_hours: @hours, dayly_minutes: @minutes}}
+    end
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_02_165018) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_103821) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_165018) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "logged", default: false
+    t.date "logged_date"
     t.index ["label_id"], name: "index_timers_on_label_id"
     t.index ["user_id"], name: "index_timers_on_user_id"
   end

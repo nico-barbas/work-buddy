@@ -10,26 +10,10 @@
             <a href="" class="fa-solid fa-circle-check" data-update-timer-target="log" data-action="click->update-timer#log"></a>
           </div>
   </div>
-  <div>
-    <p class="mt-2 text-danger">Assign your timer to a specific tag</p>
-    <%# LIST OF TAG HERE RELATED TO A FORM WITH PATCH METHOD TO UPDATE THE TAG OF THE TIMER %>
-      <%= simple_form_for timer,
-    url: timer_label_path(timer),
-    method: "patch",
-    html: {
-    data: {
-      update_timer_target: "assignlabelform",
-      action: "submit->update-timer#setlabel"
-    }
-  } do |f|%>
-      <%= f.collection_select :label_id, Label.where(user: current_user), :id, :name, prompt: true, class: "select-label-form" %>
-      <%= f.submit "Select", class:"btn small-btn-blue create-btn"%>
-  <% end %>
-  </div>
+  <div><%= render "assign_label", timer: timer, labels: @labels%></div>
 
-  <p class="mt-2 text-danger">Create a new label</p>
+  <p class="mt-4 mb-2 text-danger text-center">Create a new label</p>
   <div><%= render "new_label", timer: timer %></div>
-
   <br><div class="text-center text-info" data-update-timer-target="logconfirmation"></div>
 
 </div>
