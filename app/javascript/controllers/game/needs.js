@@ -68,7 +68,7 @@ export class NeedController {
         .withMoodWeight(1),
     };
 
-    this.needs.hunger.set(20);
+    // this.needs.hunger.set(20);
   }
 
   update() {
@@ -125,6 +125,7 @@ export class MoodDisplay extends Container {
     rest: ["cloud", "bars", "faceAngry", "sleep", "sleeps"],
     recreation: ["cloud", "bars", "faceSad"],
     happy: ["faceHappy", "laugh", "star"],
+    celebrate: ["party"],
     sing: ["music"],
     daydream: ["faceHappy", "laugh", "star"],
     eat: ["faceRelieved"],

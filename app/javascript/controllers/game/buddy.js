@@ -5,10 +5,16 @@ import {
   workBehavior,
   idleBehavior,
   feedBehavior,
+  celebrateBehavior,
 } from "./behaviors";
 import { Vector2, Vector3 } from "./math";
 import { SignalDispatcher } from "./signal";
-import { secondToTick } from "./utils";
+import {
+  AnimationSequence,
+  InterpolationKind,
+  secondToTick,
+  Tween,
+} from "./utils";
 import {
   BehaviorTree,
   BehaviorResult,
@@ -27,6 +33,8 @@ export class Buddy extends Container {
   rate = secondToTick(3);
   agent = new BehaviorTree();
   offset = new Vector2(62, 180);
+  originPosition = new Vector2();
+  animationOffset = new Vector2();
   needs = new NeedController();
   moodDisplay = new MoodDisplay(new Vector2(16, -38));
 
@@ -48,6 +56,13 @@ export class Buddy extends Container {
     this.currentCoord = new Vector3(3, 0, 3);
     this.grid.addBuddy(this, this.currentCoord);
 
+    this.animation = new AnimationSequence(2);
+    this.animation.addAnimation(
+      new Tween(secondToTick(0.3), 0, 32, InterpolationKind.InOut)
+    );
+    this.animation.addAnimation(
+      new Tween(secondToTick(0.3), 32, 0, InterpolationKind.In)
+    );
     {
       const blackboard = {
         lock: "none",
@@ -80,6 +95,9 @@ export class Buddy extends Container {
         food: {
           atFoodSource: false,
         },
+        celebrate: {
+          shouldCelebrate: false,
+        },
       };
 
       this.agent.blackboard = blackboard;
@@ -92,6 +110,7 @@ export class Buddy extends Container {
       breakSubTree.addChild(idleBehavior(blackboard));
 
       const root = new BehaviorSequence(blackboard, BehaviorResult.Success);
+      root.addChild(celebrateBehavior(blackboard));
       root.addChild(expressMoodBehavior(blackboard));
       root.addChild(workBehavior(blackboard));
       root.addChild(breakSubTree);
@@ -104,11 +123,24 @@ export class Buddy extends Container {
       this.agent.run();
       this.needs.update();
       this.moodDisplay.update();
+
+      if (this.animation.playing) {
+        const [offset, done] = this.animation.advance();
+
+        this.animationOffset.y = offset;
+        this.x = this.originPosition.x - this.animationOffset.x;
+        this.y = this.originPosition.y - this.animationOffset.y;
+      }
     };
     app.ticker.add(update);
   }
 
   setSignalListeners() {
+    SignalDispatcher.addListener("interrupt.celebrate", () => {
+      this.agent.blackboard.celebrate.shouldCelebrate = true;
+      this.animation.play();
+      this.agent.interrupt();
+    });
     SignalDispatcher.addListener("interrupt.work", () => {
       this.agent.blackboard.work.hasWork = true;
       this.agent.interrupt();
@@ -120,8 +152,10 @@ export class Buddy extends Container {
   }
 
   setPosition(pos) {
-    this.x = pos.x - this.offset.x;
-    this.y = pos.y - this.offset.y;
+    this.originPosition.x = pos.x - this.offset.x;
+    this.originPosition.y = pos.y - this.offset.y;
+    this.x = pos.x - this.offset.x - this.animationOffset.x;
+    this.y = pos.y - this.offset.y - this.animationOffset.y;
   }
 
   lookAt(dir) {

@@ -127,6 +127,7 @@ export default class extends Controller {
         this.assignlabelformTarget.reset();
   });
      SignalDispatcher.dispatchSignal("interrupt.break");
+     SignalDispatcher.dispatchSignal("interrupt.celebrate");
   }
 
   timerUrl(url) {
