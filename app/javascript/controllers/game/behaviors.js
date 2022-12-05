@@ -188,57 +188,24 @@ export const expressMoodBehavior = (blackboard) => {
 export const workBehavior = (blackboard) => {
   const moveToDeskBehavior = new BehaviorSequence(blackboard);
   moveToDeskBehavior.addChild(
-    new BehaviorCondition(blackboard, (b) => {
-      if (!b.pathFound) {
-        const grid = b.agentData.grid;
-        const deskTile = grid.findItem("desk");
-        const deskCoord = grid.indexToCoord(deskTile.index);
-        if (deskTile) {
-          const sitCoord = deskCoord.add(
-            deskTile.content.rotationIndexToDirectionVector()
-          );
-          [b.path, b.pathFound] = grid.pathTo(
-            b.agentData.currentCoord,
-            sitCoord,
-            {
-              includeStart: false,
-              includeEnd: true,
-            }
-          );
-          b.nextCoord = grid.indexToCoord(b.path.pop().index);
-        }
-      }
-      return b.pathFound;
+    new BehaviorAction(blackboard, (b) => {
+      b.itemLookup = "desk";
+      return true;
     })
   );
+  moveToDeskBehavior.addChild(findPathBehavior(blackboard));
   moveToDeskBehavior.addChild(
     new BehaviorAction(blackboard, (b) => {
-      const grid = b.agentData.grid;
-
-      b.move.timer += 1;
-      if (b.move.timer === b.move.rate) {
-        b.move.timer = 0;
-        grid.moveBuddy(b.agentData, b.nextCoord);
-        b.previousCoord = b.agentData.currentCoord;
-        b.agentData.currentCoord = b.nextCoord;
+      if (b.move.timer + 1 === b.move.rate) {
         b.lock = "none";
-        if (b.path.length > 0) {
-          b.nextCoord = grid.indexToCoord(b.path.pop().index);
-          return false;
-        }
-        return true;
+      } else {
+        b.lock = "work";
       }
-
-      const t = b.move.timer / b.move.rate;
-      // FIXME: Could optimize this since they are constant across the movement
-      const start = grid.coordToWorld(b.agentData.currentCoord);
-      const end = grid.coordToWorld(b.nextCoord);
-      const v = start.lerp(end, t);
-      b.agentData.setPosition(new Vector2(v.x - grid.x, v.y - grid.y));
-      b.lock = "work";
-      return false;
+      return true;
     })
   );
+  moveToDeskBehavior.addChild(moveAlongPathBehavior(blackboard));
+  moveToDeskBehavior.addChild(lookAtItemBehavior(blackboard));
   moveToDeskBehavior.addChild(
     new BehaviorAction(blackboard, (b) => {
       b.pathFound = false;
@@ -303,6 +270,8 @@ const findPathBehavior = (blackboard) => {
           }
         );
         b.nextCoord = grid.indexToCoord(b.path.pop().index);
+        const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
+        b.agentData.lookAt(dir);
       }
     }
     return b.pathFound;
@@ -321,6 +290,9 @@ const moveAlongPathBehavior = (blackboard) => {
       b.agentData.currentCoord = b.nextCoord;
       if (b.path.length > 0) {
         b.nextCoord = grid.indexToCoord(b.path.pop().index);
+
+        const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
+        b.agentData.lookAt(dir);
         return false;
       }
       return true;
@@ -333,6 +305,17 @@ const moveAlongPathBehavior = (blackboard) => {
     const v = start.lerp(end, t);
     b.agentData.setPosition(new Vector2(v.x - grid.x, v.y - grid.y));
     return false;
+  });
+};
+
+const lookAtItemBehavior = (blackboard) => {
+  return new BehaviorAction(blackboard, (b) => {
+    const grid = b.agentData.grid;
+    const tile = grid.findItem(b.itemLookup);
+    const coord = grid.indexToCoord(tile.index);
+    const dir = coord.sub(b.agentData.currentCoord).normalize();
+    b.agentData.lookAt(dir);
+    return true;
   });
 };
 
@@ -350,6 +333,7 @@ export const feedBehavior = (blackboard) => {
     })
   );
   moveToSource.addChild(moveAlongPathBehavior(blackboard));
+  moveToSource.addChild(lookAtItemBehavior(blackboard));
   moveToSource.addChild(
     new BehaviorAction(blackboard, (b) => {
       b.food.atFoodSource = true;
@@ -412,6 +396,8 @@ export const idleBehavior = (blackboard) => {
           if (tile.walkable && tile.index != previousIndex) {
             b.pathFound = true;
             b.nextCoord = grid.indexToCoord(tile.index);
+            const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
+            b.agentData.lookAt(dir);
             break;
           }
         }
