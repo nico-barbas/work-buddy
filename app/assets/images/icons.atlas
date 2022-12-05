@@ -1,0 +1,230 @@
+
+icons.png
+size: 2048, 64
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+emote01
+  rotate: false
+  xy: 2, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_alert01
+  rotate: false
+  xy: 36, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_anger01
+  rotate: false
+  xy: 70, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_bars01
+  rotate: false
+  xy: 104, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_cash01
+  rotate: false
+  xy: 138, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_circle01
+  rotate: false
+  xy: 172, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_cloud01
+  rotate: false
+  xy: 206, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_cross01
+  rotate: false
+  xy: 240, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_dots01
+  rotate: false
+  xy: 274, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_dots02
+  rotate: false
+  xy: 308, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_dots03
+  rotate: false
+  xy: 342, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_drop01
+  rotate: false
+  xy: 376, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_drops01
+  rotate: false
+  xy: 410, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_exclamation01
+  rotate: false
+  xy: 444, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_exclamations01
+  rotate: false
+  xy: 478, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_faceAngry01
+  rotate: false
+  xy: 512, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_faceHappy01
+  rotate: false
+  xy: 546, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_faceJoke01
+  rotate: false
+  xy: 580, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_faceRelieved01
+  rotate: false
+  xy: 614, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_faceSad01
+  rotate: false
+  xy: 648, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_heart01
+  rotate: false
+  xy: 682, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_heartBroken01
+  rotate: false
+  xy: 716, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_hearts01
+  rotate: false
+  xy: 750, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_idea01
+  rotate: false
+  xy: 784, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_laugh01
+  rotate: false
+  xy: 818, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_music01
+  rotate: false
+  xy: 852, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_question01
+  rotate: false
+  xy: 886, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_sleep01
+  rotate: false
+  xy: 920, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_sleeps01
+  rotate: false
+  xy: 954, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_star01
+  rotate: false
+  xy: 988, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_stars01
+  rotate: false
+  xy: 1022, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emote_swirl01
+  rotate: false
+  xy: 1056, 4
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1

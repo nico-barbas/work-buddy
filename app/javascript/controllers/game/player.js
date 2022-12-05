@@ -107,16 +107,7 @@ export class PlayerController {
         }
       };
       canvas.addEventListener("contextmenu", handleMouseRightInput);
-
-      // const workTest = (event) => {
-      //   if (event.key === " ") {
-      //     SignalDispatcher.dispatchSignal("interrupt.work");
-      //   }
-      // };
-      // document.addEventListener("keyup", workTest);
     }
-
-    // this.initUpdateLoop(app, grid);
   }
 
   initUpdateLoop(app, grid) {
@@ -144,26 +135,12 @@ export class PlayerController {
       if (!panValue.isZero()) {
         grid.offsetOrigin(panValue);
       }
-      // } else {
-      //   switch (this.mode.kind) {
-      //     case "idle":
-      //       break;
-      //     case "build":
-      //       break;
-      //     case "decorate":
-      //       const decorateMode = this.mode as DecorateMode;
-      //       decorateMode.update();
-      //       break;
-      //   }
-      // }
 
       panValue.x = 0;
       panValue.y = 0;
     });
   }
 }
-
-//   type PlayerMode = IdleMode | BuildMode | DecorateMode;
 
 class IdleMode {
   kind = "idle";

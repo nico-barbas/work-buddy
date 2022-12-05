@@ -5,6 +5,7 @@ const spritesheet = {
   tiles: {},
   items: {},
   characters: {},
+  icons: {},
 };
 
 export const loadAssets = async (
@@ -14,7 +15,9 @@ export const loadAssets = async (
   itemsPath,
   itemsConfigPath,
   charactersPath,
-  charactersConfigPath
+  charactersConfigPath,
+  iconsPath,
+  iconsConfigPath
 ) => {
   const tilesAtlas = await parseAtlas(tilesConfigPath);
   tilesAtlas.meta.image = tilesPath;
@@ -39,6 +42,14 @@ export const loadAssets = async (
     charactersAtlas
   );
   await spritesheet.characters.parse();
+
+  const iconsAtlas = await parseAtlas(iconsConfigPath);
+  iconsAtlas.meta.image = iconsPath;
+  spritesheet.icons = new PIXI.Spritesheet(
+    PIXI.BaseTexture.from(iconsAtlas.meta.image),
+    iconsAtlas
+  );
+  await spritesheet.icons.parse();
 };
 
 const parseAtlas = async (configPath) => {
@@ -130,6 +141,19 @@ export const getSpritesheetAnimation = (kind, name) => {
   }
 };
 
+export const getSpritesheetAnimations = (kind) => {
+  switch (kind) {
+    case "tile":
+      return spritesheet.tiles.animations;
+    case "item":
+      return spritesheet.items.animations;
+    case "character":
+      return spritesheet.characters.animations;
+    case "icon":
+      return spritesheet.icons.animations;
+  }
+};
+
 const itemAssets = [
   {
     name: "wall",
@@ -161,20 +185,35 @@ const itemAssets = [
   {
     name: "couch",
     origins: [
-      new Vector2(-8, 128),
+      // new Vector2(-8, 128),
+      new Vector2(112, 58),
       new Vector2(),
       new Vector2(),
       new Vector2(),
     ],
     scale: 2,
-    width: 1,
-    height: 1,
+    width: 2,
+    height: 2,
     pattern: "1010",
     blocking: true,
   },
   {
     name: "desk",
     origins: [new Vector2(), new Vector2(), new Vector2(), new Vector2()],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "fridge",
+    origins: [
+      new Vector2(),
+      new Vector2(-92, 128),
+      new Vector2(),
+      new Vector2(),
+    ],
     scale: 2,
     width: 1,
     height: 1,
