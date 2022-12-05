@@ -6,11 +6,11 @@ class TimersController < ApplicationController
     @timer = Timer.new
     @timer.started_at = Time.now
     @timer.user = current_user
-    if Label.find_by name: "no label assigned"
-      label = Label.find_by name: "no label assigned"
+    if Label.find_by name: "General tasks"
+      label = Label.find_by name: "General tasks"
       @timer.label = label
     else
-      @timer.label = Label.create(name: "no label assigned", user: current_user) # Here we will need to obtain the label selected by the user ...
+      @timer.label = Label.create(name: "General tasks", user: current_user) # Here we will need to obtain the label selected by the user ...
     end
     @timer.save
   end
