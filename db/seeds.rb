@@ -21,10 +21,12 @@ new_avatar = Avatar.new(name: "Sherb", user: new_user)
 new_avatar.save!
 p "avatar created"
 
-label_test = Label.new(name: "Meeting & call", user: new_user)
+label_test = Label.new(name: "No label", user: new_user)
 label_test.save!
 label_test2 = Label.new(name: "Coding", user: new_user)
 label_test2.save!
+label_test = Label.new(name: "Meeting & call", user: new_user)
+label_test.save!
 label_test3 = Label.new(name: "Paperwork", user: new_user)
 label_test3.save!
 label_test4 = Label.new(name: "Test", user: new_user)
