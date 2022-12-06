@@ -6,7 +6,6 @@
   justify-content: space-between;
   margin-left: 3rem;
   margin-right: 3rem;
-
 }
 
 .logo {
@@ -29,4 +28,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+@media (min-width: 1200px) {
+  .slogan {
+    font-size: 4rem;
+  }
+  .logo {
+    font-size: 4rem;
+  }
 }
