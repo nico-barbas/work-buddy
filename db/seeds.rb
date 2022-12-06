@@ -21,17 +21,17 @@ new_avatar = Avatar.new(name: "Sherb", user: new_user)
 new_avatar.save!
 p "avatar created"
 
-label_test = Label.new(name: "No label", user: new_user)
-label_test.save!
+label_test2 = Label.new(name: "General tasks", user: new_user)
+label_test2.save!
 label_test2 = Label.new(name: "Coding", user: new_user)
 label_test2.save!
 label_test = Label.new(name: "Meeting & call", user: new_user)
 label_test.save!
 label_test3 = Label.new(name: "Paperwork", user: new_user)
 label_test3.save!
-label_test4 = Label.new(name: "Test", user: new_user)
+label_test4 = Label.new(name: "Testing", user: new_user)
 label_test4.save!
-p "label 'General tasks' created"
+p "labels created"
 
 new_timer = Timer.new(started_at: Time.now, label: label_test, user: new_user)
 new_timer.save!
