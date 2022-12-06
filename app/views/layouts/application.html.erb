@@ -2,12 +2,26 @@
 <html>
   <head>
     <title>Virtual Work Buddy - make homeoffice a happier place</title>
+    <%# favicon_link_tag %>
+    <%= favicon_link_tag asset_path('favicon-32x32.png') %>
+    <%= favicon_link_tag asset_path('favicon-96x96.png') %>
+    <%= favicon_link_tag asset_path('favicon-16x16.png') %>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+    <% unless current_user.nil? %>
+    <link rel="preconnect" href= <%= "https://www.virtual-work-buddy.fun/users/#{current_user.id}" %> >
+    <% end %>
+
   </head>
 
   <body>
