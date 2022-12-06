@@ -19,7 +19,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
     <% unless current_user.nil? %>
-    <link rel="preconnect" href= <%= "https://www.virtual-work-buddy.fun/users/#{current_user.id}" %> >
+      <link rel="preconnect" href= <%= "https://www.virtual-work-buddy.fun/users/#{current_user.id}" %> >
     <% end %>
 
   </head>
