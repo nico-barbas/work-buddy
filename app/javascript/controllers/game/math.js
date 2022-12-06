@@ -79,6 +79,10 @@ export class Vector3 {
     return new Vector3(this.x, this.y, this.z);
   }
 
+  equal(v) {
+    return this.x === v.x && this.y === v.y && this.z === v.z;
+  }
+
   add(v) {
     return new Vector3(this.x + v.x, this.y + v.y, this.z + v.z);
   }

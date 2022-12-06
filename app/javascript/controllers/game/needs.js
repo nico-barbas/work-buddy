@@ -113,7 +113,10 @@ export class NeedController {
 
   increaseValue(name, amount) {
     if (name in this.needs) {
+      const info = {};
       this.needs[name].increase(amount);
+      info[name] = this.needs[name].current;
+      SignalDispatcher.dispatchSignal("needsUpdated", info);
     }
   }
 
