@@ -4,7 +4,9 @@ import { SignalDispatcher } from "./game/signal";
 
 // Connects to data-controller="update-timer"
 export default class extends Controller {
-  static targets = ["hours", "minutes", "seconds", "play", "pause", "log", "form", "total", "logform", "logtotal", "logconfirmation", "assignlabelform"]
+  static targets = ["hours", "minutes", "seconds", "play", "pause", "log", "form", "total", "logform",
+                    "logtotal", "logconfirmation", "assignlabelform",
+                    "homepagetimerhours", "homepagetimerminutes", "homepagetimerseconds"]
   static values = {id: Number, logged: Boolean, time: Number, label: String}
   paused = false
 
@@ -33,10 +35,11 @@ export default class extends Controller {
       let minutes = Math.floor(seconds / 60);
       let hours = Math.floor(minutes / 60);
       seconds = seconds % 60;
-      minutes = seconds >= 30 ? minutes + 1 : minutes;
+      minutes = seconds >= 60 ? minutes + 1 : minutes;
       minutes = minutes % 60;
-      this.display(hours, minutes, seconds)
-    }
+      this.display(hours, minutes, seconds);
+    };
+
     setInterval(() => {
       if (this.paused) {
         return;
@@ -121,8 +124,11 @@ export default class extends Controller {
         console.log("timer logged");
         this.loggedValue = true;
         this.hoursTarget.innerHTML = "00";
+        this.homepagetimerhoursTarget.innerHTML = "00";
         this.minutesTarget.innerHTML = "00";
+        this.homepagetimerminutesTarget.innerHTML = "00";
         this.secondsTarget.innerHTML = "00";
+        this.homepagetimersecondsTarget.innerHTML = "00";
         this.logconfirmationTarget.innerHTML = "Your last timer has been logged!<br>You can create a new one.";
         this.assignlabelformTarget.reset();
   });
@@ -137,18 +143,24 @@ export default class extends Controller {
   display(hours, minutes, seconds) {
     if (hours < 10) {
       this.hoursTarget.innerHTML = `0${hours}`;
+      this.homepagetimerhoursTarget.innerHTML = `0${hours}`;
     } else {
       this.hoursTarget.innerHTML = hours;
+      this.homepagetimerhoursTarget.innerHTML = hours;
     }
     if (minutes < 10) {
       this.minutesTarget.innerHTML = `0${minutes}`;
+      this.homepagetimerminutesTarget.innerHTML = `0${minutes}`;
     } else {
       this.minutesTarget.innerHTML = minutes;
+      this.homepagetimerminutesTarget.innerHTML = minutes;
     }
     if (seconds < 10) {
       this.secondsTarget.innerHTML = `0${seconds}`;
+      this.homepagetimersecondsTarget.innerHTML = `0${seconds}`;
     } else {
       this.secondsTarget.innerHTML = seconds;
+      this.homepagetimersecondsTarget.innerHTML = seconds;
     }
   }
 
