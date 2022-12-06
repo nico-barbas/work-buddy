@@ -1,4 +1,6 @@
-<div class="d-flex flex-row justify-content-left align-items-start p-2 ui-overlay" data-controller="navbar manage-data">
+<div class="d-flex flex-row justify-content-left align-items-start p-2 ui-overlay" data-controller="navbar manage-data update-timer"
+data-update-timer-label-value=<%= Timer.last.label %> data-update-timer-logged-value=<%= Timer.last.logged %>
+data-update-timer-time-value=<%= Timer.last.total_time %> data-update-timer-id-value= <%= Timer.last.id %> >
 
   <%= render "navbar" %>
 
@@ -11,7 +13,7 @@
   </div>
 
   <div data-navbar-target="timers" class="d-none">
-    <%= render "timer_panel", timer: @timer %>
+    <%= render "timer_panel", timer: Timer.last %>
   </div>
 
   <div data-navbar-target="music" class="d-none">
@@ -28,6 +30,7 @@
   </div>
 
   <div class="" >
+    <%= render "timer" %>
      <%= render "needs_panel" %>
   </div>
 

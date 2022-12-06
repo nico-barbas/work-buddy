@@ -28,7 +28,7 @@ export default class extends Controller {
           let totalminutes = Math.floor(totalseconds / 60);
           let totalhours = Math.floor(totalminutes / 60);
           totalseconds = totalseconds % 60;
-          totalminutes = totalseconds >= 30 ? totalminutes + 1 : totalminutes;
+          totalminutes = totalseconds >= 60 ? totalminutes + 1 : totalminutes;
           totalminutes = totalminutes % 60;
           if (totalminutes < 10) {
             totalminutes = `0${totalminutes}`;
@@ -38,14 +38,11 @@ export default class extends Controller {
           let minutes = Math.floor(seconds / 60);
           let hours = Math.floor(minutes / 60);
           seconds = seconds % 60;
-          minutes = seconds >= 30 ? minutes + 1 : minutes;
+          minutes = seconds >= 60 ? minutes + 1 : minutes;
           minutes = minutes % 60;
           if (minutes < 10) {
             minutes = `0${minutes}`;
           }
-          let inner_html = `<h3> Label: ${label.name}</h3>
-          <p>Today: ${hours} hours ${minutes} minutes</p>
-          <p>Total: ${totalhours} hours ${totalminutes} minutes</p>`;
           let html = `   <div class="label-times-card">
           <h4>${label.name}</h4>
           <div class="label-times-card-times">

@@ -92,3 +92,26 @@
   border-radius: 40px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+
+.homepage-timer {
+  position: absolute;
+  right: 0rem;
+  margin-right: 1.15rem;
+  margin-top: 0.625rem;
+  border-radius: 50px;
+  background-color: $purple;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+  width: 12.5rem;
+  opacity: 0.7;
+  padding: 0.625rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  h2 {
+    align-items: center;
+    margin: 0px;
+    font-size: 32px;
+  }
+}
