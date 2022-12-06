@@ -186,7 +186,7 @@ a {
   text-decoration: none;
   font-size: 1.4rem;
   color: $beige;
-  background-color: #FFA62B;
+  background-color: $beige;
   border-radius: 20px;
   padding: 0.4em 1em 0.5em 1em;
   margin: 1rem;
@@ -194,8 +194,10 @@ a {
   cursor: pointer;
   border: solid 4px $orange;
     &:hover {
-    color: $orange;
-    background-color: #FFEEDD;
+    background-color: $orange;
     border: solid 4px $orange;
+    .fa-hands-clapping {
+      color: $beige;
+    }
   }
 }
