@@ -36,7 +36,7 @@ p "labels created"
 new_timer = Timer.new(started_at: Time.now, label: label_test, user: new_user)
 new_timer.save!
 
-new_task = Task.new(title: "Implemente the chat feature", description: "Find ressources on how to do this", user: new_user)
+new_task = Task.new(title: "Implement the chat feature", description: "Find ressources on how to do this", user: new_user)
 new_task.save!
 new_task2 = Task.new(title: "Prepare bugs review", description: "For Monday meeting", user: new_user)
 new_task2.save!
