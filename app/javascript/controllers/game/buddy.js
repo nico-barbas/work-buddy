@@ -72,6 +72,7 @@ export class Buddy extends Container {
         previousCoord: new Vector3(),
         nextCoord: new Vector3(),
         itemLookup: "",
+        pathEmpty: false,
         pathFound: false,
         path: [],
         adjacentTiles: [],

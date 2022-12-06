@@ -379,6 +379,10 @@ export class Grid extends Container {
       return [-1, false];
     };
 
+    if (start.equal(end)) {
+      return [[], true];
+    }
+
     const startIndex = this.coordToIndex(start);
     const endIndex = this.coordToIndex(end);
 

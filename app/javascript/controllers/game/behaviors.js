@@ -294,9 +294,15 @@ const findPathBehavior = (blackboard) => {
             includeEnd: true,
           }
         );
-        b.nextCoord = grid.indexToCoord(b.path.pop().index);
-        const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
-        b.agentData.lookAt(dir);
+
+        if (b.pathFound) {
+          b.pathEmpty = b.path.length === 0;
+          if (!b.pathEmpty) {
+            b.nextCoord = grid.indexToCoord(b.path.pop().index);
+            const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
+            b.agentData.lookAt(dir);
+          }
+        }
       }
     }
     return b.pathFound;
@@ -305,6 +311,10 @@ const findPathBehavior = (blackboard) => {
 
 const moveAlongPathBehavior = (blackboard) => {
   return new BehaviorAction(blackboard, (b) => {
+    if (b.pathEmpty) {
+      return true;
+    }
+
     const grid = b.agentData.grid;
 
     b.move.timer += 1;
@@ -337,6 +347,7 @@ const lookAtItemBehavior = (blackboard) => {
   return new BehaviorAction(blackboard, (b) => {
     const grid = b.agentData.grid;
     const tile = grid.findItem(b.itemLookup);
+    console.log(b.itemLookup);
     const coord = grid.indexToCoord(tile.index);
     const dir = coord.sub(b.agentData.currentCoord).normalize();
     b.agentData.lookAt(dir);
@@ -388,6 +399,7 @@ export const feedBehavior = (blackboard) => {
         const done = !b.agentData.moodDisplay.playing;
         if (done) {
           b.agentData.needs.increaseValue("hunger", 65);
+          b.food.atFoodSource = false;
         }
         return done;
       }),
@@ -442,6 +454,7 @@ export const drinkBehavior = (blackboard) => {
         const done = !b.agentData.moodDisplay.playing;
         if (done) {
           b.agentData.needs.increaseValue("thirst", 65);
+          b.food.atFoodSource = false;
         }
         return done;
       }),
