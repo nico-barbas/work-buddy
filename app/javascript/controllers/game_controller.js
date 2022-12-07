@@ -2,10 +2,21 @@ import * as PIXI from "pixi.js";
 import { Controller } from "@hotwired/stimulus";
 import { Grid } from "./game/grid";
 import { PlayerController } from "./game/player";
-import { findAssetInfo, loadAssets } from "./game/assets";
+import {
+  findAssetInfo,
+  getSpritesheetAnimation,
+  loadAssets,
+} from "./game/assets";
 import { Buddy } from "./game/buddy";
 import { Vector2, Vector3 } from "./game/math";
 import { Item } from "./game/item";
+import {
+  EmissionShape,
+  ParticleEmitter,
+  ParticleSystem,
+  RotatingHoverItem,
+} from "./game/particles";
+import { secondToTick } from "./game/utils";
 
 // Connects to data-controller="game"
 export default class extends Controller {
@@ -104,5 +115,37 @@ export default class extends Controller {
 
     const playerController = new PlayerController(app);
     const buddy = new Buddy(app, grid);
+
+    // const particleSystem = new ParticleSystem(app);
+    // app.stage.addChild(particleSystem);
+    ParticleSystem.init(app);
+    // const test = getSpritesheetAnimation("icon", "emote_anger");
+    // {
+    //   ParticleSystem.addEmitter(
+    //     new ParticleEmitter(test, new Vector2(100, 100), {
+    //       shape: EmissionShape.Cone,
+    //       coneAngle: 45,
+    //       coneDir: new Vector2(0, -1),
+    //       maxBurstCount: 4,
+    //       burstRate: secondToTick(3),
+    //       burstCapacity: 50,
+    //       burstForce: 50,
+    //       burstMinLifetime: secondToTick(3),
+    //       burstMaxLifetime: secondToTick(4),
+    //     })
+    //   );
+    // }
+
+    // {
+    //   const wateringCan = getSpritesheetAnimation("item", "watering_can");
+    //   ParticleSystem.addEmitter(
+    //     new RotatingHoverItem(
+    //       wateringCan,
+    //       new Vector2(100, 100),
+    //       -90,
+    //       secondToTick(5)
+    //     )
+    //   );
+    // }
   }
 }

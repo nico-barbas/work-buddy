@@ -1,4 +1,12 @@
+import { getSpritesheetAnimation } from "./assets";
 import { Vector2 } from "./math";
+import {
+  EmissionShape,
+  ParticleEmitter,
+  ParticleSystem,
+  RotatingHoverItem,
+} from "./particles";
+import { secondToTick } from "./utils";
 
 export class BehaviorTree {
   blackboard = {};
@@ -280,9 +288,17 @@ const findPathBehavior = (blackboard) => {
   return new BehaviorCondition(blackboard, (b) => {
     if (!b.pathFound) {
       const grid = b.agentData.grid;
-      const tile = grid.findItem(b.itemLookup);
-      const coord = grid.indexToCoord(tile.index);
+      let tile;
+      if (b.multipleItems) {
+        const tiles = grid.findItems(b.itemLookup);
+        tile = tiles[Math.floor(Math.random() * tiles.length)];
+        b.multipleItems = false;
+      } else {
+        tile = grid.findItem(b.itemLookup);
+      }
       if (tile) {
+        const coord = grid.indexToCoord(tile.index);
+        b.target = tile;
         const interactCoord = coord.add(
           tile.content.rotationIndexToDirectionVector()
         );
@@ -346,8 +362,8 @@ const moveAlongPathBehavior = (blackboard) => {
 const lookAtItemBehavior = (blackboard) => {
   return new BehaviorAction(blackboard, (b) => {
     const grid = b.agentData.grid;
-    const tile = grid.findItem(b.itemLookup);
-    console.log(b.itemLookup);
+    // const tile = grid.findItem(b.itemLookup);
+    const tile = b.target;
     const coord = grid.indexToCoord(tile.index);
     const dir = coord.sub(b.agentData.currentCoord).normalize();
     b.agentData.lookAt(dir);
@@ -355,7 +371,7 @@ const lookAtItemBehavior = (blackboard) => {
   });
 };
 
-export const feedBehavior = (blackboard) => {
+export const refillNeedBehavior = (blackboard, opt) => {
   const moveToSource = new BehaviorSequence(blackboard);
   moveToSource.addChild(findPathBehavior(blackboard));
   moveToSource.addChild(
@@ -363,7 +379,7 @@ export const feedBehavior = (blackboard) => {
       if (b.move.timer + 1 === b.move.rate) {
         b.lock = "none";
       } else {
-        b.lock = "feed";
+        b.lock = opt.lock;
       }
       return true;
     })
@@ -374,7 +390,7 @@ export const feedBehavior = (blackboard) => {
     new BehaviorAction(blackboard, (b) => {
       b.food.atFoodSource = true;
       b.pathFound = false;
-      b.agentData.moodDisplay.play("eat");
+      b.agentData.moodDisplay.play(opt.mood);
       return true;
     })
   );
@@ -382,9 +398,9 @@ export const feedBehavior = (blackboard) => {
   const behavior = new BehaviorSequence(blackboard);
   behavior.addChild(
     new BehaviorCondition(blackboard, (b) => {
-      const ok = b.agentData.needs.isLow("hunger");
+      const ok = b.agentData.needs.isLow(opt.need);
       if (ok) {
-        b.itemLookup = "fridge";
+        b.itemLookup = opt.item;
       }
       return ok;
     })
@@ -398,7 +414,7 @@ export const feedBehavior = (blackboard) => {
       new BehaviorAction(blackboard, (b) => {
         const done = !b.agentData.moodDisplay.playing;
         if (done) {
-          b.agentData.needs.increaseValue("hunger", 65);
+          b.agentData.needs.increaseValue(opt.need, opt.refillValue);
           b.food.atFoodSource = false;
         }
         return done;
@@ -410,7 +426,7 @@ export const feedBehavior = (blackboard) => {
   return behavior;
 };
 
-export const drinkBehavior = (blackboard) => {
+export const waterPlantBehavior = (blackboard) => {
   const moveToSource = new BehaviorSequence(blackboard);
   moveToSource.addChild(findPathBehavior(blackboard));
   moveToSource.addChild(
@@ -418,7 +434,7 @@ export const drinkBehavior = (blackboard) => {
       if (b.move.timer + 1 === b.move.rate) {
         b.lock = "none";
       } else {
-        b.lock = "drink";
+        b.lock = "waterPlant";
       }
       return true;
     })
@@ -427,38 +443,117 @@ export const drinkBehavior = (blackboard) => {
   moveToSource.addChild(lookAtItemBehavior(blackboard));
   moveToSource.addChild(
     new BehaviorAction(blackboard, (b) => {
-      b.food.atFoodSource = true;
+      b.atTarget = true;
       b.pathFound = false;
-      b.agentData.moodDisplay.play("drink");
       return true;
     })
+  );
+
+  const wateringBehavior = new BehaviorSequence(blackboard);
+  wateringBehavior.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      if (!b.recreation.wateringAnimation) {
+        const grid = b.agentData.grid;
+        const plantTile = b.target;
+        const plantPosition = grid.indexToWorld(plantTile.index);
+        plantPosition.x += 64;
+        plantPosition.y -= 32;
+        b.recreation.wateringAnimation = new RotatingHoverItem(
+          getSpritesheetAnimation("item", "watering_can"),
+          plantPosition,
+          0.5,
+          -90,
+          secondToTick(1.5)
+        );
+        ParticleSystem.addEmitter(b.recreation.wateringAnimation);
+        const dropletDir = new Vector2(-1, 1).normalizeInPlace();
+        const dropletOrigin = new Vector2(
+          plantPosition.x - 16,
+          plantPosition.y - 16
+        );
+        ParticleSystem.addEmitter(
+          new ParticleEmitter(
+            getSpritesheetAnimation("icon", "droplet"),
+            dropletOrigin,
+            {
+              shape: EmissionShape.Cone,
+              coneAngle: 25,
+              coneDir: dropletDir,
+              maxBurstCount: 10,
+              burstRate: secondToTick(0.1),
+              burstCapacity: 3,
+              burstForce: 50,
+              burstMinLifetime: secondToTick(0.5),
+              burstMaxLifetime: secondToTick(1),
+            }
+          )
+        );
+      }
+      return true;
+    })
+  );
+  wateringBehavior.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      if (!b.recreation.wateringAnimation.playing) {
+        b.recreation.wateringAnimation = null;
+        b.recreation.wateringPlant = false;
+        b.recreation.wateringTimer = 0;
+        b.entropy.waterPlant.current = b.entropy.waterPlant.base;
+        b.atTarget = false;
+        return true;
+      }
+      return false;
+    })
+  );
+
+  const leftSubTree = new BehaviorSequence(blackboard);
+  leftSubTree.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      b.itemLookup = "plant";
+      return true;
+    })
+  );
+  leftSubTree.addChild(
+    new BehaviorBranch(
+      blackboard,
+      new BehaviorCondition(blackboard, (b) => {
+        return b.atTarget;
+      }),
+      wateringBehavior,
+      moveToSource
+    )
   );
 
   const behavior = new BehaviorSequence(blackboard);
   behavior.addChild(
     new BehaviorCondition(blackboard, (b) => {
-      const ok = b.agentData.needs.isLow("thirst");
-      if (ok) {
-        b.itemLookup = "kitchenSink";
-      }
-      return ok;
+      b.recreation.wateringTimer += 1;
+      return b.recreation.wateringTimer >= b.recreation.wateringCooldown;
     })
   );
   behavior.addChild(
     new BehaviorBranch(
       blackboard,
       new BehaviorCondition(blackboard, (b) => {
-        return b.food.atFoodSource;
+        return b.recreation.wateringPlant;
       }),
-      new BehaviorAction(blackboard, (b) => {
-        const done = !b.agentData.moodDisplay.playing;
-        if (done) {
-          b.agentData.needs.increaseValue("thirst", 65);
-          b.food.atFoodSource = false;
+      leftSubTree,
+      new BehaviorCondition(blackboard, (b) => {
+        b.entropy.waterPlant.timer += 1;
+        if (b.entropy.waterPlant.timer < b.entropy.waterPlant.cooldown) {
+          return false;
         }
-        return done;
-      }),
-      moveToSource
+
+        b.entropy.waterPlant.timer = 0;
+        const rng = Math.random();
+        const threshold = b.entropy.waterPlant.current;
+        if (rng >= 1 - threshold) {
+          b.recreation.wateringPlant = true;
+        } else {
+          b.entropy.waterPlant.current = threshold / Math.sqrt(threshold);
+        }
+        return false;
+      })
     )
   );
 

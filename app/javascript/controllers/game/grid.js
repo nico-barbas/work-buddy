@@ -269,6 +269,17 @@ export class Grid extends Container {
     return item;
   }
 
+  findItems(name) {
+    const items = this.tiles.filter((tile) => {
+      if (tile.content && tile.content.name === name) {
+        return true;
+      }
+      return false;
+    });
+
+    return items;
+  }
+
   addBuddy(buddy, at) {
     if (!this.coordInBounds(at)) {
       console.error("Buddy out of grid bounds");
@@ -410,6 +421,10 @@ export class Grid extends Container {
         const adjacents = this.adjacentTiles(currentCoord);
         for (let i = 0; i < adjacents.length; i += 1) {
           const result = adjacents[i];
+          if (!result.walkable) {
+            continue;
+          }
+
           const next = new NavigationNode(result, current);
           next.gCost = current.gCost + 1;
           next.hCost = calculateHeuristic(currentCoord, end);
