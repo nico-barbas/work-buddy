@@ -106,8 +106,8 @@ export class Buddy extends Container {
         recreation: {
           wateringPlant: false,
           wateringAnimation: null,
-          wateringTimer: 0,
-          wateringCooldown: secondToTick(5),
+          wateringTimer: secondToTick(180),
+          wateringCooldown: secondToTick(180),
         },
         entropy: {
           waterPlant: {
