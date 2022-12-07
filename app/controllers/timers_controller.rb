@@ -36,8 +36,8 @@ class TimersController < ApplicationController
     @timer.save
     # push the total time to daily_label_time / total_label_time
     label = @timer.label
-    label.total_label_time = @timer.total_time
-    label.daily_label_time = @timer.total_time
+    label.total_label_time = label.total_label_time + @timer.total_time
+    label.daily_label_time = label.daily_label_time + @timer.total_time
     label.save
   end
 
