@@ -16,5 +16,6 @@ export default class extends Controller {
 
   play(event) {
     SignalDispatcher.dispatchSignal("interrupt.play");
+    console.log("hello");
   }
 }
