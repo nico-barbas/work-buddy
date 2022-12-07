@@ -275,6 +275,7 @@ export const workBehavior = (blackboard) => {
         (b) => {
           b.lock = "none";
           b.work.atDesk = false;
+          b.atTarget = false;
         }
       ),
       moveToDeskBehavior
@@ -286,6 +287,9 @@ export const workBehavior = (blackboard) => {
 
 const findPathBehavior = (blackboard) => {
   return new BehaviorCondition(blackboard, (b) => {
+    if (b.itemLookup === "plant") {
+      console.log("??", b.pathFound);
+    }
     if (!b.pathFound) {
       const grid = b.agentData.grid;
       let tile;
@@ -415,6 +419,7 @@ export const refillNeedBehavior = (blackboard, opt) => {
         const done = !b.agentData.moodDisplay.playing;
         if (done) {
           b.agentData.needs.increaseValue(opt.need, opt.refillValue);
+          b.atTarget = false;
           b.food.atFoodSource = false;
         }
         return done;
@@ -517,6 +522,7 @@ export const waterPlantBehavior = (blackboard) => {
     new BehaviorBranch(
       blackboard,
       new BehaviorCondition(blackboard, (b) => {
+        console.log("At plant target: ", b.atTarget);
         return b.atTarget;
       }),
       wateringBehavior,
@@ -525,6 +531,15 @@ export const waterPlantBehavior = (blackboard) => {
   );
 
   const behavior = new BehaviorSequence(blackboard);
+  behavior.addChild(
+    new BehaviorCondition(blackboard, (b) => {
+      const filters = ["waterPlant", "none"];
+      const isLocked = !filters.find((filter) => {
+        return filter == b.lock;
+      });
+      return !isLocked;
+    })
+  );
   behavior.addChild(
     new BehaviorCondition(blackboard, (b) => {
       b.recreation.wateringTimer += 1;
