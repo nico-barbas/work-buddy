@@ -1,14 +1,14 @@
 .data-panel-today {
   color: $darkpurple;
   opacity: 0.7;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 
 }
 
 .data-panel-congrats {
-  margin-top: 3.5rem;
-  margin: 3rem;
+  margin-top: 3rem;
+  margin: 2.5rem;
   color: $orange;
   display: flex;
   flex-direction: column;
@@ -18,9 +18,9 @@
 .data-panel-footer {
   color: grey;
   text-align: center;
-  h3 {
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  h4 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   }
   &:hover {
   color: #858AE3;
@@ -48,7 +48,7 @@
   align-items: center;
   h3 {
     color: #858AE3;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -72,13 +72,12 @@
     opacity: 0.7;
     text-align: center;
     font-style: italic;
-    font-size: 1.5rem;
-
+    font-size: 1.2rem;
   }
   p {
     margin-bottom: 0.3rem;
     opacity: 0.7;
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 

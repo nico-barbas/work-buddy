@@ -56,12 +56,13 @@
   }
 }
 
-
   .icon-param {
   padding: 1.3em;
   border-radius: 40%;
   background-color: $beige;
-  margin-top: 17em;
+  position: absolute;
+  bottom: 0rem;
+  right: 0rem;
   .fa-solid {
     &:hover {
       color: $darkpurple;
@@ -69,8 +70,20 @@
       opacity: 1;
     }
   }
-  }
+}
+
+.side-navbar {
+  height: 96vh;
+  position: relative;
+}
 
   .circle {
     box-shadow: inset 0px 0px 0px 4px #0f0326b5;
+  }
+
+
+  @media (min-width: 1200px) {
+    .fa-solid {
+      font-size: 2rem;
+        }
   }
