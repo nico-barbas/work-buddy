@@ -102,19 +102,26 @@ export default class extends Controller {
 
       const desk = insertItem("desk", new Vector3(4, 0, 1), 1);
       insertNestedItem("laptop", desk, 1, new Vector2(-30, 0));
-      insertItem("rug", new Vector3(9, 0, 5), 0);
+      // insertItem("rug", new Vector3(9, 0, 5), 0);
       insertItem("couch", new Vector3(1, 0, 5));
       insertItem("fridge", new Vector3(9, 0, 1), 1);
       insertItem("kitchenSink", new Vector3(8, 0, 1), 1);
       insertItem("plant", new Vector3(5, 0, 1));
       insertItem("plant", new Vector3(1, 0, 4), 1);
       insertItem("christmastree", new Vector3(1, 0, 1), 0);
-      insertItem("kitchenCabinet", new Vector3(7, 0, 1), 1);
-      insertItem("bookcase", new Vector3(1, 0, 8), 0);
+      const kitchenCabinet = insertItem("kitchenCabinet", new Vector3(7, 0, 1), 1);
+      insertNestedItem("coffeeMachine", kitchenCabinet, 1, new Vector2(-35, 5));
+      const bookcase = insertItem("bookcase", new Vector3(1, 0, 8), 0);
+      insertNestedItem("books", bookcase, 0, new Vector2(-30, 0));
+      insertNestedItem("books", bookcase, 0, new Vector2(-30, -30));
+      insertNestedItem("books", bookcase, 0, new Vector2(-30, -60));
       // insertItem("deskChair", new Vector3(4, 0, 2), 3);
-
       const table = insertItem("coffeeTable", new Vector3(3, 0, 5));
       insertNestedItem("tv", table, 2, new Vector2(0, 10));
+      const present = insertItem("presentGreenRectangle", new Vector3(1, 0, 2), 0);
+      insertNestedItem("presentRedSquare", present, 0, new Vector2(-40, -5));
+      insertNestedItem("presentGreenRound", present, 0, new Vector2(-100, 0));
+      insertNestedItem("presentRed", present, 0, new Vector2(-70, -10));
     });
     app.stage.addChild(grid);
 

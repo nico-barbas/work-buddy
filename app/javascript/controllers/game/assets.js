@@ -340,6 +340,80 @@ const itemAssets = [
     pattern: "1",
     blocking: true,
   },
+  {
+    name: "coffeeMachine",
+    origins: [
+      new Vector2(),
+      new Vector2(),
+      new Vector2(),
+      new Vector2()
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "books",
+    origins: [
+      new Vector2(),
+      new Vector2(),
+      new Vector2(),
+      new Vector2()
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "presentGreenRectangle",
+    origins: [
+      new Vector2(-90, -60),
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "presentRedSquare",
+    origins: [
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "presentGreenRound",
+    origins: [
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "presentRed",
+    origins: [
+      new Vector2(),
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
 ];
 
 export const findAssetInfo = (name) => {
