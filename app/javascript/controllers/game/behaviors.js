@@ -160,6 +160,31 @@ export const celebrateBehavior = (blackboard) => {
   return behavior;
 };
 
+export const singBehavior = (blackboard) => {
+  const behavior = new BehaviorSequence(blackboard);
+  behavior.addChild(
+    new BehaviorCondition(blackboard, (b) => {
+      return b.celebrate.shouldSing;
+    })
+  );
+  behavior.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      if (!b.agentData.moodDisplay.playing) {
+        b.agentData.moodDisplay.play("sing");
+      }
+      return !b.agentData.animation.playing;
+    })
+  );
+  behavior.addChild(
+    new BehaviorAction(blackboard, (b) => {
+      b.celebrate.shouldSing = false;
+      return true;
+    })
+  );
+
+  return behavior;
+};
+
 export const expressMoodBehavior = (blackboard) => {
   const happyMoods = ["happy", "daydream"];
   const behavior = new BehaviorSequence(blackboard);
@@ -287,9 +312,6 @@ export const workBehavior = (blackboard) => {
 
 const findPathBehavior = (blackboard) => {
   return new BehaviorCondition(blackboard, (b) => {
-    if (b.itemLookup === "plant") {
-      console.log("??", b.pathFound);
-    }
     if (!b.pathFound) {
       const grid = b.agentData.grid;
       let tile;
@@ -522,7 +544,6 @@ export const waterPlantBehavior = (blackboard) => {
     new BehaviorBranch(
       blackboard,
       new BehaviorCondition(blackboard, (b) => {
-        console.log("At plant target: ", b.atTarget);
         return b.atTarget;
       }),
       wateringBehavior,
