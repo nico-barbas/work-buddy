@@ -138,6 +138,8 @@ export const getSpritesheetAnimation = (kind, name) => {
       return spritesheet.items.animations[name];
     case "character":
       return spritesheet.characters.animations[name];
+    case "icon":
+      return spritesheet.icons.animations[name];
   }
 };
 

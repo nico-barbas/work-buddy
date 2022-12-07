@@ -4,9 +4,9 @@ import {
   expressMoodBehavior,
   workBehavior,
   idleBehavior,
-  feedBehavior,
   celebrateBehavior,
-  drinkBehavior,
+  refillNeedBehavior,
+  waterPlantBehavior,
 } from "./behaviors";
 import { Vector2, Vector3 } from "./math";
 import { SignalDispatcher } from "./signal";
@@ -71,7 +71,10 @@ export class Buddy extends Container {
         runningNode: null,
         previousCoord: new Vector3(),
         nextCoord: new Vector3(),
+        target: null,
+        atTarget: false,
         itemLookup: "",
+        multipleItems: false,
         pathEmpty: false,
         pathFound: false,
         path: [],
@@ -100,6 +103,20 @@ export class Buddy extends Container {
         celebrate: {
           shouldCelebrate: false,
         },
+        recreation: {
+          wateringPlant: false,
+          wateringAnimation: null,
+          wateringTimer: 0,
+          wateringCooldown: secondToTick(5),
+        },
+        entropy: {
+          waterPlant: {
+            base: 0.1,
+            current: 0.1,
+            timer: 0,
+            cooldown: secondToTick(1),
+          },
+        },
       };
 
       this.agent.blackboard = blackboard;
@@ -108,8 +125,35 @@ export class Buddy extends Container {
         blackboard,
         BehaviorResult.Success
       );
-      breakSubTree.addChild(feedBehavior(blackboard));
-      breakSubTree.addChild(drinkBehavior(blackboard));
+      breakSubTree.addChild(
+        refillNeedBehavior(blackboard, {
+          lock: "feed",
+          mood: "eat",
+          need: "hunger",
+          item: "fridge",
+          refillValue: 65,
+        })
+      );
+      breakSubTree.addChild(
+        refillNeedBehavior(blackboard, {
+          lock: "drink",
+          mood: "drink",
+          need: "thirst",
+          item: "kitchenSink",
+          refillValue: 65,
+        })
+      );
+      // FIXME: Uncomment when door has been added
+      // breakSubTree.addChild(
+      //   refillNeedBehavior(blackboard, {
+      //     lock: "bathroom",
+      //     mood: "bathroom",
+      //     need: "bathroom",
+      //     item: "door",
+      //     refillValue: 100,
+      //   })
+      // );
+      breakSubTree.addChild(waterPlantBehavior(blackboard));
       breakSubTree.addChild(idleBehavior(blackboard));
 
       const root = new BehaviorSequence(blackboard, BehaviorResult.Success);
