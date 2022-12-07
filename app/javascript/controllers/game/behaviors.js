@@ -142,6 +142,7 @@ export const celebrateBehavior = (blackboard) => {
       return b.celebrate.shouldCelebrate;
     })
   );
+
   behavior.addChild(
     new BehaviorAction(blackboard, (b) => {
       if (!b.agentData.moodDisplay.playing) {
