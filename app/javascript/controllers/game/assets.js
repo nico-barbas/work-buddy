@@ -182,7 +182,7 @@ const itemAssets = [
     width: 1,
     height: 1,
     pattern: "1",
-    blocking: false,
+    blocking: true,
   },
   {
     name: "couch",
