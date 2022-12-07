@@ -161,7 +161,7 @@ export const celebrateBehavior = (blackboard) => {
 };
 
 export const expressMoodBehavior = (blackboard) => {
-  const happyMoods = ["happy", "sing", "daydream"];
+  const happyMoods = ["happy", "daydream"];
   const behavior = new BehaviorSequence(blackboard);
   behavior.addChild(
     new BehaviorCondition(blackboard, (b) => {
@@ -592,15 +592,26 @@ export const idleBehavior = (blackboard) => {
         const grid = b.agentData.grid;
         const previousIndex = grid.coordToIndex(b.previousCoord);
         b.adjacentTiles = grid.adjacentTiles(b.agentData.currentCoord);
-        while (!b.pathFound && b.adjacentTiles.length > 0) {
-          const rand = Math.floor(Math.random() * b.adjacentTiles.length);
-          const tile = b.adjacentTiles.splice(rand, 1)[0];
-          if (tile.walkable && tile.index != previousIndex) {
-            b.pathFound = true;
-            b.nextCoord = grid.indexToCoord(tile.index);
-            const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
-            b.agentData.lookAt(dir);
-            break;
+        b.adjacentTiles = b.adjacentTiles.filter((tile) => {
+          return tile.walkable;
+        });
+        if (b.adjacentTiles.length === 1) {
+          const tile = b.adjacentTiles.pop();
+          b.pathFound = true;
+          b.nextCoord = grid.indexToCoord(tile.index);
+          const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
+          b.agentData.lookAt(dir);
+        } else {
+          while (!b.pathFound && b.adjacentTiles.length > 0) {
+            const rand = Math.floor(Math.random() * b.adjacentTiles.length);
+            const tile = b.adjacentTiles.splice(rand, 1)[0];
+            if (tile.walkable && tile.index != previousIndex) {
+              b.pathFound = true;
+              b.nextCoord = grid.indexToCoord(tile.index);
+              const dir = b.nextCoord.sub(b.agentData.currentCoord).normalize();
+              b.agentData.lookAt(dir);
+              break;
+            }
           }
         }
       }
