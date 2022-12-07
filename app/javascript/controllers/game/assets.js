@@ -273,6 +273,73 @@ const itemAssets = [
     pattern: "1",
     blocking: true,
   },
+  {
+    name: "christmastree",
+    origins: [
+      new Vector2(-30, 190),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "kitchenCabinet",
+    origins: [
+      new Vector2(),
+      new Vector2(0, 90),
+      new Vector2(),
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "bookcase",
+    origins: [
+      new Vector2(-70, 120),
+      new Vector2(),
+      new Vector2(),
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "deskChair",
+    origins: [
+      new Vector2(),
+      new Vector2(),
+      new Vector2(),
+      new Vector2(-120, 0)
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "laptop",
+    origins: [
+      new Vector2(),
+      new Vector2(),
+      new Vector2(),
+      new Vector2()
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
 ];
 
 export const findAssetInfo = (name) => {

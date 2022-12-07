@@ -100,13 +100,18 @@ export default class extends Controller {
         parent.nestItem(item, offset);
       };
 
-      insertItem("desk", new Vector3(4, 0, 1), 1);
+      const desk = insertItem("desk", new Vector3(4, 0, 1), 1);
+      insertNestedItem("laptop", desk, 1, new Vector2(-30, 0));
       insertItem("rug", new Vector3(9, 0, 5), 0);
       insertItem("couch", new Vector3(1, 0, 5));
       insertItem("fridge", new Vector3(9, 0, 1), 1);
       insertItem("kitchenSink", new Vector3(8, 0, 1), 1);
       insertItem("plant", new Vector3(5, 0, 1));
       insertItem("plant", new Vector3(1, 0, 4), 1);
+      insertItem("christmastree", new Vector3(1, 0, 1), 0);
+      insertItem("kitchenCabinet", new Vector3(7, 0, 1), 1);
+      insertItem("bookcase", new Vector3(1, 0, 8), 0);
+      // insertItem("deskChair", new Vector3(4, 0, 2), 3);
 
       const table = insertItem("coffeeTable", new Vector3(3, 0, 5));
       insertNestedItem("tv", table, 2, new Vector2(0, 10));
