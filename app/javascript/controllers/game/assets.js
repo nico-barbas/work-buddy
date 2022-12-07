@@ -414,6 +414,28 @@ const itemAssets = [
     pattern: "1",
     blocking: true,
   },
+  {
+    name: "teaCup",
+    origins: [
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
+  {
+    name: "pizza",
+    origins: [
+      new Vector2(),
+    ],
+    scale: 2,
+    width: 1,
+    height: 1,
+    pattern: "1",
+    blocking: true,
+  },
 ];
 
 export const findAssetInfo = (name) => {
