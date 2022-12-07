@@ -7,6 +7,7 @@ import {
   celebrateBehavior,
   refillNeedBehavior,
   waterPlantBehavior,
+  singBehavior,
 } from "./behaviors";
 import { Vector2, Vector3 } from "./math";
 import { SignalDispatcher } from "./signal";
@@ -102,6 +103,7 @@ export class Buddy extends Container {
         },
         celebrate: {
           shouldCelebrate: false,
+          shouldSing: false,
         },
         recreation: {
           wateringPlant: false,
@@ -158,6 +160,7 @@ export class Buddy extends Container {
 
       const root = new BehaviorSequence(blackboard, BehaviorResult.Success);
       root.addChild(celebrateBehavior(blackboard));
+      root.addChild(singBehavior(blackboard));
       root.addChild(expressMoodBehavior(blackboard));
       root.addChild(workBehavior(blackboard));
       root.addChild(breakSubTree);
@@ -186,6 +189,10 @@ export class Buddy extends Container {
     SignalDispatcher.addListener("interrupt.celebrate", () => {
       this.agent.blackboard.celebrate.shouldCelebrate = true;
       this.animation.play();
+      this.agent.interrupt();
+    });
+    SignalDispatcher.addListener("interrupt.sing", () => {
+      this.agent.blackboard.celebrate.shouldSing = true;
       this.agent.interrupt();
     });
     SignalDispatcher.addListener("interrupt.work", () => {

@@ -12,9 +12,14 @@ export default class extends Controller {
     const url = this.inputTarget.value;
     const video_id = url.slice(url.length - 11);
     this.iframeTarget.src = `https://www.youtube.com/embed/${video_id}`;
+    // console.log(this.iframeTarget.autoplay);
+    const video =
+      this.iframeTarget.contentWindow.document.getElementsByTagName("video")[0];
+    console.log(video);
   }
 
   play(event) {
-    SignalDispatcher.dispatchSignal("interrupt.play");
+    SignalDispatcher.dispatchSignal("interrupt.sing");
+    // console.log("why");
   }
 }
