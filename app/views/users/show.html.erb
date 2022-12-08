@@ -1,6 +1,12 @@
+
+<!-- app/views/offers/show.html.erb -->
+<% content_for :meta_title, "#{current_user.username} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, 'Bienvenue' %>
+<% content_for :meta_image, asset_path('ogimage.png') %>
+
 <div class="d-flex flex-row justify-content-left align-items-start p-2 ui-overlay" data-controller="navbar manage-data update-timer"
-data-update-timer-label-value=<%= Timer.last.label %> data-update-timer-logged-value=<%= Timer.last.logged %>
-data-update-timer-time-value=<%= Timer.last.total_time %> data-update-timer-id-value= <%= Timer.last.id %> >
+  data-update-timer-label-value=<%= Timer.last.label %> data-update-timer-logged-value=<%= Timer.last.logged %>
+  data-update-timer-time-value=<%= Timer.last.total_time %> data-update-timer-id-value= <%= Timer.last.id %> >
 
   <%= render "navbar" %>
 
