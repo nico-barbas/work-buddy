@@ -42,9 +42,10 @@ export default class extends Controller {
     const iconsConfigPath = this.iconsConfigValue;
 
     let app = new PIXI.Application({
-      width: window.innerWidth,
-      height: window.innerHeight,
+      // width: window.innerWidth,
+      // height: window.innerHeight,
       background: 0xffffff,
+      resizeTo: this.element,
     });
     // background: 0xf2ecfd,
 
@@ -53,10 +54,8 @@ export default class extends Controller {
     app.renderer.view.style.display = "block";
 
     app.renderer.resize(window.innerWidth, window.innerHeight);
-    window.addEventListener("resize", (e) => {
-      app.renderer.resize(window.innerWidth, window.innerHeight);
-    });
-    document.body.appendChild(app.view);
+    this.element.appendChild(app.view);
+    // document.body.appendChild(app.view);
 
     await loadAssets(
       app,
@@ -110,7 +109,11 @@ export default class extends Controller {
       insertItem("plant", new Vector3(5, 0, 1));
       insertItem("plant", new Vector3(1, 0, 4), 1);
       insertItem("christmastree", new Vector3(1, 0, 1), 0);
-      const kitchenCabinet = insertItem("kitchenCabinet", new Vector3(7, 0, 1), 1);
+      const kitchenCabinet = insertItem(
+        "kitchenCabinet",
+        new Vector3(7, 0, 1),
+        1
+      );
       insertNestedItem("coffeeMachine", kitchenCabinet, 1, new Vector2(-35, 5));
       const bookcase = insertItem("bookcase", new Vector3(1, 0, 8), 0);
       insertNestedItem("books", bookcase, 0, new Vector2(-30, 0));
@@ -120,7 +123,11 @@ export default class extends Controller {
       const table = insertItem("coffeeTable", new Vector3(3, 0, 5));
       insertNestedItem("tv", table, 2, new Vector2(0, 10));
       insertNestedItem("pizza", table, 0, new Vector2(-100, 0));
-      const present = insertItem("presentGreenRectangle", new Vector3(1, 0, 2), 0);
+      const present = insertItem(
+        "presentGreenRectangle",
+        new Vector3(1, 0, 2),
+        0
+      );
       insertNestedItem("presentRedSquare", present, 0, new Vector2(-40, -5));
       insertNestedItem("presentGreenRound", present, 0, new Vector2(-100, 0));
       insertNestedItem("presentRed", present, 0, new Vector2(-70, -10));
@@ -130,36 +137,9 @@ export default class extends Controller {
     const playerController = new PlayerController(app);
     const buddy = new Buddy(app, grid);
 
-    // const particleSystem = new ParticleSystem(app);
-    // app.stage.addChild(particleSystem);
     ParticleSystem.init(app);
-    // const test = getSpritesheetAnimation("icon", "emote_anger");
-    // {
-    //   ParticleSystem.addEmitter(
-    //     new ParticleEmitter(test, new Vector2(100, 100), {
-    //       shape: EmissionShape.Cone,
-    //       coneAngle: 45,
-    //       coneDir: new Vector2(0, -1),
-    //       maxBurstCount: 4,
-    //       burstRate: secondToTick(3),
-    //       burstCapacity: 50,
-    //       burstForce: 50,
-    //       burstMinLifetime: secondToTick(3),
-    //       burstMaxLifetime: secondToTick(4),
-    //     })
-    //   );
-    // }
-
-    // {
-    //   const wateringCan = getSpritesheetAnimation("item", "watering_can");
-    //   ParticleSystem.addEmitter(
-    //     new RotatingHoverItem(
-    //       wateringCan,
-    //       new Vector2(100, 100),
-    //       -90,
-    //       secondToTick(5)
-    //     )
-    //   );
-    // }
+    window.addEventListener("resize", (e) => {
+      app.renderer.resize(this.element.offsetWidth, this.element.offsetHeight);
+    });
   }
 }
