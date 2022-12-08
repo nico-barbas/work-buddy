@@ -16,9 +16,15 @@
 }
 
 .slogan {
-  font-size: 5rem;
+  font-size: 4rem;
   text-align: center;
-  color: #FFEEDD;
+  color: $beige;
+  background-color: #858AE3;
+  border: 5px solid $orange;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 60px;
   margin-top: 1em;
   margin-bottom: 1.5em;
 }
@@ -28,6 +34,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url('idle01.png');
 }
 
 @media (min-width: 1200px) {
