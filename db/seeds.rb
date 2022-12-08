@@ -28,13 +28,13 @@ label_test2 = Label.new(name: "Coding", user: new_user)
 label_test2.total_label_time = 203580000
 label_test2.save!
 label_test5 = Label.new(name: "Meeting & call", user: new_user)
-label_test5.total_label_time = 84816000
+label_test5.total_label_time = 64816000
 label_test5.save!
 label_test3 = Label.new(name: "Paperwork", user: new_user)
-label_test3.total_label_time = 56412000
+label_test3.total_label_time = 46412000
 label_test3.save!
 label_test4 = Label.new(name: "Testing", user: new_user)
-label_test4.total_label_time = 29628000
+label_test4.total_label_time = 19628000
 label_test4.save!
 p "labels created"
 
@@ -59,10 +59,10 @@ label_test4.daily_label_time = new_timer.total_time
 new_timer.save!
 label_test4.save
 
-new_task = Task.new(title: "Implement the chat feature", description: "Find ressources on how to do this", user: new_user)
+new_task = Task.new(title: "Implement the chat feature", user: new_user)
 new_task.save!
 new_task2 = Task.new(title: "Prepare bugs review", description: "For Monday meeting", user: new_user)
 new_task2.save!
-new_task3 = Task.new(title: "URSAFF declaration", description: "The worst part about being a freelance ", user: new_user)
+new_task3 = Task.new(title: "Review Cannelle's code", user: new_user)
 new_task3.save!
 p "tasks created"
