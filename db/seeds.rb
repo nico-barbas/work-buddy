@@ -33,6 +33,7 @@ label_test5 = Label.new(name: "Meeting & call", user: new_user)
 label_test5.total_label_time = 64816000
 label_test5.save!
 
+
 label_test4 = Label.new(name: "Testing", user: new_user)
 label_test4.total_label_time = 19628000
 label_test4.save!
