@@ -1,5 +1,5 @@
 <!-- app/views/offers/show.html.erb -->
-<% content_for :meta_title, "You are on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_title, "#{DEFAULT_META["meta_product_name"]}" %>
 <% content_for :meta_description, 'Welcome to Virtual Work Buddy' %>
 <% content_for :meta_image, asset_path('ogimage.png') %>
 
@@ -11,11 +11,11 @@
         <div class="logo">Virtual Work Buddy</div>
         <div class="homepage-buttons">
         <% if current_user %>
-          <%= link_to "Your Buddy", new_avatar_path(current_user), class: "btn btn-pink" if current_user.avatar == nil  %>
-          <%= link_to "Your Buddy", user_path(current_user), class: "btn btn-pink" if current_user.avatar %>
+          <%= link_to "Your Buddy", new_avatar_path(current_user), class: "btn btn-transparent-blue" if current_user.avatar == nil  %>
+          <%= link_to "Your Buddy", user_path(current_user), class: "btn btn-transparent-blue" if current_user.avatar %>
           <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blue" %>
         <% else %>
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-pink" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-transparent-blue" %>
           <%= link_to "Login", new_user_session_path, class: "btn btn-blue" %>
         <% end %>
         </div>
@@ -37,27 +37,33 @@
 
     <div class="cards">
       <div class="card-category" style="background-color: #858AE3;">
-        <h4>Your virtual buddy works with you</h4>
+        <div class="icon"><i class="fa-solid fa-laptop fa-2xl fa-bounce" style="--fa-animation-duration: 3s;"></i></div>
+        <div class="slogan-card"><h4>Your virtual buddy works with you</h4></div>
       </div>
 
       <div class="card-category" style="background-color: #FF8FAB;">
-        <h4>Create your to do lists</h4>
+        <div class="icon"><i class="fa-solid fa-list fa-2xl fa-bounce" style="--fa-animation-duration: 3s;"></i></div>
+        <div class="slogan-card"><h4>Create your to do lists</h4></div>
       </div>
 
       <div class="card-category" style="background-color: #FFA62B;">
-        <h4>Set a timer to keep track of your work time</h4>
+        <div class="icon"><i class="fa-solid fa-clock fa-2xl fa-bounce" style="--fa-animation-duration: 3s;"></i></div>
+        <div class="slogan-card"><h4>Set a timer</h4></div>
       </div>
 
       <div class="card-category" style="background-color: #FFA62B;">
-        <h4>Import your Spotify playlists</h4>
+        <div class="icon"><i class="fa-solid fa-music fa-2xl fa-bounce" style="--fa-animation-duration: 3s;"></i></div>
+        <div class="slogan-card"><h4>Listen to your music</h4></div>
       </div>
 
       <div class="card-category" style="background-color: #75C9C8;">
-        <h4>Create a perfect work environment</h4>
+      <div class="icon"><i class="fa-solid fa-thumbs-up fa-2xl fa-bounce" style="--fa-animation-duration: 3s;"></i></div>
+      <div class="slogan-card"><h4>Create a perfect work environment</h4></div>
       </div>
 
       <div class="card-category" style="background-color: #858AE3;">
-        <h4>Get statistics about your time working</h4>
+        <div class="icon"><i class="fa-solid fa-chart-line fa-2xl fa-bounce" style="--fa-animation-duration: 3s;"></i></div>
+        <div class="slogan-card"><h4>Get your statistics</h4></div>
       </div>
     </div>
   </div>
