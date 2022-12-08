@@ -9,7 +9,7 @@ import {
 } from "./game/assets";
 import { Buddy } from "./game/buddy";
 import { Vector2, Vector3 } from "./game/math";
-import { Item } from "./game/item";
+import { Item, presentInteraction } from "./game/item";
 import {
   EmissionShape,
   ParticleEmitter,
@@ -42,10 +42,9 @@ export default class extends Controller {
     const iconsConfigPath = this.iconsConfigValue;
 
     let app = new PIXI.Application({
-      // width: window.innerWidth,
-      // height: window.innerHeight,
+      width: window.innerWidth,
+      height: window.innerHeight,
       background: 0xffffff,
-      resizeTo: this.element,
     });
     // background: 0xf2ecfd,
 
@@ -55,7 +54,7 @@ export default class extends Controller {
 
     app.renderer.resize(window.innerWidth, window.innerHeight);
     this.element.appendChild(app.view);
-    // document.body.appendChild(app.view);
+    document.body.appendChild(app.view);
 
     await loadAssets(
       app,
@@ -97,6 +96,7 @@ export default class extends Controller {
         item.x = -item.currentOffset.x;
         item.y = -item.currentOffset.y;
         parent.nestItem(item, offset);
+        return item;
       };
 
       const desk = insertItem("desk", new Vector3(4, 0, 1), 1);
@@ -139,7 +139,7 @@ export default class extends Controller {
 
     ParticleSystem.init(app);
     window.addEventListener("resize", (e) => {
-      app.renderer.resize(this.element.offsetWidth, this.element.offsetHeight);
+      app.renderer.resize(window.innerWidth, window.innerHeight);
     });
   }
 }

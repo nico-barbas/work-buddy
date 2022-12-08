@@ -210,6 +210,7 @@ export class Buddy extends Container {
     this.originPosition.y = pos.y - this.offset.y;
     this.x = pos.x - this.offset.x - this.animationOffset.x;
     this.y = pos.y - this.offset.y - this.animationOffset.y;
+    this.grid.sortItems();
   }
 
   lookAt(dir) {
