@@ -1,6 +1,6 @@
 <div>
    <%= simple_form_for [current_user, @label], html: { data: {manage_labels_target: "newlabelform", action: "submit->manage-labels#create" }} do |f| %>
-      <div class="mt-0">
+      <div>
       <%= f.input :name, label: false, placeholder: 'Type your label name' %>
       <div class="d-flex justify-content-center"><%= f.submit "+", class:"btn small-btn-blue-label create-btn" %></div>
       </div>

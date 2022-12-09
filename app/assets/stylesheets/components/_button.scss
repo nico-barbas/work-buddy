@@ -120,10 +120,8 @@ a {
 }
 
 .create-btn {
-  z-index: 5;
   &:hover {
-    background-color: none;
-    border: 4px solid $blue;
+  color: $blue;
   }
 }
 
@@ -212,11 +210,6 @@ a {
 }
 
 .small-btn-blue-label {
-  font-size: 1rem;
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
-  padding-top: 0.2rem;
-  background-color: $blue;
-  color: white;
-  border: 4px solid $blue;
+  font-size: 2rem;
+  color: $purple;
 }
