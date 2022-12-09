@@ -4,11 +4,25 @@ import { SignalDispatcher } from "./game/signal";
 
 // Connects to data-controller="update-timer"
 export default class extends Controller {
-  static targets = ["hours", "minutes", "seconds", "play", "pause", "log", "form", "total", "logform",
-                    "logtotal", "logconfirmation", "assignlabelform",
-                    "homepagetimerhours", "homepagetimerminutes", "homepagetimerseconds"]
-  static values = {id: Number, logged: Boolean, time: Number, label: String}
-  paused = false
+  static targets = [
+    "hours",
+    "minutes",
+    "seconds",
+    "play",
+    "pause",
+    "log",
+    "form",
+    "total",
+    "logform",
+    "logtotal",
+    "logconfirmation",
+    "assignlabelform",
+    "homepagetimerhours",
+    "homepagetimerminutes",
+    "homepagetimerseconds",
+  ];
+  static values = { id: Number, logged: Boolean, time: Number, label: String };
+  paused = false;
 
   connect() {
     addEventListener("beforeunload", (event) => {
@@ -38,7 +52,7 @@ export default class extends Controller {
       minutes = seconds >= 60 ? minutes + 1 : minutes;
       minutes = minutes % 60;
       this.display(hours, minutes, seconds);
-    };
+    }
 
     setInterval(() => {
       if (this.paused) {
@@ -64,9 +78,9 @@ export default class extends Controller {
   }
 
   start(event) {
-    event.preventDefault()
-    this.logconfirmationTarget.innerHTML = ""
-    this.paused = false
+    event.preventDefault();
+    this.logconfirmationTarget.innerHTML = "";
+    this.paused = false;
     if (this.loggedValue == false && this.timeValue != 0) {
       // on restart le timer
       console.log("timer restarted");
@@ -78,12 +92,12 @@ export default class extends Controller {
         headers: { Accept: "text/plain", "X-CSRF-Token": csrfToken() },
         body: {},
       })
-      .then(response => response.text())
-      .then((data) => {
-        console.log("timer created")
-      })
-      this.idValue = this.idValue + 1
-      this.assignlabelformTarget.reset()
+        .then((response) => response.text())
+        .then((data) => {
+          console.log("timer created");
+        });
+      this.idValue = this.idValue + 1;
+      this.assignlabelformTarget.reset();
     }
     SignalDispatcher.dispatchSignal("interrupt.work");
   }
@@ -129,11 +143,12 @@ export default class extends Controller {
         this.homepagetimerminutesTarget.innerHTML = "00";
         this.secondsTarget.innerHTML = "00";
         this.homepagetimersecondsTarget.innerHTML = "00";
-        this.logconfirmationTarget.innerHTML = "Your last timer has been logged!<br>You can create a new one.";
+        this.logconfirmationTarget.innerHTML =
+          "Your last timer has been logged!";
         this.assignlabelformTarget.reset();
-  });
-     SignalDispatcher.dispatchSignal("interrupt.break");
-     SignalDispatcher.dispatchSignal("interrupt.celebrate");
+      });
+    SignalDispatcher.dispatchSignal("interrupt.break");
+    SignalDispatcher.dispatchSignal("interrupt.celebrate");
   }
 
   timerUrl(url) {
@@ -165,16 +180,16 @@ export default class extends Controller {
   }
 
   setlabel() {
-    event.preventDefault()
-    const url = this.timerUrl(this.assignlabelformTarget.action)
+    event.preventDefault();
+    const url = this.timerUrl(this.assignlabelformTarget.action);
     fetch(url, {
       method: "PATCH",
-      headers: { "Accept": "text/plain", 'X-CSRF-Token': csrfToken() },
-      body: new FormData(this.assignlabelformTarget)
+      headers: { Accept: "text/plain", "X-CSRF-Token": csrfToken() },
+      body: new FormData(this.assignlabelformTarget),
     })
-      .then(response => response.text())
+      .then((response) => response.text())
       .then((data) => {
-        console.log("label assigned")
-  })
+        console.log("label assigned");
+      });
   }
 }
