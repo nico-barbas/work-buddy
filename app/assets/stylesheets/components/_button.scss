@@ -97,17 +97,15 @@ a {
 
 .btn-plus {
   text-decoration: none;
-  font-size: 1.5rem;
-  color: #ffffff;
-  background-color: #858AE3;
+  font-size: 3.5rem;
+  color: $purple;
   border-radius: 50%;
-  padding: 0.3em 1em 0.4em 1em;
+  padding: 0.4em 1em;
   margin-bottom: center;
   height: 65px;
-  line-height: 2.7rem;
   cursor: pointer;
     &:hover {
-    color: $beige;
+    color: $orange;
   }
 }
 
@@ -122,10 +120,8 @@ a {
 }
 
 .create-btn {
-  z-index: 5;
   &:hover {
-    background-color: none;
-    border: 4px solid $blue;
+  color: $blue;
   }
 }
 
@@ -154,10 +150,9 @@ a {
     color: $beige;
     background-color: #858AE3;
     border-radius: 20px;
-    padding: 0.4em 1em 0.5em 1em;
+    padding: 0.5em 1em 0.5em 1em;
     margin-bottom: center;
     height: 65px;
-    line-height: 2.7rem;
     cursor: pointer;
     border: solid 4px $purple;
       &:hover {
@@ -215,11 +210,6 @@ a {
 }
 
 .small-btn-blue-label {
-  font-size: 1rem;
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
-  padding-top: 0.2rem;
-  background-color: $blue;
-  color: white;
-  border: 4px solid $blue;
+  font-size: 2rem;
+  color: $purple;
 }

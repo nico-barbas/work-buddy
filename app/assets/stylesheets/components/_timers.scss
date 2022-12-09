@@ -55,7 +55,6 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
-
 }
 
 .timer-button {
@@ -66,7 +65,7 @@
   margin-bottom: 0.7em;
   width:5em;
   text-align: center;
-  margin-left:0.8em;
+  margin-left:0.7em;
   .fa-solid {
     &:hover {
       color: $beige;
