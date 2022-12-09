@@ -131,6 +131,10 @@ export default class extends Controller {
       insertNestedItem("presentRedSquare", present, 0, new Vector2(-40, -5));
       insertNestedItem("presentGreenRound", present, 0, new Vector2(-100, 0));
       insertNestedItem("presentRed", present, 0, new Vector2(-70, -10));
+
+      g.tiles[g.coordToIndex(new Vector3(1, 0, 2))].walkable = false;
+      g.tiles[g.coordToIndex(new Vector3(2, 0, 1))].walkable = false;
+      g.tiles[g.coordToIndex(new Vector3(2, 0, 2))].walkable = false;
     });
     app.stage.addChild(grid);
 
