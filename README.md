@@ -1,4 +1,4 @@
-#Work Buddy
+# Work Buddy
 
 Installation:
 ```
